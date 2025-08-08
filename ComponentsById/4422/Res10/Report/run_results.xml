@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<Results version="1.0">
+<ReportNode type="testrun">
+<ReportNode type="Step">
+<Data>
+    <Name>Add-in(s) not activated</Name>
+    <Description>The following add-in(s) were associated with your test, but are not currently loaded: 
+PDFPackage.</Description>
+    <StartTime>2025-08-08 11:11:21</StartTime>
+    <Result>Warning</Result>
+    <Extension>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<ReportNode type="Action">
+<ReportNode type="User">
+<Data>
+    <Name>FOUND OBJECT REPOSITORY:</Name>
+    <Description>Repository 1: ..\..\Resources\BPT Resources\Object Repositories\AWC_OR_ChromiumEdge.tsr</Description>
+    <StartTime>2025-08-08 11:11:22</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>ac13434d91a74dfbb7fb7ced3cda35dc</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <IsPlainTextStepInfo>True</IsPlainTextStepInfo>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>'Load' - General error.</Name>
+    <ErrorText>'Load' - General error.</ErrorText>
+    <Description>&lt;BR/&gt;Line (50): &amp;quot;ORUtil.Load RepositoryPath&amp;quot;.</Description>
+    <StartTime>2025-08-08 11:11:22</StartTime>
+    <Result>Failed</Result>
+    <Extension>
+      <StackTrace>
+        <StackFrame>
+          <ModuleName><![CDATA[0. Start Active Workspace 2406]]></ModuleName>
+          <FileName><![CDATA[0. Start Active Workspace 2406]]></FileName>
+          <Language><![CDATA[VBScript - script block]]></Language>
+          <FunctionName><![CDATA[VBScript global code]]></FunctionName>
+          <Scripts><![CDATA[ORUtil.Load RepositoryPath]]></Scripts>
+          <LineNo><![CDATA[50]]></LineNo>
+        </StackFrame>
+      </StackTrace>
+      <IconKey>beff8ffe9ea3425cbb5f2ad81788b5b7</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <MergeIsErrorIcon>True</MergeIsErrorIcon>
+    </Extension>
+    <Snapshot reference="Resources\Snapshots\e2d0cf82-4535-421b-b158-a9a78c8e4c72.jpeg" />
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<Data>
+    <Name>0. Start Active Workspace 2406</Name>
+    <Description />
+    <StartTime>2025-08-08 11:11:22</StartTime>
+    <Duration>1</Duration>
+    <Result>Failed</Result>
+    <InputParameters>
+      <Parameter name="str_Instance" value="INT2-NONSSO" type="System.String" />
+      <Parameter name="str_UserName" value="#T_RD10" type="System.String" />
+      <Parameter name="str_password" value="" type="System.String" />
+      <Parameter name="str_Location" value="INTEGRATION" type="System.String" />
+    </InputParameters>
+    <OutputParameters>
+      <Parameter name="str_UserName_Out" value="" type="" />
+    </OutputParameters>
+    <Extension>
+      <IconKey>42b77abb2fa24ceaa5eb0aa346eb9fb8</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<Data>
+    <Name>4422</Name>
+    <ToolName>OpenText Functional Testing</ToolName>
+    <ToolVersion>25.2</ToolVersion>
+    <ToolVersionStringLiteral>25.2</ToolVersionStringLiteral>
+    <Description />
+    <StartTime>2025-08-08 11:11:20</StartTime>
+    <Duration>3</Duration>
+    <Result>Failed</Result>
+    <InputParameters>
+      <Parameter name="str_Instance" value="INT2-NONSSO" type="System.String" />
+      <Parameter name="str_UserName" value="#T_RD10" type="System.String" />
+      <Parameter name="str_password" value="" type="System.String" />
+      <Parameter name="str_Location" value="INTEGRATION" type="System.String" />
+    </InputParameters>
+    <OutputParameters>
+      <Parameter name="str_UserName_Out" value="" type="" />
+    </OutputParameters>
+    <Extension>
+      <IconKey>7c370dd0bfa6491f817b4846e50bbd3c</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <Environment>
+      <Timezone>+03:00:00</Timezone>
+      <Locale>English (United States)</Locale>
+      <User>OPENTEXT\aadam2</User>
+      <CpuInfo>Intel(R) Core(TM) Ultra 7 165H</CpuInfo>
+      <NumberOfCores>22</NumberOfCores>
+      <TotalMemory>64981</TotalMemory>
+      <HostName>\OTX-2VMBG54</HostName>
+      <OSInfo>Windows 11 24H2 (x64)</OSInfo>
+    </Environment>
+    <TestedApplications />
+    <Links>
+      <Link type="DataTable" reference="Default.xlsx" displayname="Default Data Table" />
+    </Links>
+  </Data>
+</ReportNode>
+<GeneralInfo>
+    <ResultName>Res10</ResultName>
+    <RunStartTime>2025-08-08 11:11:20</RunStartTime>
+    <Timezone>+03:00:00</Timezone>
+    <OrchestrationToolName>OpenText Functional Testing</OrchestrationToolName>
+    <OrchestrationToolVersion>25.2</OrchestrationToolVersion>
+    <OrchestrationToolVersionStringLiteral>25.2</OrchestrationToolVersionStringLiteral>
+  </GeneralInfo>
+</Results>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutDefinition objectID="0">
+  <IsDefault>False</IsDefault>
+  <ID>319b4208-31fc-4705-81b4-ea0f58f60dc7</ID>
+  <Name>eCenter TEX Viewer Client PreProd</Name>
+  <Description isNull="True" />
+  <AddinsDefinition objectID="1">
+    <Elements isCollection="True">
+      <String>Java</String>
+      <String>Web</String>
+    </Elements>
+  </AddinsDefinition>
+  <ExecutionType>NonWeb</ExecutionType>
+  <StationsAutDefinition objectID="2">
+    <RecorderAutDefinition objectID="3">
+      <ExecutionDefinition objectID="4" type="HP.MirrorTesting.Common.NonWebExecutionDefinition, HP.Sprinter.Common">
+        <Path>C:\Program Files (x86)\Internet Explorer\iexplore.exe</Path>
+        <Arguments>https://ecenter-pre.muc.knorr-bremse.com:8121/ec/ecenter_knorr_tms_autologin.jnlp</Arguments>
+        <WorkingFolder></WorkingFolder>
+      </ExecutionDefinition>
+      <RunMode>CreateNew, AnyActiveWindow</RunMode>
+      <CloseAutAtRunEnd>False</CloseAutAtRunEnd>
+    </RecorderAutDefinition>
+    <Elements isCollection="True">
+      <StationAutDefinition cyclicReferenceObjectID="3" />
+    </Elements>
+  </StationsAutDefinition>
+</AutDefinition>

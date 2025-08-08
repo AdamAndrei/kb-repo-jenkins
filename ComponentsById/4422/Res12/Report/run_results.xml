@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<Results version="1.0">
+<ReportNode type="testrun">
+<ReportNode type="Step">
+<Data>
+    <Name>Add-in(s) not activated</Name>
+    <Description>The following add-in(s) were associated with your test, but are not currently loaded: 
+PDFPackage.</Description>
+    <StartTime>2025-08-08 11:12:54</StartTime>
+    <Result>Warning</Result>
+    <Extension>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<ReportNode type="Action">
+<ReportNode type="Context">
+<ReportNode type="Step">
+<Data>
+    <Name>Run Error</Name>
+    <Description>General run error.&lt;BR/&gt;Line (31): &amp;quot;Set obj_AWCTeamcenterHome=Eval(Browser(&amp;quot;Browser&amp;quot;).Page(&amp;quot;wpage_AWCTeamcenterHome&amp;quot;))&amp;quot;. </Description>
+    <StartTime>2025-08-08 11:12:55</StartTime>
+    <Result>Failed</Result>
+    <Extension>
+      <StackTrace>
+        <StackFrame>
+          <ModuleName><![CDATA[0. Start Active Workspace 2406]]></ModuleName>
+          <FileName><![CDATA[0. Start Active Workspace 2406]]></FileName>
+          <Language><![CDATA[VBScript - script block]]></Language>
+          <FunctionName><![CDATA[VBScript global code]]></FunctionName>
+          <Scripts><![CDATA[Set obj_AWCTeamcenterHome=Eval(Browser("Browser").Page("wpage_AWCTeamcenterHome"))]]></Scripts>
+          <LineNo><![CDATA[31]]></LineNo>
+        </StackFrame>
+      </StackTrace>
+      <TestObject>
+        <Repository>..\..\Resources\BPT Resources\Object Repositories\AWC_OR_ChromiumEdge.tsr</Repository>
+        <Path>
+          <Object>
+            <Type>Browser</Type>
+            <Name><![CDATA[Browser]]></Name>
+          </Object>
+        </Path>
+        <OperationData><![CDATA[General run error.<BR/>Line (31): &quot;Set obj_AWCTeamcenterHome=Eval(Browser(&quot;Browser&quot;).Page(&quot;wpage_AWCTeamcenterHome&quot;))&quot;. ]]></OperationData>
+        <Properties>
+          <Property>
+            <Name><![CDATA[version]]></Name>
+            <Value><![CDATA[Chromium Edge.*]]></Value>
+          </Property>
+        </Properties>
+      </TestObject>
+      <IconKey>829b0c49f77c42cfa35cc51228ce02b4</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <MergeIsErrorIcon>True</MergeIsErrorIcon>
+    </Extension>
+    <Snapshot reference="Resources\Snapshots\3734f0fd-04c2-4a90-acd8-fe937df3a1f5.jpeg" highlight="0,0,2410,1080" />
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>Stop Run</Name>
+    <Description>Run stopped by user.</Description>
+    <StartTime>2025-08-08 11:13:50</StartTime>
+    <Result>Information</Result>
+    <Extension>
+      <IconKey>aee663e063cc4d5e8f7b3c3c69997cdf</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<Data>
+    <Name>Browser</Name>
+    <Description>&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;span style="text-align : left; font-size : 12px; "&gt;Local Browser&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</Description>
+    <StartTime>2025-08-08 11:12:55</StartTime>
+    <Duration>55</Duration>
+    <Result>Failed</Result>
+    <Extension>
+      <TestObject>
+        <Repository>..\..\Resources\BPT Resources\Object Repositories\AWC_OR_ChromiumEdge.tsr</Repository>
+        <Path>
+          <Object>
+            <Type>Browser</Type>
+            <Name><![CDATA[Browser]]></Name>
+          </Object>
+        </Path>
+        <OperationData><![CDATA[<table><tr><td><span style="text-align : left; font-size : 12px; ">Local Browser</span></td></tr></table>]]></OperationData>
+        <Properties>
+          <Property>
+            <Name><![CDATA[version]]></Name>
+            <Value><![CDATA[Chromium Edge.*]]></Value>
+          </Property>
+        </Properties>
+      </TestObject>
+      <IconKey>82040e65bebf431c92b520b3dec6b56b</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<Data>
+    <Name>0. Start Active Workspace 2406</Name>
+    <Description />
+    <StartTime>2025-08-08 11:12:55</StartTime>
+    <Duration>55</Duration>
+    <Result>Failed</Result>
+    <InputParameters>
+      <Parameter name="str_Instance" value="INT2-NONSSO" type="System.String" />
+      <Parameter name="str_UserName" value="#T_RD10" type="System.String" />
+      <Parameter name="str_password" value="" type="System.String" />
+      <Parameter name="str_Location" value="INTEGRATION" type="System.String" />
+    </InputParameters>
+    <OutputParameters>
+      <Parameter name="str_UserName_Out" value="" type="" />
+    </OutputParameters>
+    <Extension>
+      <IconKey>b18c8a95fc194fa78e561e2a25c6900a</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>Stop Run</Name>
+    <Description>Run stopped by user.</Description>
+    <StartTime>2025-08-08 11:13:50</StartTime>
+    <Result>Information</Result>
+    <Extension>
+      <IconKey>91e4f2cf01e040cfb5ad4fe3c4979e49</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<Data>
+    <Name>4422</Name>
+    <ToolName>OpenText Functional Testing</ToolName>
+    <ToolVersion>25.2</ToolVersion>
+    <ToolVersionStringLiteral>25.2</ToolVersionStringLiteral>
+    <Description />
+    <StartTime>2025-08-08 11:12:53</StartTime>
+    <Duration>57</Duration>
+    <Result>Failed</Result>
+    <InputParameters>
+      <Parameter name="str_Instance" value="INT2-NONSSO" type="System.String" />
+      <Parameter name="str_UserName" value="#T_RD10" type="System.String" />
+      <Parameter name="str_password" value="" type="System.String" />
+      <Parameter name="str_Location" value="INTEGRATION" type="System.String" />
+    </InputParameters>
+    <OutputParameters>
+      <Parameter name="str_UserName_Out" value="" type="" />
+    </OutputParameters>
+    <Extension>
+      <IconKey>960cf94f71754c0e8b5814937224c8aa</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <Environment>
+      <Timezone>+03:00:00</Timezone>
+      <Locale>English (United States)</Locale>
+      <User>OPENTEXT\aadam2</User>
+      <CpuInfo>Intel(R) Core(TM) Ultra 7 165H</CpuInfo>
+      <NumberOfCores>22</NumberOfCores>
+      <TotalMemory>64981</TotalMemory>
+      <HostName>\OTX-2VMBG54</HostName>
+      <OSInfo>Windows 11 24H2 (x64)</OSInfo>
+    </Environment>
+    <TestedApplications />
+    <Links>
+      <Link type="DataTable" reference="Default.xlsx" displayname="Default Data Table" />
+    </Links>
+  </Data>
+</ReportNode>
+<GeneralInfo>
+    <ResultName>Res12</ResultName>
+    <RunStartTime>2025-08-08 11:12:53</RunStartTime>
+    <Timezone>+03:00:00</Timezone>
+    <OrchestrationToolName>OpenText Functional Testing</OrchestrationToolName>
+    <OrchestrationToolVersion>25.2</OrchestrationToolVersion>
+    <OrchestrationToolVersionStringLiteral>25.2</OrchestrationToolVersionStringLiteral>
+  </GeneralInfo>
+</Results>

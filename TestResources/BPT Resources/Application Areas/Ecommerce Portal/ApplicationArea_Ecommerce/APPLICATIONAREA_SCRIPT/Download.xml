@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Owners>
+  <OwnerId>2378</OwnerId>
+  <OwnerType>RESOURCES</OwnerType>
+  <Name><![CDATA[ApplicationArea_Ecommerce]]></Name>
+  <FSRoot><![CDATA[resources\2378]]></FSRoot>
+  <FSPath><![CDATA[resources\2378\APPLICATIONAREA_SCRIPT]]></FSPath>
+  <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\ApplicationArea_Ecommerce]]></QCPath>
+  <FileName>APPLICATIONAREA_SCRIPT</FileName>
+  <SubType>Application Area</SubType>
+  <Owner>
+    <OwnerId>2378</OwnerId>
+    <OwnerType>RESOURCES</OwnerType>
+    <Name><![CDATA[ApplicationArea_Ecommerce]]></Name>
+    <FSRoot><![CDATA[resources\2378]]></FSRoot>
+    <FSPath><![CDATA[resources\2378\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\ApplicationArea_Ecommerce]]></QCPath>
+    <FileName>APPLICATIONAREA_SCRIPT</FileName>
+    <SubType>Application Area</SubType>
+    <Relation>
+      <RelatedId>2457</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[OR_Ecommerce.tsr]]></Name>
+      <FSRoot><![CDATA[resources\2457]]></FSRoot>
+      <FSPath><![CDATA[resources\2457]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\OR_Ecommerce.tsr]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>21</Order>
+      <FileName>OR_Bendix.tsr</FileName>
+      <SubType>Shared object repository</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2458</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Ecommerce_Web_UI.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2458]]></FSRoot>
+      <FSPath><![CDATA[resources\2458]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\Ecommerce_Web_UI.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>18</Order>
+      <FileName>Bendix_Web_UI.qfl</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>10341</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\2378]]></FSRoot>
+      <FSPath><![CDATA[resources\2378\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\ApplicationArea_Ecommerce]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>10342</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Action1]]></Name>
+      <FSRoot><![CDATA[resources\2378]]></FSRoot>
+      <FSPath><![CDATA[resources\2378\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\ApplicationArea_Ecommerce]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>10340</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Main Test Flow]]></Name>
+      <FSRoot><![CDATA[resources\2378]]></FSRoot>
+      <FSPath><![CDATA[resources\2378\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\ApplicationArea_Ecommerce]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2459</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Ecommerce_Global_Variable.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2459]]></FSRoot>
+      <FSPath><![CDATA[resources\2459]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\Ecommerce_Global_Variable.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>19</Order>
+      <FileName>Bendix_Global_Variable.qfl</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2460</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Ecommerce_Common_Util.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2460]]></FSRoot>
+      <FSPath><![CDATA[resources\2460]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\Ecommerce_Common_Util.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>20</Order>
+      <FileName>Bendix_Common_Util.qfl</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+  </Owner>
+  <Owner>
+    <OwnerId>10342</OwnerId>
+    <OwnerType>USER_ASSETS</OwnerType>
+    <Name><![CDATA[Action1]]></Name>
+    <FSRoot><![CDATA[resources\2378]]></FSRoot>
+    <FSPath><![CDATA[resources\2378\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\ApplicationArea_Ecommerce]]></QCPath>
+    <Relation>
+      <RelatedId>10341</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\2378]]></FSRoot>
+      <FSPath><![CDATA[resources\2378\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\ApplicationArea_Ecommerce]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>17</Order>
+    </Relation>
+  </Owner>
+</Owners>

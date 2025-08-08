@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Owners>
+  <OwnerId>2373</OwnerId>
+  <OwnerType>RESOURCES</OwnerType>
+  <Name><![CDATA[ActiveWorkspace]]></Name>
+  <FSRoot><![CDATA[resources\2373]]></FSRoot>
+  <FSPath><![CDATA[resources\2373\APPLICATIONAREA_SCRIPT]]></FSPath>
+  <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\ActiveWorkspace]]></QCPath>
+  <FileName>APPLICATIONAREA_SCRIPT</FileName>
+  <SubType>Application Area</SubType>
+  <Owner>
+    <OwnerId>2373</OwnerId>
+    <OwnerType>RESOURCES</OwnerType>
+    <Name><![CDATA[ActiveWorkspace]]></Name>
+    <FSRoot><![CDATA[resources\2373]]></FSRoot>
+    <FSPath><![CDATA[resources\2373\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\ActiveWorkspace]]></QCPath>
+    <FileName>APPLICATIONAREA_SCRIPT</FileName>
+    <SubType>Application Area</SubType>
+    <Relation>
+      <RelatedId>2449</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Common_FSO.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2449]]></FSRoot>
+      <FSPath><![CDATA[resources\2449]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Common_FSO.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>134</Order>
+      <FileName>Common_FSO.qfl</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2389</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[ActiveWorkspace_OR_INT2_6.2.1.tsr]]></Name>
+      <FSRoot><![CDATA[resources\2389]]></FSRoot>
+      <FSPath><![CDATA[resources\2389]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Object Repositories\ActiveWorkspace_OR_INT2_6.2.1.tsr]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>135</Order>
+      <FileName>AWC_OR_ChromiumEdge.tsr</FileName>
+      <SubType>Shared object repository</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>10327</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Action1]]></Name>
+      <FSRoot><![CDATA[resources\2373]]></FSRoot>
+      <FSPath><![CDATA[resources\2373\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\ActiveWorkspace]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2394</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Web_UI.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2394]]></FSRoot>
+      <FSPath><![CDATA[resources\2394]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Web_UI.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>132</Order>
+      <FileName>Web.txt</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2442</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[AWC_CommonBusinessFunctions.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2442]]></FSRoot>
+      <FSPath><![CDATA[resources\2442]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\AWC_CommonBusinessFunctions.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>133</Order>
+      <FileName>AWC_CommonBusinessFunctions.qfl</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>10325</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Main Test Flow]]></Name>
+      <FSRoot><![CDATA[resources\2373]]></FSRoot>
+      <FSPath><![CDATA[resources\2373\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\ActiveWorkspace]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>10326</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\2373]]></FSRoot>
+      <FSPath><![CDATA[resources\2373\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\ActiveWorkspace]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>1051</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[kb_resources.vbs]]></Name>
+      <FSRoot><![CDATA[resources\1051]]></FSRoot>
+      <FSPath><![CDATA[resources\1051]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\kb_resources.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>129</Order>
+      <FileName>kb_resources.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2395</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Common_Util.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2395]]></FSRoot>
+      <FSPath><![CDATA[resources\2395]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Common_Util.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>130</Order>
+      <FileName>Common_Util.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2396</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[AWC_Global_Variable.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2396]]></FSRoot>
+      <FSPath><![CDATA[resources\2396]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\AWC_Global_Variable.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>131</Order>
+      <FileName>AWC_Global_Variable.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+  </Owner>
+  <Owner>
+    <OwnerId>10327</OwnerId>
+    <OwnerType>USER_ASSETS</OwnerType>
+    <Name><![CDATA[Action1]]></Name>
+    <FSRoot><![CDATA[resources\2373]]></FSRoot>
+    <FSPath><![CDATA[resources\2373\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\ActiveWorkspace]]></QCPath>
+    <Relation>
+      <RelatedId>10326</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\2373]]></FSRoot>
+      <FSPath><![CDATA[resources\2373\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\ActiveWorkspace]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>128</Order>
+    </Relation>
+  </Owner>
+</Owners>

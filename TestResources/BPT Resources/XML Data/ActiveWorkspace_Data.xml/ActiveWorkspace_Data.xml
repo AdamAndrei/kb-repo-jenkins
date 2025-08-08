@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Dictionary>
+  <Item>
+    <Key>PRE-PROD</Key>
+    <Val>https://cvsplm-pre.corp.knorr-bremse.com:24432</Val>
+  </Item>
+<Item>
+    <Key>PRE</Key>
+    <Val>https://cvsplm-pre.corp.knorr-bremse.com:24432</Val>
+  </Item>
+  <Item>
+    <Key>PROJECT</Key>
+    <Val>https://cvsplm-prj.fsc.corp.knorr-bremse.com:23000</Val>
+  </Item>
+   <Item>
+    <Key>PRE-NONSSO</Key>
+	 <Val>https://cvsplm-pre.corp.knorr-bremse.com:24433</Val>
+	<!-- <Val>https://cvsplm.corp.knorr-bremse.com:14432/</Val> -->
+	<!--INT2 Non SSO <Val>https://mucs70496.corp.knorr-bremse.com:24433/</Val>-->
+  </Item> 
+  <Item>
+    <Key>INT2-NONSSO</Key>
+    <Val>https://cvsplm-int.fsc.corp.knorr-bremse.com:23000/</Val>
+  </Item>
+   <Item>
+    <Key>INT1</Key>
+    <Val>https://mucs70496.corp.knorr-bremse.com:24432/</Val>
+  </Item>
+   <Item>
+    <Key>PROD-NonSSO</Key>
+    <Val>https://cvsplm.corp.knorr-bremse.com:14433</Val>
+  </Item>
+    <Item>
+    <Key>PROD</Key>
+    <Val>https://cvsplm.corp.knorr-bremse.com:14432/</Val>
+  </Item>
+   <Item>
+    <Key>CLOUD</Key>
+    <Val>https://cvsplm-dev.corp.knorr-bremse.com:14432</Val>
+  </Item>
+  <Item>
+    <Key>Group_MAX2</Key>
+    <Val>MAX2</Val>
+  </Item>
+  <Item>
+    <Key>Group_Basic</Key>
+    <Val>Basic</Val>
+  </Item>
+  <Item>
+    <Key>Role_CADAuthor</Key>
+    <Val>CAD Author</Val>
+  </Item>
+  <Item>
+    <Key>Role_BasicMember</Key>
+    <Val>Basic Member</Val>
+  </Item>
+</Dictionary>

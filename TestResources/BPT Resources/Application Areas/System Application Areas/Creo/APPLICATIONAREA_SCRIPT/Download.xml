@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Owners>
+  <OwnerId>1563</OwnerId>
+  <OwnerType>RESOURCES</OwnerType>
+  <Name><![CDATA[Creo]]></Name>
+  <FSRoot><![CDATA[resources\1563]]></FSRoot>
+  <FSPath><![CDATA[resources\1563\APPLICATIONAREA_SCRIPT]]></FSPath>
+  <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\Creo]]></QCPath>
+  <FileName>APPLICATIONAREA_SCRIPT</FileName>
+  <SubType>Application Area</SubType>
+  <Owner>
+    <OwnerId>2897</OwnerId>
+    <OwnerType>USER_ASSETS</OwnerType>
+    <Name><![CDATA[Action1]]></Name>
+    <FSRoot><![CDATA[resources\1563]]></FSRoot>
+    <FSPath><![CDATA[resources\1563\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\Creo]]></QCPath>
+    <Relation>
+      <RelatedId>2896</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\1563]]></FSRoot>
+      <FSPath><![CDATA[resources\1563\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\Creo]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>153</Order>
+    </Relation>
+  </Owner>
+  <Owner>
+    <OwnerId>1563</OwnerId>
+    <OwnerType>RESOURCES</OwnerType>
+    <Name><![CDATA[Creo]]></Name>
+    <FSRoot><![CDATA[resources\1563]]></FSRoot>
+    <FSPath><![CDATA[resources\1563\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\Creo]]></QCPath>
+    <FileName>APPLICATIONAREA_SCRIPT</FileName>
+    <SubType>Application Area</SubType>
+    <Relation>
+      <RelatedId>2353</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Java_UI_Library.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2353]]></FSRoot>
+      <FSPath><![CDATA[resources\2353]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Java_UI_Library.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>154</Order>
+      <FileName>Java_UI_Library.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2449</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Common_FSO.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2449]]></FSRoot>
+      <FSPath><![CDATA[resources\2449]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Common_FSO.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>156</Order>
+      <FileName>Common_FSO.qfl</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2465</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Creo_OR.tsr]]></Name>
+      <FSRoot><![CDATA[resources\2465]]></FSRoot>
+      <FSPath><![CDATA[resources\2465]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Object Repositories\Creo_OR.tsr]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>162</Order>
+      <FileName>Creo_OR.tsr</FileName>
+      <SubType>Shared object repository</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2466</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Creo_CommonBusinessFunctions.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2466]]></FSRoot>
+      <FSPath><![CDATA[resources\2466]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Creo_CommonBusinessFunctions.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>158</Order>
+      <FileName>Creo_CommonBusinessFunctions.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2897</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Action1]]></Name>
+      <FSRoot><![CDATA[resources\1563]]></FSRoot>
+      <FSPath><![CDATA[resources\1563\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\Creo]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2394</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Web_UI.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2394]]></FSRoot>
+      <FSPath><![CDATA[resources\2394]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Web_UI.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>160</Order>
+      <FileName>Web.txt</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2442</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[AWC_CommonBusinessFunctions.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2442]]></FSRoot>
+      <FSPath><![CDATA[resources\2442]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\AWC_CommonBusinessFunctions.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>159</Order>
+      <FileName>AWC_CommonBusinessFunctions.qfl</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>1051</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[kb_resources.vbs]]></Name>
+      <FSRoot><![CDATA[resources\1051]]></FSRoot>
+      <FSPath><![CDATA[resources\1051]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\kb_resources.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>157</Order>
+      <FileName>kb_resources.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2395</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Common_Util.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2395]]></FSRoot>
+      <FSPath><![CDATA[resources\2395]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Common_Util.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>155</Order>
+      <FileName>Common_Util.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2896</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\1563]]></FSRoot>
+      <FSPath><![CDATA[resources\1563\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\Creo]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2396</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[AWC_Global_Variable.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2396]]></FSRoot>
+      <FSPath><![CDATA[resources\2396]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\AWC_Global_Variable.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>161</Order>
+      <FileName>AWC_Global_Variable.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2895</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Main Test Flow]]></Name>
+      <FSRoot><![CDATA[resources\1563]]></FSRoot>
+      <FSPath><![CDATA[resources\1563\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\Creo]]></QCPath>
+    </Relation>
+  </Owner>
+</Owners>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutDefinition objectID="0">
+  <IsDefault>False</IsDefault>
+  <ID>4911bb4c-11b1-46c6-af58-aa72f57b87e6</ID>
+  <Name>Active Workspace</Name>
+  <Description isNull="True" />
+  <AddinsDefinition objectID="1">
+    <Elements isCollection="True">
+      <String>Web</String>
+    </Elements>
+  </AddinsDefinition>
+  <ExecutionType>Web</ExecutionType>
+  <StationsAutDefinition objectID="2">
+    <RecorderAutDefinition objectID="3">
+      <ExecutionDefinition objectID="4">
+        <ExecutionType>Web</ExecutionType>
+        <Browser>Microsoft Edge</Browser>
+        <URL isNull="True" />
+        <WebReplayType>Event</WebReplayType>
+        <Path isNull="True" />
+        <Arguments isNull="True" />
+        <WorkingFolder isNull="True" />
+        <IsSapUI5>False</IsSapUI5>
+        <Job isNull="True" />
+        <NetworkProfiles isNull="True" />
+      </ExecutionDefinition>
+      <RunMode>CreateNew</RunMode>
+      <CloseAutAtRunEnd>False</CloseAutAtRunEnd>
+    </RecorderAutDefinition>
+    <Elements isCollection="True">
+      <StationAutDefinition cyclicReferenceObjectID="3" />
+    </Elements>
+  </StationsAutDefinition>
+</AutDefinition>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Dictionary>
+  <Item>
+    <Key>Model_Revision</Key>
+    <Val></Val>
+  </Item>
+  <Item>
+    <Key>Model_TitleID</Key>
+    <Val></Val>
+  </Item>
+  <Item>
+    <Key>Model_UseStatus</Key>
+    <Val></Val>
+  </Item>
+  <Item>
+    <Key>Model_Team</Key>
+    <Val></Val>
+  </Item>
+  <Item>
+    <Key>Model_FolderName</Key>
+    <Val></Val>
+  </Item>
+  <Item>
+    <Key>Model_ID</Key>
+	<Val></Val>
+  </Item>
+  <Item>
+    <Key>Model_Node</Key>
+    <Val></Val>
+  </Item>
+</Dictionary>

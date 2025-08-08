@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Owners>
+  <OwnerId>2384</OwnerId>
+  <OwnerType>RESOURCES</OwnerType>
+  <Name><![CDATA[Creo2406]]></Name>
+  <FSRoot><![CDATA[resources\2384]]></FSRoot>
+  <FSPath><![CDATA[resources\2384\APPLICATIONAREA_SCRIPT]]></FSPath>
+  <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\Creo2406]]></QCPath>
+  <FileName>APPLICATIONAREA_SCRIPT</FileName>
+  <SubType>Application Area</SubType>
+  <Owner>
+    <OwnerId>2384</OwnerId>
+    <OwnerType>RESOURCES</OwnerType>
+    <Name><![CDATA[Creo2406]]></Name>
+    <FSRoot><![CDATA[resources\2384]]></FSRoot>
+    <FSPath><![CDATA[resources\2384\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\Creo2406]]></QCPath>
+    <FileName>APPLICATIONAREA_SCRIPT</FileName>
+    <SubType>Application Area</SubType>
+    <Relation>
+      <RelatedId>2465</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Creo_OR.tsr]]></Name>
+      <FSRoot><![CDATA[resources\2465]]></FSRoot>
+      <FSPath><![CDATA[resources\2465]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Object Repositories\Creo_OR.tsr]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>33</Order>
+      <FileName>Creo_OR.tsr</FileName>
+      <SubType>Shared object repository</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2466</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Creo_CommonBusinessFunctions.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2466]]></FSRoot>
+      <FSPath><![CDATA[resources\2466]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Creo_CommonBusinessFunctions.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>30</Order>
+      <FileName>Creo_CommonBusinessFunctions.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2499</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_AWC_Global_Variable.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2499]]></FSRoot>
+      <FSPath><![CDATA[resources\2499]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_AWC_Global_Variable.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>25</Order>
+      <FileName>AWC_Global_Variable.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>10424</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Main Test Flow]]></Name>
+      <FSRoot><![CDATA[resources\2384]]></FSRoot>
+      <FSPath><![CDATA[resources\2384\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\Creo2406]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2492</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[ActiveWorkspace2406_OR]]></Name>
+      <FSRoot><![CDATA[resources\2492]]></FSRoot>
+      <FSPath><![CDATA[resources\2492]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Object Repositories\ActiveWorkspace2406_OR]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>34</Order>
+      <FileName>AWC_OR_ChromiumEdge.tsr</FileName>
+      <SubType>Shared object repository</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2353</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Java_UI_Library.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2353]]></FSRoot>
+      <FSPath><![CDATA[resources\2353]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Java_UI_Library.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>27</Order>
+      <FileName>Java_UI_Library.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2514</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_AWC_Common_Business_Operations.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2514]]></FSRoot>
+      <FSPath><![CDATA[resources\2514]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_AWC_Common_Business_Operations.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>32</Order>
+      <FileName>Fn_AWC_Common_Business_Operations.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>10425</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\2384]]></FSRoot>
+      <FSPath><![CDATA[resources\2384\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\Creo2406]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2517</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_AWC_Object_Navigation_Operations.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2517]]></FSRoot>
+      <FSPath><![CDATA[resources\2517]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_AWC_Object_Navigation_Operations.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>31</Order>
+      <FileName>Fn_AWC_Object_Navigation_Operations.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>10426</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Action1]]></Name>
+      <FSRoot><![CDATA[resources\2384]]></FSRoot>
+      <FSPath><![CDATA[resources\2384\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\Creo2406]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2506</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_Resources.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2506]]></FSRoot>
+      <FSPath><![CDATA[resources\2506]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_Resources.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>26</Order>
+      <FileName>kb_resources.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2505</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_Common_Util.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2505]]></FSRoot>
+      <FSPath><![CDATA[resources\2505]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_Common_Util.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>28</Order>
+      <FileName>Common_Util.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2508</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_Web_UI.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2508]]></FSRoot>
+      <FSPath><![CDATA[resources\2508]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_Web_UI.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>24</Order>
+      <FileName>Web.txt</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2507</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_Common_FSO.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2507]]></FSRoot>
+      <FSPath><![CDATA[resources\2507]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_Common_FSO.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>29</Order>
+      <FileName>Common_FSO.qfl</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+  </Owner>
+  <Owner>
+    <OwnerId>10426</OwnerId>
+    <OwnerType>USER_ASSETS</OwnerType>
+    <Name><![CDATA[Action1]]></Name>
+    <FSRoot><![CDATA[resources\2384]]></FSRoot>
+    <FSPath><![CDATA[resources\2384\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\Creo2406]]></QCPath>
+    <Relation>
+      <RelatedId>10425</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\2384]]></FSRoot>
+      <FSPath><![CDATA[resources\2384\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\Creo2406]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>23</Order>
+    </Relation>
+  </Owner>
+</Owners>

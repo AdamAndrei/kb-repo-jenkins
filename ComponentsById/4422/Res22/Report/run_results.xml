@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<Results version="1.0">
+<ReportNode type="testrun">
+<ReportNode type="Step">
+<Data>
+    <Name>Add-in(s) not activated</Name>
+    <Description>The following add-in(s) were associated with your test, but are not currently loaded: 
+PDFPackage.</Description>
+    <StartTime>2025-08-08 13:15:44</StartTime>
+    <Result>Warning</Result>
+    <Extension>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<ReportNode type="Action">
+<ReportNode type="User">
+<Data>
+    <Name>Test dir</Name>
+    <Description>C:\MBT-REPOS\kb-repo\ComponentsById\4422</Description>
+    <StartTime>2025-08-08 13:15:45</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>434e7041b70b4ef6bf921996c1a5fe23</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <IsPlainTextStepInfo>True</IsPlainTextStepInfo>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="User">
+<Data>
+    <Name>FOUND OBJECT REPOSITORY:</Name>
+    <Description>Repository 1: ..\..\Resources\BPT Resources\Object Repositories\AWC_OR_ChromiumEdge.tsr</Description>
+    <StartTime>2025-08-08 13:15:45</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>434e7041b70b4ef6bf921996c1a5fe23</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <IsPlainTextStepInfo>True</IsPlainTextStepInfo>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>Variable is undefined: 'LibrariesCollection'</Name>
+    <ErrorText>Variable is undefined: 'LibrariesCollection'</ErrorText>
+    <Description>&lt;BR/&gt;Line (40): &amp;quot;libCount = LibrariesCollection.Count&amp;quot;.</Description>
+    <StartTime>2025-08-08 13:15:45</StartTime>
+    <Result>Failed</Result>
+    <Extension>
+      <StackTrace>
+        <StackFrame>
+          <ModuleName><![CDATA[0. Start Active Workspace 2406]]></ModuleName>
+          <FileName><![CDATA[0. Start Active Workspace 2406]]></FileName>
+          <Language><![CDATA[VBScript - script block]]></Language>
+          <FunctionName><![CDATA[VBScript global code]]></FunctionName>
+          <Scripts><![CDATA[libCount = LibrariesCollection.Count]]></Scripts>
+          <LineNo><![CDATA[40]]></LineNo>
+        </StackFrame>
+      </StackTrace>
+      <IconKey>02371acaf61e4537aad11f16fbcaf8ec</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <MergeIsErrorIcon>True</MergeIsErrorIcon>
+    </Extension>
+    <Snapshot reference="Resources\Snapshots\432a2743-38a6-49f9-9f75-24c7dbedf753.jpeg" />
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<ReportNode type="User">
+<Data>
+    <Name>Found file</Name>
+    <Description>C:\MBT-REPOS\kb-repo\TestResources\BPT Resources\XML Data\ActiveWorkspace_OR.xml\ActiveWorkspace_OR.xml</Description>
+    <StartTime>2025-08-08 13:15:45</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>434e7041b70b4ef6bf921996c1a5fe23</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <IsPlainTextStepInfo>True</IsPlainTextStepInfo>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>Stop Run</Name>
+    <Description>Run stopped by user.</Description>
+    <StartTime>2025-08-08 13:15:47</StartTime>
+    <Result>Information</Result>
+    <Extension>
+      <IconKey>13d49a9840b94d29a7eb714b8b9d60fd</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<Data>
+    <Name>0. Start Active Workspace 2406</Name>
+    <Description />
+    <StartTime>2025-08-08 13:15:45</StartTime>
+    <Duration>2</Duration>
+    <Result>Failed</Result>
+    <InputParameters>
+      <Parameter name="str_Instance" value="INT2-NONSSO" type="System.String" />
+      <Parameter name="str_UserName" value="#T_RD10" type="System.String" />
+      <Parameter name="str_password" value="" type="System.String" />
+      <Parameter name="str_Location" value="INTEGRATION" type="System.String" />
+    </InputParameters>
+    <OutputParameters>
+      <Parameter name="str_UserName_Out" value="" type="" />
+    </OutputParameters>
+    <Extension>
+      <IconKey>485765b30a114d23a83b370675f78fae</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>Stop Run</Name>
+    <Description>Run stopped by user.</Description>
+    <StartTime>2025-08-08 13:15:47</StartTime>
+    <Result>Information</Result>
+    <Extension>
+      <IconKey>b7607bc97417465da152a6a64bd24bf4</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<Data>
+    <Name>4422</Name>
+    <ToolName>OpenText Functional Testing</ToolName>
+    <ToolVersion>25.2</ToolVersion>
+    <ToolVersionStringLiteral>25.2</ToolVersionStringLiteral>
+    <Description />
+    <StartTime>2025-08-08 13:15:43</StartTime>
+    <Duration>4</Duration>
+    <Result>Failed</Result>
+    <InputParameters>
+      <Parameter name="str_Instance" value="INT2-NONSSO" type="System.String" />
+      <Parameter name="str_UserName" value="#T_RD10" type="System.String" />
+      <Parameter name="str_password" value="" type="System.String" />
+      <Parameter name="str_Location" value="INTEGRATION" type="System.String" />
+    </InputParameters>
+    <OutputParameters>
+      <Parameter name="str_UserName_Out" value="" type="" />
+    </OutputParameters>
+    <Extension>
+      <IconKey>15f9b13a60ac431390ad63dd199952db</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <Environment>
+      <Timezone>+03:00:00</Timezone>
+      <Locale>English (United States)</Locale>
+      <User>OPENTEXT\aadam2</User>
+      <CpuInfo>Intel(R) Core(TM) Ultra 7 165H</CpuInfo>
+      <NumberOfCores>22</NumberOfCores>
+      <TotalMemory>64981</TotalMemory>
+      <HostName>\OTX-2VMBG54</HostName>
+      <OSInfo>Windows 11 24H2 (x64)</OSInfo>
+    </Environment>
+    <TestedApplications />
+    <Links>
+      <Link type="DataTable" reference="Default.xlsx" displayname="Default Data Table" />
+    </Links>
+  </Data>
+</ReportNode>
+<GeneralInfo>
+    <ResultName>Res22</ResultName>
+    <RunStartTime>2025-08-08 13:15:43</RunStartTime>
+    <Timezone>+03:00:00</Timezone>
+    <OrchestrationToolName>OpenText Functional Testing</OrchestrationToolName>
+    <OrchestrationToolVersion>25.2</OrchestrationToolVersion>
+    <OrchestrationToolVersionStringLiteral>25.2</OrchestrationToolVersionStringLiteral>
+  </GeneralInfo>
+</Results>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Favorites objectID="0">
+  <Elements isCollection="True">
+    <Favorite objectID="1">
+      <Name>Last Session</Name>
+      <Collection objectID="2">
+        <Elements isCollection="True">
+          <RunLocation objectID="3" type="HP.MirrorTesting.BL.Data.Favorites.Favorite+RunLocation, HP.Sprinter.BL.Data">
+            <RunID objectID="4">
+              <ID>30332</ID>
+              <TestInstanceID>42122</TestInstanceID>
+            </RunID>
+            <TestName>04.05.01. Comparing object properties</TestName>
+            <TestSourceType>QcTest</TestSourceType>
+            <Path>Root\0. Active Workspace\Active Workspace - 1 - Manual Testing\1.. AWC Fundamentals - Cad Cleint\Chapter 4 -  Working with data\04.05. Comparing object properties\01. Comparing object properties\04.05.01. Comparing object properties</Path>
+            <TestSetID type="System.Int32, mscorlib">10039</TestSetID>
+            <TestInstanceID type="System.Int32, mscorlib">42122</TestInstanceID>
+          </RunLocation>
+        </Elements>
+      </Collection>
+      <QcConnectionSettings objectID="5">
+        <Credentials objectID="6" type="HP.MirrorTesting.BL.Data.TestDefinitionData.RunDefinition.Host.CredentialsDefinition, HP.Sprinter.BL.Data">
+          <EncryptedPassword></EncryptedPassword>
+          <Username>kb_bondarde</Username>
+          <FullUsername isNull="True" />
+          <UserDomain isNull="True" />
+        </Credentials>
+        <Domain>DEFAULT_KNORR_BREMSE</Domain>
+        <Project>KB_Functional_Testing_Design</Project>
+        <ServerAddress>https://almknorrbremse1501.saas.microfocus.com/qcbin/</ServerAddress>
+        <AttemptingToConnect>False</AttemptingToConnect>
+        <EnableSSO>False</EnableSSO>
+        <ServerHistory objectID="7">
+          <Elements isCollection="True">
+            <String>https://almknorrbremse126.saas.microfocus.com/qcbin</String>
+            <String>https://almknorrbremse126.saas.microfocus.com/qcbin/</String>
+            <String>https://almknorrbremse1501.saas.microfocus.com/qcbin/</String>
+            <String>https://almknorrbremse1501.saas.microfocus.com/qcbin</String>
+          </Elements>
+        </ServerHistory>
+      </QcConnectionSettings>
+      <TestSourceType>QcTest</TestSourceType>
+      <IsRunSpecific>True</IsRunSpecific>
+    </Favorite>
+  </Elements>
+</Favorites>

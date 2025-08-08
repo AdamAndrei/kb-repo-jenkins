@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutDefinition objectID="0">
+  <IsDefault>False</IsDefault>
+  <ID>92d74af4-b05a-4abb-96e2-41febd8ce181</ID>
+  <Name>TC12</Name>
+  <Description isNull="True" />
+  <AddinsDefinition objectID="1">
+    <Elements isCollection="True">
+      <String>Web</String>
+      <String>Java</String>
+    </Elements>
+  </AddinsDefinition>
+  <ExecutionType>Web</ExecutionType>
+  <StationsAutDefinition objectID="2">
+    <RecorderAutDefinition objectID="3">
+      <ExecutionDefinition objectID="4">
+        <ExecutionType>Web</ExecutionType>
+        <Browser>IEXPLORE</Browser>
+        <URL>https://cvsplm-pre.corp.knorr-bremse.com:7121/ec/ecenter_knorr_default.jnlp</URL>
+        <WebReplayType>Event</WebReplayType>
+        <Path isNull="True" />
+        <Arguments isNull="True" />
+        <WorkingFolder isNull="True" />
+        <IsSapUI5>False</IsSapUI5>
+        <Job isNull="True" />
+        <NetworkProfiles isNull="True" />
+      </ExecutionDefinition>
+      <RunMode>CreateNew</RunMode>
+      <CloseAutAtRunEnd>False</CloseAutAtRunEnd>
+    </RecorderAutDefinition>
+    <Elements isCollection="True">
+      <StationAutDefinition cyclicReferenceObjectID="3" />
+    </Elements>
+  </StationsAutDefinition>
+</AutDefinition>

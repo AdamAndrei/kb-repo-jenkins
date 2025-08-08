@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Favorites objectID="0">
+  <Elements isCollection="True">
+    <Favorite objectID="1">
+      <Name>Last Session</Name>
+      <Collection objectID="2">
+        <Elements isCollection="True">
+          <RunLocation objectID="3" type="HP.MirrorTesting.BL.Data.Favorites.Favorite+RunLocation, HP.Sprinter.BL.Data">
+            <RunID objectID="4">
+              <ID>30128</ID>
+              <TestInstanceID>39445</TestInstanceID>
+            </RunID>
+            <TestName>0. Start Active Workspace - Cad Client - M</TestName>
+            <TestSourceType>QcTest</TestSourceType>
+            <Path>Root\0. Active Workspace\Active Workspace - 1 - Manual Testing\1.. AWC Fundamentals - Cad Cleint\Chapter 0. Start Active Workspace - Cad Client\0. Start Active Workspace - Cad Client</Path>
+            <TestSetID type="System.Int32, mscorlib">7905</TestSetID>
+            <TestInstanceID type="System.Int32, mscorlib">39445</TestInstanceID>
+          </RunLocation>
+          <RunLocation objectID="5" type="HP.MirrorTesting.BL.Data.Favorites.Favorite+RunLocation, HP.Sprinter.BL.Data">
+            <RunID objectID="6">
+              <ID>56148</ID>
+              <TestInstanceID>69791</TestInstanceID>
+            </RunID>
+            <TestName>05. Pack or unpack structure elements</TestName>
+            <TestSourceType>QcTest</TestSourceType>
+            <Path>Root\0. Active Workspace\Active Workspace - 1 - Manual Testing\AWC - Structure Management\03. Finding and navigating structures and structure elements\05. Pack or unpack structure elements\05. Pack or unpack structure elements</Path>
+            <TestSetID type="System.Int32, mscorlib">15612</TestSetID>
+            <TestInstanceID type="System.Int32, mscorlib">69791</TestInstanceID>
+          </RunLocation>
+        </Elements>
+      </Collection>
+      <QcConnectionSettings objectID="7">
+        <Credentials objectID="8" type="HP.MirrorTesting.BL.Data.TestDefinitionData.RunDefinition.Host.CredentialsDefinition, HP.Sprinter.BL.Data">
+          <EncryptedPassword></EncryptedPassword>
+          <Username>kb_deshmukh</Username>
+          <FullUsername isNull="True" />
+          <UserDomain isNull="True" />
+        </Credentials>
+        <Domain>DEFAULT_KNORRBREMSE</Domain>
+        <Project>KB_Functional_Testing_Design</Project>
+        <ServerAddress>https://almknorrbremse16.saas.microfocus.com/qcbin/</ServerAddress>
+        <AttemptingToConnect>False</AttemptingToConnect>
+        <EnableSSO>False</EnableSSO>
+        <ServerHistory objectID="9">
+          <Elements isCollection="True">
+            <String>https://almknorrbremse16.saas.microfocus.com/qcbin/</String>
+          </Elements>
+        </ServerHistory>
+      </QcConnectionSettings>
+      <TestSourceType>QcTest</TestSourceType>
+      <IsRunSpecific>True</IsRunSpecific>
+    </Favorite>
+  </Elements>
+</Favorites>

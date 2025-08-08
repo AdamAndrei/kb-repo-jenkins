@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutDefinition objectID="0">
+  <IsDefault>False</IsDefault>
+  <ID>aeaae843-e711-41a1-8060-f2530f1f5ce8</ID>
+  <Name>New Application</Name>
+  <Description isNull="True" />
+  <AddinsDefinition objectID="1">
+    <Elements isCollection="True">
+      <String>Web</String>
+      <String>WPF</String>
+      <String>.NET</String>
+      <String>Java</String>
+    </Elements>
+  </AddinsDefinition>
+  <ExecutionType>Web</ExecutionType>
+  <StationsAutDefinition objectID="2">
+    <RecorderAutDefinition objectID="3">
+      <ExecutionDefinition objectID="4" type="HP.MirrorTesting.Common.WebExecutionDefinition, HP.Sprinter.Common">
+        <Browser>IEXPLORE</Browser>
+        <URL></URL>
+        <WebReplayType>Event</WebReplayType>
+      </ExecutionDefinition>
+      <RunMode>AttachExisting, AnyActiveWindow</RunMode>
+      <CloseAutAtRunEnd>False</CloseAutAtRunEnd>
+    </RecorderAutDefinition>
+    <Elements isCollection="True">
+      <StationAutDefinition cyclicReferenceObjectID="3" />
+    </Elements>
+  </StationsAutDefinition>
+</AutDefinition>

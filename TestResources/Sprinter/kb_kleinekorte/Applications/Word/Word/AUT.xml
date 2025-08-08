@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutDefinition objectID="0">
+  <IsDefault>False</IsDefault>
+  <ID>c851b992-f0fe-428a-b962-4a3df2cbe79c</ID>
+  <Name>Word</Name>
+  <Description isNull="True" />
+  <AddinsDefinition objectID="1">
+    <Elements isCollection="True">
+      <String>WPF</String>
+      <String>.NET</String>
+      <String>Visual Basic</String>
+      <String>Java</String>
+    </Elements>
+  </AddinsDefinition>
+  <ExecutionType>Desktop</ExecutionType>
+  <StationsAutDefinition objectID="2">
+    <RecorderAutDefinition objectID="3">
+      <ExecutionDefinition objectID="4">
+        <ExecutionType>Desktop</ExecutionType>
+        <Browser>IEXPLORE</Browser>
+        <URL>C:\Program Files (x86)\Microsoft Office\root\Office16\WINWORD.EXE</URL>
+        <WebReplayType>Event</WebReplayType>
+        <Path>C:\Program Files (x86)\Microsoft Office\root\Office16\WINWORD.EXE</Path>
+        <Arguments isNull="True" />
+        <WorkingFolder isNull="True" />
+        <IsSapUI5>False</IsSapUI5>
+        <Job isNull="True" />
+        <NetworkProfiles isNull="True" />
+      </ExecutionDefinition>
+      <RunMode>CreateNew, AnyActiveWindow</RunMode>
+      <CloseAutAtRunEnd>False</CloseAutAtRunEnd>
+    </RecorderAutDefinition>
+    <Elements isCollection="True">
+      <StationAutDefinition cyclicReferenceObjectID="3" />
+    </Elements>
+  </StationsAutDefinition>
+</AutDefinition>

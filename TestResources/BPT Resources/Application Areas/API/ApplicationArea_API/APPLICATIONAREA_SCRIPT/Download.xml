@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Owners>
+  <OwnerId>2597</OwnerId>
+  <OwnerType>RESOURCES</OwnerType>
+  <Name><![CDATA[ApplicationArea_SCIO]]></Name>
+  <FSRoot><![CDATA[resources\2597]]></FSRoot>
+  <FSPath><![CDATA[resources\2597\APPLICATIONAREA_SCRIPT]]></FSPath>
+  <QCPath><![CDATA[Resources\BPT Resources\Application Areas\SCIO\ApplicationArea_SCIO]]></QCPath>
+  <FileName>APPLICATIONAREA_SCRIPT</FileName>
+  <SubType>Application Area</SubType>
+  <Owner>
+    <OwnerId>2597</OwnerId>
+    <OwnerType>RESOURCES</OwnerType>
+    <Name><![CDATA[ApplicationArea_SCIO]]></Name>
+    <FSRoot><![CDATA[resources\2597]]></FSRoot>
+    <FSPath><![CDATA[resources\2597\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\SCIO\ApplicationArea_SCIO]]></QCPath>
+    <FileName>APPLICATIONAREA_SCRIPT</FileName>
+    <SubType>Application Area</SubType>
+    <Relation>
+      <RelatedId>2463</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Ecommerce_Resources.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2463]]></FSRoot>
+      <FSPath><![CDATA[resources\2463]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\Ecommerce_Resources.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>5</Order>
+      <FileName>Ecommerce_Resources.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2457</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[OR_Ecommerce.tsr]]></Name>
+      <FSRoot><![CDATA[resources\2457]]></FSRoot>
+      <FSPath><![CDATA[resources\2457]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\OR_Ecommerce.tsr]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>6</Order>
+      <FileName>OR_Bendix.tsr</FileName>
+      <SubType>Shared object repository</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2458</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Ecommerce_Web_UI.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2458]]></FSRoot>
+      <FSPath><![CDATA[resources\2458]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\Ecommerce_Web_UI.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>1</Order>
+      <FileName>Bendix_Web_UI.qfl</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>26285</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Action1]]></Name>
+      <FSRoot><![CDATA[resources\2597]]></FSRoot>
+      <FSPath><![CDATA[resources\2597\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\SCIO\ApplicationArea_SCIO]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2461</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Ecommerce_Business_Functions.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2461]]></FSRoot>
+      <FSPath><![CDATA[resources\2461]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\Ecommerce_Business_Functions.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>4</Order>
+      <FileName>Ecommerce_Business_Functions.qfl</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>26283</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Main Test Flow]]></Name>
+      <FSRoot><![CDATA[resources\2597]]></FSRoot>
+      <FSPath><![CDATA[resources\2597\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\SCIO\ApplicationArea_SCIO]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>26284</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\2597]]></FSRoot>
+      <FSPath><![CDATA[resources\2597\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\SCIO\ApplicationArea_SCIO]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2459</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Ecommerce_Global_Variable.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2459]]></FSRoot>
+      <FSPath><![CDATA[resources\2459]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\Ecommerce_Global_Variable.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>2</Order>
+      <FileName>Bendix_Global_Variable.qfl</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2460</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Ecommerce_Common_Util.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2460]]></FSRoot>
+      <FSPath><![CDATA[resources\2460]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\Ecommerce Portal\Ecommerce_Common_Util.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>3</Order>
+      <FileName>Bendix_Common_Util.qfl</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+  </Owner>
+  <Owner>
+    <OwnerId>26285</OwnerId>
+    <OwnerType>USER_ASSETS</OwnerType>
+    <Name><![CDATA[Action1]]></Name>
+    <FSRoot><![CDATA[resources\2597]]></FSRoot>
+    <FSPath><![CDATA[resources\2597\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\SCIO\ApplicationArea_SCIO]]></QCPath>
+    <Relation>
+      <RelatedId>26284</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\2597]]></FSRoot>
+      <FSPath><![CDATA[resources\2597\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\SCIO\ApplicationArea_SCIO]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>1</Order>
+    </Relation>
+  </Owner>
+</Owners>

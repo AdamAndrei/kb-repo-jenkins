@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Owners>
+  <OwnerId>1162</OwnerId>
+  <OwnerType>RESOURCES</OwnerType>
+  <Name><![CDATA[eCenter]]></Name>
+  <FSRoot><![CDATA[resources\1162]]></FSRoot>
+  <FSPath><![CDATA[resources\1162\APPLICATIONAREA_SCRIPT]]></FSPath>
+  <QCPath><![CDATA[Resources\BPT Resources\Application Areas\eCenter]]></QCPath>
+  <FileName>APPLICATIONAREA_SCRIPT</FileName>
+  <SubType>Application Area</SubType>
+  <Owner>
+    <OwnerId>1162</OwnerId>
+    <OwnerType>RESOURCES</OwnerType>
+    <Name><![CDATA[eCenter]]></Name>
+    <FSRoot><![CDATA[resources\1162]]></FSRoot>
+    <FSPath><![CDATA[resources\1162\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\eCenter]]></QCPath>
+    <FileName>APPLICATIONAREA_SCRIPT</FileName>
+    <SubType>Application Area</SubType>
+    <Relation>
+      <RelatedId>1023</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Common.txt]]></Name>
+      <FSRoot><![CDATA[resources\1023]]></FSRoot>
+      <FSPath><![CDATA[resources\1023]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Common.txt]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>2</Order>
+      <FileName>Common.txt</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>1024</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Java.txt]]></Name>
+      <FSRoot><![CDATA[resources\1024]]></FSRoot>
+      <FSPath><![CDATA[resources\1024]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Java.txt]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>6</Order>
+      <FileName>Java.txt</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>1049</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[kb_common.vbs]]></Name>
+      <FSRoot><![CDATA[resources\1049]]></FSRoot>
+      <FSPath><![CDATA[resources\1049]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\kb_common.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>7</Order>
+      <FileName>common.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>1031</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Visual_Basic.txt]]></Name>
+      <FSRoot><![CDATA[resources\1031]]></FSRoot>
+      <FSPath><![CDATA[resources\1031]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Visual_Basic.txt]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>4</Order>
+      <FileName>Visual_Basic.txt</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>1032</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Web.txt]]></Name>
+      <FSRoot><![CDATA[resources\1032]]></FSRoot>
+      <FSPath><![CDATA[resources\1032]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Web.txt]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>5</Order>
+      <FileName>Web.txt</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>1167</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\1162]]></FSRoot>
+      <FSPath><![CDATA[resources\1162\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\eCenter]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>1022</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[ActiveX.txt]]></Name>
+      <FSRoot><![CDATA[resources\1022]]></FSRoot>
+      <FSPath><![CDATA[resources\1022]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\ActiveX.txt]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>3</Order>
+      <FileName>ActiveX.txt</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>1168</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Action1]]></Name>
+      <FSRoot><![CDATA[resources\1162]]></FSRoot>
+      <FSPath><![CDATA[resources\1162\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\eCenter]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>1051</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[kb_resources.vbs]]></Name>
+      <FSRoot><![CDATA[resources\1051]]></FSRoot>
+      <FSPath><![CDATA[resources\1051]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\kb_resources.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>8</Order>
+      <FileName>resources.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>1163</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[eCenter_Application.tsr]]></Name>
+      <FSRoot><![CDATA[resources\1163]]></FSRoot>
+      <FSPath><![CDATA[resources\1163]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Object Repositories\eCenter_Application.tsr]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>9</Order>
+      <FileName>eCenter_Application.tsr</FileName>
+      <SubType>Shared object repository</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>1166</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Main Test Flow]]></Name>
+      <FSRoot><![CDATA[resources\1162]]></FSRoot>
+      <FSPath><![CDATA[resources\1162\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\eCenter]]></QCPath>
+    </Relation>
+  </Owner>
+  <Owner>
+    <OwnerId>1168</OwnerId>
+    <OwnerType>USER_ASSETS</OwnerType>
+    <Name><![CDATA[Action1]]></Name>
+    <FSRoot><![CDATA[resources\1162]]></FSRoot>
+    <FSPath><![CDATA[resources\1162\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\eCenter]]></QCPath>
+    <Relation>
+      <RelatedId>1167</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\1162]]></FSRoot>
+      <FSPath><![CDATA[resources\1162\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\eCenter]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>1</Order>
+    </Relation>
+  </Owner>
+</Owners>

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserSettingsDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="HP.MirrorTesting.BL.Data.xsd" objectID="0">
+  <UserSettingsQualityCenterConnectionDefinition objectID="1">
+    <Credentials objectID="2" type="HP.MirrorTesting.BL.Data.TestDefinitionData.RunDefinition.Host.CredentialsDefinition, HP.Sprinter.BL.Data">
+      <EncryptedPassword></EncryptedPassword>
+      <Username>kb_gumaste</Username>
+      <FullUsername isNull="True" />
+      <UserDomain isNull="True" />
+    </Credentials>
+    <Domain>DEFAULT_KNORRBREMSE</Domain>
+    <Project>KB_Functional_Testing_Design</Project>
+    <ServerAddress>https://almknorrbremse.saas.microfocus.com/qcbin/</ServerAddress>
+    <AttemptingToConnect>False</AttemptingToConnect>
+    <EnableSSO>False</EnableSSO>
+    <ServerHistory objectID="3">
+      <Elements isCollection="True">
+        <String>https://almknorrbremse.saas.microfocus.com/qcbin</String>
+        <String>https://almknorrbremse.saas.microfocus.com/qcbin/</String>
+      </Elements>
+    </ServerHistory>
+  </UserSettingsQualityCenterConnectionDefinition>
+  <UserSettingsTestDefinition objectID="4">
+    <DefaultTestLocation>C:\Users\ext-gumastey\Documents\Sprinter\</DefaultTestLocation>
+  </UserSettingsTestDefinition>
+  <UserSettingsRunTimeDefinition objectID="5">
+    <ParametersViewMode>False</ParametersViewMode>
+  </UserSettingsRunTimeDefinition>
+  <UserSettingsComparisonDefinition objectID="6">
+    <SnapshotTime>0</SnapshotTime>
+    <IsObjectsPositionToleranceEnabled>True</IsObjectsPositionToleranceEnabled>
+    <ObjectsPositionTolerance>30</ObjectsPositionTolerance>
+    <IsObjectsSizeToleranceEnabled>True</IsObjectsSizeToleranceEnabled>
+    <ObjectsSizeTolerance>30</ObjectsSizeTolerance>
+    <IgnoreLayoutResultedDiffs>True</IgnoreLayoutResultedDiffs>
+    <MaximumDiffNumberToReport>50</MaximumDiffNumberToReport>
+    <UsePreDefinedRules>True</UsePreDefinedRules>
+  </UserSettingsComparisonDefinition>
+  <UserSettingsReplicationDefinition objectID="7">
+    <DifferenceSeverityToPauseOn>Medium</DifferenceSeverityToPauseOn>
+    <NeverPauseOnDifference>False</NeverPauseOnDifference>
+  </UserSettingsReplicationDefinition>
+  <UserSettingsSubtitles objectID="8">
+    <SubtitlesOn>False</SubtitlesOn>
+    <ForegroundColor>#FFFFFFFF</ForegroundColor>
+    <BackgroundColor>Gray</BackgroundColor>
+    <FontSize>20</FontSize>
+    <Location>Bottom</Location>
+    <Opacity>0.7</Opacity>
+    <DisolveTime>0</DisolveTime>
+    <OverrideLocation>-1</OverrideLocation>
+  </UserSettingsSubtitles>
+  <UserSettingsOpenBugDefinition objectID="9">
+    <IncludeScreenshot>True</IncludeScreenshot>
+    <IncludeMovie>False</IncludeMovie>
+    <IncludeActualResults>True</IncludeActualResults>
+    <IncludeSteps>False</IncludeSteps>
+    <IncludeActions>False</IncludeActions>
+    <DefectPreviewExpanded>True</DefectPreviewExpanded>
+    <IncludeLogs>True</IncludeLogs>
+    <IncludeVitals>True</IncludeVitals>
+    <IncludeNVReport>True</IncludeNVReport>
+  </UserSettingsOpenBugDefinition>
+  <UserSettingsAnnotations objectID="10">
+    <ArrowAnnotationLastUsedColor>Red</ArrowAnnotationLastUsedColor>
+    <ArrowAnnotationLastUsedLineWidth>3</ArrowAnnotationLastUsedLineWidth>
+    <RectangleAnnotationLastUsedColor>#FFFF0000</RectangleAnnotationLastUsedColor>
+    <RectangleAnnotationLastUsedLineWidth>3</RectangleAnnotationLastUsedLineWidth>
+    <HighlightAnnotationLastUsedColor>Yellow</HighlightAnnotationLastUsedColor>
+    <EllipseAnnotationLastUsedColor>Red</EllipseAnnotationLastUsedColor>
+    <EllipseAnnotationLastUsedLineWidth>3</EllipseAnnotationLastUsedLineWidth>
+    <TextBoxAnnotationLastUsedColor>NOTE_YELLOW_COLOR</TextBoxAnnotationLastUsedColor>
+  </UserSettingsAnnotations>
+  <UserSettingsOpenBCDefinition objectID="11">
+    <SelectedColumns objectID="12" type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib">
+      <Elements isCollection="True" />
+    </SelectedColumns>
+    <Filter></Filter>
+    <Size>
+      <Width>0</Width>
+      <Height>0</Height>
+    </Size>
+    <TreeWidth>150</TreeWidth>
+    <TemplateOnly>False</TemplateOnly>
+  </UserSettingsOpenBCDefinition>
+  <UserSettingsOpenTestsDefinition objectID="13">
+    <SelectedColumns objectID="14" type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib">
+      <Elements isCollection="True" />
+    </SelectedColumns>
+    <Filter></Filter>
+    <Size>
+      <Width>0</Width>
+      <Height>0</Height>
+    </Size>
+    <TreeWidth>150</TreeWidth>
+    <TemplateOnly>False</TemplateOnly>
+  </UserSettingsOpenTestsDefinition>
+  <UserSettingsOpenTestSetDefinition objectID="15">
+    <SelectedColumns objectID="16" type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib">
+      <Elements isCollection="True" />
+    </SelectedColumns>
+    <Filter></Filter>
+    <Size>
+      <Width>0</Width>
+      <Height>0</Height>
+    </Size>
+    <TreeWidth>150</TreeWidth>
+    <TemplateOnly>False</TemplateOnly>
+  </UserSettingsOpenTestSetDefinition>
+  <UserSettingsSidebars objectID="17">
+    <SidebarsSettings objectID="18" type="System.Collections.Generic.List`1[[HP.MirrorTesting.BL.Data.SidebarSettings, HP.Sprinter.BL.Data, Version=2023.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib">
+      <Elements isCollection="True">
+        <SidebarSettings objectID="19">
+          <ID>0</ID>
+          <Width>NaN</Width>
+          <Height>NaN</Height>
+          <Top>0</Top>
+          <Bottom>0</Bottom>
+          <Left>447</Left>
+          <Right>0</Right>
+          <ExpandDirection>Down</ExpandDirection>
+          <IsExpanded>False</IsExpanded>
+          <IsPinned>False</IsPinned>
+        </SidebarSettings>
+        <SidebarSettings objectID="20">
+          <ID>1</ID>
+          <Width>NaN</Width>
+          <Height>NaN</Height>
+          <Top>175</Top>
+          <Bottom>0</Bottom>
+          <Left>0</Left>
+          <Right>0</Right>
+          <ExpandDirection>Right</ExpandDirection>
+          <IsExpanded>True</IsExpanded>
+          <IsPinned>True</IsPinned>
+        </SidebarSettings>
+        <SidebarSettings objectID="21">
+          <ID>2</ID>
+          <Width>355</Width>
+          <Height>250</Height>
+          <Top>0</Top>
+          <Bottom>0</Bottom>
+          <Left>0</Left>
+          <Right>25</Right>
+          <ExpandDirection>Up</ExpandDirection>
+          <IsExpanded>False</IsExpanded>
+          <IsPinned>False</IsPinned>
+        </SidebarSettings>
+        <SidebarSettings objectID="22">
+          <ID>3</ID>
+          <Width>NaN</Width>
+          <Height>NaN</Height>
+          <Top>0</Top>
+          <Bottom>0</Bottom>
+          <Left>890</Left>
+          <Right>0</Right>
+          <ExpandDirection>Down</ExpandDirection>
+          <IsExpanded>False</IsExpanded>
+          <IsPinned>False</IsPinned>
+        </SidebarSettings>
+        <SidebarSettings objectID="23">
+          <ID>4</ID>
+          <Width>NaN</Width>
+          <Height>NaN</Height>
+          <Top>0</Top>
+          <Bottom>0</Bottom>
+          <Left>100</Left>
+          <Right>0</Right>
+          <ExpandDirection>Down</ExpandDirection>
+          <IsExpanded>False</IsExpanded>
+          <IsPinned>False</IsPinned>
+        </SidebarSettings>
+        <SidebarSettings objectID="24">
+          <ID>5</ID>
+          <Width>1462</Width>
+          <Height>350</Height>
+          <Top>0</Top>
+          <Bottom>0</Bottom>
+          <Left>0</Left>
+          <Right>16.2</Right>
+          <ExpandDirection>Up</ExpandDirection>
+          <IsExpanded>False</IsExpanded>
+          <IsPinned>False</IsPinned>
+        </SidebarSettings>
+        <SidebarSettings objectID="25">
+          <ID>6</ID>
+          <Width>NaN</Width>
+          <Height>NaN</Height>
+          <Top>100</Top>
+          <Bottom>0</Bottom>
+          <Left>0</Left>
+          <Right>0</Right>
+          <ExpandDirection>Right</ExpandDirection>
+          <IsExpanded>False</IsExpanded>
+          <IsPinned>False</IsPinned>
+        </SidebarSettings>
+        <SidebarSettings objectID="26">
+          <ID>7</ID>
+          <Width>NaN</Width>
+          <Height>NaN</Height>
+          <Top>0</Top>
+          <Bottom>0</Bottom>
+          <Left>1100</Left>
+          <Right>0</Right>
+          <ExpandDirection>Down</ExpandDirection>
+          <IsExpanded>False</IsExpanded>
+          <IsPinned>False</IsPinned>
+        </SidebarSettings>
+        <SidebarSettings objectID="27">
+          <ID>8</ID>
+          <Width>NaN</Width>
+          <Height>NaN</Height>
+          <Top>0</Top>
+          <Bottom>0</Bottom>
+          <Left>400</Left>
+          <Right>0</Right>
+          <ExpandDirection>Down</ExpandDirection>
+          <IsExpanded>False</IsExpanded>
+          <IsPinned>False</IsPinned>
+        </SidebarSettings>
+        <SidebarSettings objectID="28">
+          <ID>9</ID>
+          <Width>400</Width>
+          <Height>350</Height>
+          <Top>0</Top>
+          <Bottom>0</Bottom>
+          <Left>0</Left>
+          <Right>410</Right>
+          <ExpandDirection>Up</ExpandDirection>
+          <IsExpanded>False</IsExpanded>
+          <IsPinned>False</IsPinned>
+        </SidebarSettings>
+      </Elements>
+    </SidebarsSettings>
+  </UserSettingsSidebars>
+  <UserSettingsGeneralPreferences objectID="29">
+    <ShowPowerModeWelcomeScreenOnActivating>False</ShowPowerModeWelcomeScreenOnActivating>
+    <ShowWelcomeScreen>True</ShowWelcomeScreen>
+    <IsPowerModeOn>False</IsPowerModeOn>
+    <CurrentAutName isNull="True" />
+    <NonPowerModeFalvor>Desktop</NonPowerModeFalvor>
+    <DefaultCulture>en</DefaultCulture>
+    <DataInjectionRectangles objectID="30">
+      <HorizontalSearch objectID="31">
+        <Left>0</Left>
+        <Right>220</Right>
+        <Up>8</Up>
+        <Down>15</Down>
+      </HorizontalSearch>
+      <VerticalSearch objectID="32">
+        <Left>5</Left>
+        <Right>15</Right>
+        <Up>0</Up>
+        <Down>35</Down>
+      </VerticalSearch>
+      <OppositeSideHorizontalSearch objectID="33">
+        <Left>30</Left>
+        <Right>0</Right>
+        <Up>8</Up>
+        <Down>15</Down>
+      </OppositeSideHorizontalSearch>
+      <SafetyBufferForIntersectionSearch>5</SafetyBufferForIntersectionSearch>
+      <PrefferedMappingType>NotSet</PrefferedMappingType>
+    </DataInjectionRectangles>
+    <WorkingMode>Execution</WorkingMode>
+    <EnableAnimations>False</EnableAnimations>
+    <LicensingMode>ALM</LicensingMode>
+  </UserSettingsGeneralPreferences>
+  <UserSettingsSavingDefinition objectID="34">
+    <SavingImagesMethod>SavingAllImages</SavingImagesMethod>
+    <MaxFilesNumberInZipFile>10</MaxFilesNumberInZipFile>
+    <EnableMovieRecording>True</EnableMovieRecording>
+    <ImageResizePercentage>100</ImageResizePercentage>
+    <ImageQualityPercentage>30</ImageQualityPercentage>
+    <ImageFormatIndex>0</ImageFormatIndex>
+    <StoryBoardImageScalePercentage>50</StoryBoardImageScalePercentage>
+    <LinkDefectMethod>LinkDefectToRunStep</LinkDefectMethod>
+    <AskMeForLinkDefectMethod>True</AskMeForLinkDefectMethod>
+    <ShowServerTimeInTestReportWhenAvailable>True</ShowServerTimeInTestReportWhenAvailable>
+    <CaptureFullScreen>True</CaptureFullScreen>
+  </UserSettingsSavingDefinition>
+  <UserSettingsNotificationsDefinition objectID="35">
+    <DoNotShowDINotificationDialog>False</DoNotShowDINotificationDialog>
+    <DoNotShowMacroNotificationDialog>False</DoNotShowMacroNotificationDialog>
+    <DoNotShowJavaEnablerNotificationDialog>False</DoNotShowJavaEnablerNotificationDialog>
+    <DoNotShowLinkRequirementWarning>False</DoNotShowLinkRequirementWarning>
+  </UserSettingsNotificationsDefinition>
+  <UserSettingsGridSettingsDefinition objectID="36">
+    <GridSettings objectID="37">
+      <Elements isCollection="True" />
+    </GridSettings>
+  </UserSettingsGridSettingsDefinition>
+  <UserSettingsAutoAuthoringSettings objectID="38">
+    <InsertUserActionToItsOwnStep>False</InsertUserActionToItsOwnStep>
+    <StepTargetField>Description</StepTargetField>
+  </UserSettingsAutoAuthoringSettings>
+  <UserSettingsLicensingDefinition objectID="39">
+    <WizardWasShown>False</WizardWasShown>
+  </UserSettingsLicensingDefinition>
+  <UserSettingsDTSDefinition objectID="40">
+    <AvailableDTSConnectionSettings objectID="41" type="System.Collections.Generic.List`1[[HP.MirrorTesting.BL.Data.UserSettingsDTSDefinition+DTSConnectionSettings, HP.Sprinter.BL.Data, Version=2023.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib">
+      <Elements isCollection="True" />
+    </AvailableDTSConnectionSettings>
+    <SelectedDTSConnectionSettings objectID="42">
+      <Name>Mail</Name>
+      <Url isNull="True" />
+      <Username isNull="True" />
+      <ProjectSettings isNull="True" />
+      <ReconnectOnStartup>False</ReconnectOnStartup>
+      <EncryptedPassword isNull="True" />
+    </SelectedDTSConnectionSettings>
+    <SelectedDTSName>Mail</SelectedDTSName>
+  </UserSettingsDTSDefinition>
+  <UserSettingsMobileDefinition objectID="43">
+    <SelectedMobileConnectionSettings objectID="44">
+      <Url></Url>
+      <Username isNull="True" />
+      <Workspace isNull="True" />
+      <ProxyInfo objectID="45">
+        <Type>Auto</Type>
+        <Address isNull="True" />
+        <Authorization isNull="True" />
+      </ProxyInfo>
+      <EncryptedPassword isNull="True" />
+      <UseSSL>False</UseSSL>
+      <AuthMode>Normal</AuthMode>
+      <AccessKey isNull="True" />
+    </SelectedMobileConnectionSettings>
+  </UserSettingsMobileDefinition>
+  <UserSettingsOctaneDefinition objectID="46">
+    <ConnectionSettings objectID="47">
+      <Url isNull="True" />
+      <Username isNull="True" />
+      <EncryptedPassword isNull="True" />
+      <SharedSpace isNull="True" />
+      <Workspace isNull="True" />
+      <ProxyInfo objectID="48">
+        <Type>Auto</Type>
+        <Address isNull="True" />
+        <Authorization isNull="True" />
+      </ProxyInfo>
+      <UseSSL>False</UseSSL>
+    </ConnectionSettings>
+    <TesterDisplayFormat>DisplayNameForTester</TesterDisplayFormat>
+  </UserSettingsOctaneDefinition>
+</UserSettingsDefinition>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutDefinition objectID="0">
+  <IsDefault>False</IsDefault>
+  <ID>ce63b826-10fa-420a-85d9-0b0f268c4656</ID>
+  <Name>STEPS4 - Test Request Client</Name>
+  <Description isNull="True" />
+  <AddinsDefinition objectID="1">
+    <Elements isCollection="True">
+      <String>Web</String>
+      <String>Java</String>
+    </Elements>
+  </AddinsDefinition>
+  <ExecutionType>Web</ExecutionType>
+  <StationsAutDefinition objectID="2">
+    <RecorderAutDefinition objectID="3">
+      <ExecutionDefinition objectID="4">
+        <ExecutionType>Web</ExecutionType>
+        <Browser>IEXPLORE</Browser>
+        <URL>https://cvsplm-pre.corp.knorr-bremse.com:8121/ec/ecenter_knorr_trs.jnlp</URL>
+        <WebReplayType>Event</WebReplayType>
+        <Path isNull="True" />
+        <Arguments isNull="True" />
+        <WorkingFolder isNull="True" />
+        <IsSapUI5>False</IsSapUI5>
+        <Job isNull="True" />
+        <NetworkProfiles isNull="True" />
+      </ExecutionDefinition>
+      <RunMode>CreateNew</RunMode>
+      <CloseAutAtRunEnd>False</CloseAutAtRunEnd>
+    </RecorderAutDefinition>
+    <Elements isCollection="True">
+      <StationAutDefinition cyclicReferenceObjectID="3" />
+    </Elements>
+  </StationsAutDefinition>
+</AutDefinition>

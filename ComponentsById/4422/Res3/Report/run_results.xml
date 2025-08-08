@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<Results version="1.0">
+<ReportNode type="testrun">
+<ReportNode type="Step">
+<Data>
+    <Name>Add-in(s) not activated</Name>
+    <Description>The following add-in(s) were associated with your test, but are not currently loaded: 
+PDFPackage.</Description>
+    <StartTime>2025-08-08 09:19:19</StartTime>
+    <Result>Warning</Result>
+    <Extension>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<ReportNode type="Action">
+<ReportNode type="Step">
+<Data>
+    <Name>Name redefined</Name>
+    <ErrorText>Name redefined</ErrorText>
+    <Description>&lt;BR/&gt;Line (36): &amp;quot;Dim ORUtil, RepositoryPath, ObjectList, i&amp;quot;.</Description>
+    <StartTime>2025-08-08 09:19:20</StartTime>
+    <Result>Failed</Result>
+    <Extension>
+      <IconKey>8f6e5f23214c4b42a38310d9d7fc96b8</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <MergeIsErrorIcon>True</MergeIsErrorIcon>
+    </Extension>
+    <Snapshot reference="Resources\Snapshots\ec3c6f88-3914-4c31-b857-96e5ee6dd791.jpeg" />
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<Data>
+    <Name>0. Start Active Workspace 2406</Name>
+    <Description />
+    <StartTime>2025-08-08 09:19:20</StartTime>
+    <Duration>0</Duration>
+    <Result>Failed</Result>
+    <InputParameters>
+      <Parameter name="str_Instance" value="INT2-NONSSO" type="System.String" />
+      <Parameter name="str_UserName" value="#T_RD10" type="System.String" />
+      <Parameter name="str_password" value="" type="System.String" />
+      <Parameter name="str_Location" value="INTEGRATION" type="System.String" />
+    </InputParameters>
+    <OutputParameters>
+      <Parameter name="str_UserName_Out" value="" type="" />
+    </OutputParameters>
+    <Extension>
+      <IconKey>f020829971c44aa185ffff31cf93b763</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<Data>
+    <Name>4422</Name>
+    <ToolName>OpenText Functional Testing</ToolName>
+    <ToolVersion>25.2</ToolVersion>
+    <ToolVersionStringLiteral>25.2</ToolVersionStringLiteral>
+    <Description />
+    <StartTime>2025-08-08 09:19:18</StartTime>
+    <Duration>2</Duration>
+    <Result>Failed</Result>
+    <InputParameters>
+      <Parameter name="str_Instance" value="INT2-NONSSO" type="System.String" />
+      <Parameter name="str_UserName" value="#T_RD10" type="System.String" />
+      <Parameter name="str_password" value="" type="System.String" />
+      <Parameter name="str_Location" value="INTEGRATION" type="System.String" />
+    </InputParameters>
+    <OutputParameters>
+      <Parameter name="str_UserName_Out" value="" type="" />
+    </OutputParameters>
+    <Extension>
+      <IconKey>7ece18adde1f4efd8d727cbc88feda22</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <Environment>
+      <Timezone>+03:00:00</Timezone>
+      <Locale>English (United States)</Locale>
+      <User>OPENTEXT\aadam2</User>
+      <CpuInfo>Intel(R) Core(TM) Ultra 7 165H</CpuInfo>
+      <NumberOfCores>22</NumberOfCores>
+      <TotalMemory>64981</TotalMemory>
+      <HostName>\OTX-2VMBG54</HostName>
+      <OSInfo>Windows 11 24H2 (x64)</OSInfo>
+    </Environment>
+    <TestedApplications />
+    <Links>
+      <Link type="DataTable" reference="Default.xlsx" displayname="Default Data Table" />
+    </Links>
+  </Data>
+</ReportNode>
+<GeneralInfo>
+    <ResultName>Res3</ResultName>
+    <RunStartTime>2025-08-08 09:19:18</RunStartTime>
+    <Timezone>+03:00:00</Timezone>
+    <OrchestrationToolName>OpenText Functional Testing</OrchestrationToolName>
+    <OrchestrationToolVersion>25.2</OrchestrationToolVersion>
+    <OrchestrationToolVersionStringLiteral>25.2</OrchestrationToolVersionStringLiteral>
+  </GeneralInfo>
+</Results>
