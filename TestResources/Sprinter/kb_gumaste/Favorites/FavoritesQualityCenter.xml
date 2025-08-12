@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Favorites objectID="0">
+  <Elements isCollection="True">
+    <Favorite objectID="1">
+      <Name>Last Session</Name>
+      <Collection objectID="2">
+        <Elements isCollection="True">
+          <RunLocation objectID="3" type="HP.MirrorTesting.BL.Data.Favorites.Favorite+RunLocation, HP.Sprinter.BL.Data">
+            <RunID objectID="4">
+              <ID>99040</ID>
+              <TestInstanceID>106412</TestInstanceID>
+            </RunID>
+            <TestName>PRJ - Advanced search - Documents - Query CAD Design - All attributes validation - Smoke Test</TestName>
+            <TestSourceType>QcTest</TestSourceType>
+            <Path>Root\Active Workspace Client TC2024-6\Active Workspace - 1 - Manual Testing\Chapter 3 - Finding data in Active Workspace - Manual Testing\03.01.03. Advanced search - All attributes validation - TC2024-6 - Manual Testing</Path>
+            <TestSetID type="System.Int32, mscorlib">20937</TestSetID>
+            <TestInstanceID type="System.Int32, mscorlib">106412</TestInstanceID>
+          </RunLocation>
+        </Elements>
+      </Collection>
+      <QcConnectionSettings objectID="5">
+        <Credentials objectID="6" type="HP.MirrorTesting.BL.Data.TestDefinitionData.RunDefinition.Host.CredentialsDefinition, HP.Sprinter.BL.Data">
+          <EncryptedPassword></EncryptedPassword>
+          <Username>kb_gumaste</Username>
+          <FullUsername isNull="True" />
+          <UserDomain isNull="True" />
+        </Credentials>
+        <Domain>DEFAULT_KNORRBREMSE</Domain>
+        <Project>KB_Functional_Testing_Design</Project>
+        <ServerAddress>https://almknorrbremse.saas.microfocus.com/qcbin/</ServerAddress>
+        <AttemptingToConnect>False</AttemptingToConnect>
+        <EnableSSO>False</EnableSSO>
+        <ServerHistory objectID="7">
+          <Elements isCollection="True">
+            <String>https://almknorrbremse.saas.microfocus.com/qcbin</String>
+            <String>https://almknorrbremse.saas.microfocus.com/qcbin/</String>
+          </Elements>
+        </ServerHistory>
+      </QcConnectionSettings>
+      <TestSourceType>QcTest</TestSourceType>
+      <IsRunSpecific>True</IsRunSpecific>
+    </Favorite>
+  </Elements>
+</Favorites>

@@ -1,0 +1,1880 @@
+﻿Option Explicit
+Err.Clear
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'001.Fn_AWC_Object_Creation_Operation						|	Mohini.Deshmukh@knorr-bremse.com		|	14-Aug-2024	|	Function used to perform  create object
+'002.Fn_AWC_Object_SaveAs_Operation						|	Mohini.Deshmukh@knorr-bremse.com		|	20-Jan-2025	|	Function used to perform  save as operation
+'003.Fn_AWC_Object_Copy_To_Existing_Operation				|	Mohini.Deshmukh@knorr-bremse.com		|	27-Jan-2025	|	Function used to perform  copy to existing operation
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header Start 
+'Function Name				:	Fn_AWC_Object_Creation_Operation
+'Function Description		:	Function used to create an object
+'Function Parameters		:   1.sAction : Create object by tile or by primary toolbar
+'								2.sObjType : Business Object Type
+'								3.sdic : Dictionary variable to store the property name and property value on creation dialog
+'								4.sPerformance : Performance monitor
+'Function Return Value	   	: 	Search Result
+'Wrapper Function	    	 	: 	NA
+'Function Pre-requisite	 	:	AWC should be open
+'Function Usage		   	 :	Fn_AWC_Object_Creation_Operation("bytile",Parameter("str_type_of_object") ,objDic,Parameter("str_Performance") )
+'History			     			:
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Developer Name			 |	Date			 |	      Reviewer			
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Mohini Deshmukh		   	|  14 Aug 2024	    	|	 				 
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header End
+Public Function Fn_AWC_Object_Creation_Operation(sAction,sObjType,sdic,sPerformance)
+	Err.Clear
+	'-------------------------------------------------------------------------------------------------------------------------------
+	'Variable Declaration
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Dim obj_AWCTeamcenterHome,objWshShell
+	Dim sLang,sStatusMesaage,sID,sOjectNodeName,sXpath,sTempPropertyValue,sTempProperites,sTempPropertyValues,sPropertyName,sPropertyValue,sSalesID
+	Dim sTempLocation,sTempMakeBuy,sTempAction,sTemp,sTemp1,sTemp2,sTemp3,sTempProperty,sTempValue,sFolderName,sFolderDesc,sTempNodeName
+	Dim iCounter,jCounter,iPropertyCount,sColumnNm,sSite,excelFileName,folderPath,excelFilePath,iCountParts
+	Dim bAllocateID,bCreateMulParts
+	Dim sQuestionTopic,sHeaderText
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Get AWC PLM window object from xml
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Set obj_AWCTeamcenterHome=Eval(SearchAndLoadResourceByName("ActiveWorkspace2406_OR.xml").GetValue("wpage_AWCTeamcenterHome"))
+	'''--------------------------------------------------------------------------------------------------------------------------------
+	'''Verify the header for performance Monitor
+	'''--------------------------------------------------------------------------------------------------------------------------------
+	If lcase(sPerformance)="true" Then
+		If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_Env_Header"), 5,5) Then
+			sHeaderText=obj_AWCTeamcenterHome.WebElement("wele_Env_Header").GetROProperty("outertext")
+		End If
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Click on Settings -> Performace Monitor
+		'--------------------------------------------------------------------------------------------------------------------------------
+		Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_Property_Name_On_Performance_Monitor"), "2", "innertext", "Total Time")
+		If Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "exist", obj_AWCTeamcenterHome.WebElement("wele_Property_Name_On_Performance_Monitor"), "5", "", "")=False  Then
+		
+			If  Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Creation_Operation ","Click",obj_AWCTeamcenterHome,"wele_UserSessionBar_Settings","","","")  =False Then
+				Reporter.ReportEvent micFail, "Click on [ Settings ] on User session bar", "Fail to click on [ Settings ] on User session bar"
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Click on [ Settings ] on User session bar", "Successfully clicked on [ Settings ] on User session bar"
+			End If
+			Call  Fn_AWC_ReadyStatusSync(1)
+			
+			Call Fn_AWC_Common_Business_Primary_Toolbar_Operations(obj_AWCTeamcenterHome,"Monitoring","Performance Monitor")
+			Wait 2
+			'-----------------------------------------------------------------------------------------------------------------------------------------------------------
+			'Verify Performance Monitor Panel is open
+			'-----------------------------------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_Web_UI_WebObject_Operations("Validate the Icons at the bottom - CAD user - AUTHOR Client", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_Property_Name_On_Performance_Monitor"), "2", "innertext", "Total Time")
+			If Fn_Web_UI_WebElement_Operations(" Fn_Common_Business_Primary_Toolbar_Operations","Click",obj_AWCTeamcenterHome,"wele_Property_Name_On_Performance_Monitor","","","")=False  Then
+				Reporter.ReportEvent micFail, "Verify [ Performance Monitor ] Panel is open.", "Fail to Verify [ Performance Monitor ] Panel is open."
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Verify [ Performance Monitor ] Panel is open.", "Successfully verified [ Performance Monitor ] Panel is open."
+			End If	
+		End If	
+	End If
+	'Select method to create object
+	Select case lcase(sAction)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Case to create object by tile
+		Case "bytile"
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Home Folder
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_Creation_Operation", "click", obj_AWCTeamcenterHome, "wbtn_Home","","","")
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Home page tile Create
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_HomePage_Tile"), "", "innertext", glblCREATE)
+			If obj_AWCTeamcenterHome.WebElement("wele_HomePage_Tile").exist Then
+				If Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Creation_Operation","Click",obj_AWCTeamcenterHome,"wele_HomePage_Tile","","","") =False Then
+					Reporter.ReportEvent micFail, "Click on [ "&glblCREATE&" ] Tile on home page", "Fail to click on [ "&glblCREATE&" ] Tile on home page"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on [ "&glblCREATE&" ] Tile on home page", "Successfully clicked on [ "&glblCREATE&" ] Tile on home page"
+				End If
+			End  IF	
+			Call  Fn_AWC_ReadyStatusSync(1)
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Type Object type value in edit box
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If obj_AWCTeamcenterHome.WebEdit("wedit_SearchBoxLOV").exist Then
+				If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Creation_Operation","Set",obj_AWCTeamcenterHome, "wedit_SearchBoxLOV", sObjType ) Then
+					Reporter.ReportEvent micPass, "Type [ " & sObjType & " ] in Edit Box", "Successfully Typed [ " & sObjType & " ] in Edit Box"
+				Else
+					Reporter.ReportEvent micFail, "Type [ " & sObjType & " ] in Edit Box", "Fail to Type [ " & sObjType & " ] in Edit Box"
+					ExitComponent
+				End  If
+			End If
+			Call Fn_AWC_ReadyStatusSync(1)
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Select Object type value in edit box
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectType"), "2", "innertext", sObjType)
+			If Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Creation_Operation","Click",obj_AWCTeamcenterHome,"wele_ObjectType","","","") =False Then
+				Reporter.ReportEvent micFail, "Select object type", "Fail to select object type"
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Select object type", "Successfully Selected object type is a [ " & sObjType & " ]"
+			End If
+			Call Fn_AWC_ReadyStatusSync(2)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Case to create object by primary toolbar
+		Case "by primary toolbar"
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Home Folder
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_Creation_Operation", "click", obj_AWCTeamcenterHome, "wbtn_Home","","","")
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Explorer
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_Creation_Operation", "click", obj_AWCTeamcenterHome, "wbtn_Explorer","","","")
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on more command on Primary tab
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If  Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Creation_Operation ","Click",obj_AWCTeamcenterHome,"wele_WorkAreaTool_MoreCommand","","","")  =False Then
+				Reporter.ReportEvent micFail, "Click on [ More Command ] on primary toolbar", "Fail to click on [ More Command ] on primary toolbar"
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Click on [ More Command ] on primary toolbar", "Successfully clicked on [ More Command ] on primary toolbar"
+			End If
+			Call  Fn_AWC_ReadyStatusSync(1)
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on New -> Add New
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_AWC_Common_Business_Primary_Toolbar_Operations(obj_AWCTeamcenterHome,gNew,gAdd)
+			Call  Fn_AWC_ReadyStatusSync(1)
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Type Object type value in edit box
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If obj_AWCTeamcenterHome.WebEdit("wedit_SearchBoxLOV").exist Then
+				If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Creation_Operation","Set",obj_AWCTeamcenterHome, "wedit_SearchBoxLOV", sObjType ) Then
+					Reporter.ReportEvent micPass, "Type [ " & sObjType & " ] in Edit Box", "Successfully Typed [ " & sObjType & " ] in Edit Box"
+				Else
+					Reporter.ReportEvent micFail, "Type [ " & sObjType & " ] in Edit Box", "Fail to Type [ " & sObjType & " ] in Edit Box"
+					ExitComponent
+				End  If
+			End If
+			Call Fn_AWC_ReadyStatusSync(1)
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Select Object type value in edit box
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectType"), "2", "innertext", sObjType)
+			If Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Creation_Operation","Click",obj_AWCTeamcenterHome,"wele_ObjectType","","","") =False Then
+				Reporter.ReportEvent micFail, "Select object type", "Fail to select object type"
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Select object type", "Successfully Selected object type is a [ " & sObjType & " ]"
+			End If
+			Call Fn_AWC_ReadyStatusSync(2)
+		'--------------------------------------------------------------------------------------------------------------------------------		
+		'This action is to create object from Add To on work area panel
+		Case "add to" 
+		'	'--------------------------------------------------------------------------------------------------------------------------------
+			'Type Object type value in edit box
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If obj_AWCTeamcenterHome.WebEdit("wedit_SearchBoxLOV").exist Then
+				If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Creation_Operation","Set",obj_AWCTeamcenterHome, "wedit_SearchBoxLOV", sObjType ) Then
+					Reporter.ReportEvent micPass, "Type [ " & sObjType & " ] in Edit Box", "Successfully Typed [ " & sObjType & " ] in Edit Box"
+				Else
+					Reporter.ReportEvent micFail, "Type [ " & sObjType & " ] in Edit Box", "Fail to Type [ " & sObjType & " ] in Edit Box"
+					ExitComponent
+				End  If
+			End If
+			Call Fn_AWC_ReadyStatusSync(1)
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Select Object type value in edit box
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectType"), "2", "innertext", sObjType)
+			If Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Creation_Operation","Click",obj_AWCTeamcenterHome,"wele_ObjectType","","","") =False Then
+				Reporter.ReportEvent micFail, "Select object type", "Fail to select object type"
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Select object type", "Successfully Selected object type is a [ " & sObjType & " ]"
+			End If
+			Call Fn_AWC_ReadyStatusSync(2)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Case to Create Change  object by primary toolbar
+		Case "change object"
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Home Folder
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_Creation_Operation", "click", obj_AWCTeamcenterHome, "wbtn_Home","","","")
+			Call Fn_AWC_ReadyStatusSync(2)
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Explorer
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_Creation_Operation", "click", obj_AWCTeamcenterHome, "wbtn_Explorer","","","")
+			Call Fn_AWC_ReadyStatusSync(2)
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Create Change Objects button on Primary tab
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If Fn_WEB_UI_WebButton_Operations("Create an object", "Click", obj_AWCTeamcenterHome, "wbtn_Create_Change_Objects","","","") =False Then
+				Reporter.ReportEvent micFail, "Click on [ Create Change Objects ] toolbar button on primary toolbar", "Fail to click on [ Create Change Objects ] toolbar button on primary toolbar"
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Click on [ Create Change Objects ] toolbar button on primary toolbar", "Successfully clicked on [ Create Change Objects ] toolbar button on primary toolbar"
+			End If
+			Call  Fn_AWC_ReadyStatusSync(1)
+			'------------------------------------------------------------------------------------------------------------------------------
+			' Select provided change object type
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_NewSubmenu"), "2", "innertext", sObjType)
+			If Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome,"wele_NewSubmenu","","","") =False Then
+				Reporter.ReportEvent micFail, "Click on [ " & cstr(sObjType) & " ] toolbar button on primary toolbar", "Fail to click on [ " & cstr(sObjType) & " ] toolbar button on primary toolbar"
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Click on [ " & cstr(sObjType) & " ] toolbar button on primary toolbar", "Successfully clicked on [ " & cstr(sObjType) & " ] toolbar button on primary toolbar"
+			End If
+			Call Fn_AWC_ReadyStatusSync(2)
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Verify Create Change Proposal Panel is open
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If lcase(sObjType) = "create mcr" Then
+				sXpath=Replace(gChangeObjectsSubmenu,"~","Create Material Concession Request")
+			ElseIf lcase(sObjType) = "create change proposal" Then
+				sXpath=Replace(gChangeObjectsSubmenu,"~","Create Change")
+			Else
+				sXpath=Replace(gChangeObjectsSubmenu,"~",sObjType)
+			End If
+			Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_Create_DocReq_Panel"), "2", "xpath", sXpath)
+			If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_Create_DocReq_Panel"), 2, 5)=False Then
+				Reporter.ReportEvent micFail, "Verify Panel [ " & sObjType & "] ", "Fail to verify [ " & sObjType & "] Panel is open"
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Verify Panel [ " & sObjType & "]", "Successfully verified [ " & sObjType & "] Panel is opened"
+			End  IF
+			Call Fn_AWC_ReadyStatusSync(2)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Case to Part , Add New Saleable Item by primary toolbar
+		Case "create part","add new saleable item"
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Home Folder
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_Creation_Operation", "click", obj_AWCTeamcenterHome, "wbtn_Home","","","")
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Explorer
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_Creation_Operation", "click", obj_AWCTeamcenterHome, "wbtn_Explorer","","","")
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Create Part button on Primary tab
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If Fn_WEB_UI_WebButton_Operations("Create an object", "Click", obj_AWCTeamcenterHome, "wbtn_Create_Part","","","") =False Then
+				Reporter.ReportEvent micFail, "Click on [ Create Part ] toolbar button on primary toolbar", "Fail to click on [ Create Part ] toolbar button on primary toolbar"
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Click on [ Create Part ] toolbar button on primary toolbar", "Successfully clicked on [ Create Part ] toolbar button on primary toolbar"
+			End If
+			Call  Fn_AWC_ReadyStatusSync(1)
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If lcase(sAction)= "add new saleable item" Then
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Click on add new saleable item menu
+				'--------------------------------------------------------------------------------------------------------------------------------
+				Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_NewSubmenu"), "2", "innertext", gAddNewSaleableItem)
+				If Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome,"wele_NewSubmenu","","","") =False Then
+					Reporter.ReportEvent micFail, "Click on [ " & cstr(gAddNewSaleableItem) & " ] toolbar button on primary toolbar", "Fail to click on [ " & cstr(gAddNewSaleableItem) & " ] toolbar button on primary toolbar"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on [ " & cstr(gAddNewSaleableItem) & " ] toolbar button on primary toolbar", "Successfully clicked on [ " & cstr(gAddNewSaleableItem) & " ] toolbar button on primary toolbar"
+				End If
+				Call Fn_AWC_ReadyStatusSync(2)
+				'--------------------------------------------------------------------------------------------------------------------------------
+			ElseIf lcase(sAction)= "create part" Then
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Click on Create Part menu
+				'--------------------------------------------------------------------------------------------------------------------------------
+				Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_NewSubmenu"), "2", "innertext", gCreatePart)
+				If Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome,"wele_NewSubmenu","","","") =False Then
+					Reporter.ReportEvent micFail, "Click on [ " & cstr(gCreatePart) & " ] toolbar button on primary toolbar", "Fail to click on [ " & cstr(gCreatePart) & " ] toolbar button on primary toolbar"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on [ " & cstr(gCreatePart) & " ] toolbar button on primary toolbar", "Successfully clicked on [ " & cstr(gCreatePart) & " ] toolbar button on primary toolbar"
+				End If
+				Call Fn_AWC_ReadyStatusSync(2)
+				'--------------------------------------------------------------------------------------------------------------------------------
+			End If
+			
+	End Select
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Select case(lcase(sObjType))
+		'--------------------------------------------------------------------------------------------------------------------------------
+		Case "sales document","engineering document","manufacturing document","tex document"	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Store the ID value
+			'--------------------------------------------------------------------------------------------------------------------------------
+			sXpath=Replace(gEditBoxXpath,"~",glblID)
+			Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "2", "xpath", sXpath)
+			sID= Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "getroproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "2", "value", "")
+			If sID="" Then
+				Reporter.ReportEvent micFail, "Store the ID value ", "Fail to Fn_AWC_Object_Creation_Operation as fail to get ID value"
+				ExitComponent
+			End If
+			Call Fn_AWC_ReadyStatusSync(1)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		Case "transfer folder"
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Store the Name value
+			'--------------------------------------------------------------------------------------------------------------------------------
+			sXpath=Replace(gNameValue,"~",gName)
+			Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_MainInfoNameValue"), "2", "xpath", sXpath)
+			sID= Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "getroproperty", obj_AWCTeamcenterHome.WebElement("wele_MainInfoNameValue"), "2", "title", "")
+			If sID="" Then
+				Reporter.ReportEvent micFail, "Store the ID value ", "Fail to Fn_AWC_Object_Creation_Operation as fail to get ID value"
+				ExitComponent
+			End If
+			Call Fn_AWC_ReadyStatusSync(1)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		Case  "part" ,"add new saleable item"
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Main tab of Create Part Panel
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"), "2", "innertext", "Main")
+			If Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome,"wele_AddPanelTabs","","","") =False Then
+				Reporter.ReportEvent micFail, "Click on [ Main ] tab of Create Part panel", "Fail to click on [ Main ] tab of Create Part panel"
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Click on [ Main ] tab of Create Part panel", "Successfully clicked on [ Main ] tab of Create Part panel"
+			End If
+			Call Fn_AWC_ReadyStatusSync(1)
+		'--------------------------------------------------------------------------------------------------------------------------------
+	End Select		
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Enter property values on creation dialog		
+	iPropertyCount=sdic.Count
+	sTempProperites=sdic.Keys
+	sTempPropertyValues=sdic.items
+	For iCounter=0 to iPropertyCount-1
+		sPropertyName=sTempProperites(iCounter)
+		sPropertyValue=sTempPropertyValues(iCounter)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		Select Case lcase(sPropertyName)
+		'--------------------------------------------------------------------------------------------------------------------------------
+			'Select the value from list field with have search edit box
+			Case "calibration database","engineer responsible","manager responsible","responsible tester","global or regional change","responsible location","Project2","ca owner 1","ca owner 2","ca owner 3","ca owner 4","ca owner 5","root cause 1","root cause 2","root cause 3","root cause 4","root cause 5","quality manager","location/plant","analyst","r/d manager","sqd","business type","unit of costs","customer affected","cr complexity","functional safety","functional safety manager","system","projects list","change owner","admin manager","crb leader","change manager","change template","weight unit (from r/d)","surface","material","default unit","material group","reman type","device code","article type","saleable item type","design owner","use status","correct product group","ip owner","type number","correct product group","cp analyst","cp manager","responsible pg","responsible location/plant","responsible global coc","priority","classification","category","reason","test classification","component code","test part disposition","test part status","test location","device code","customer","department code","requested by location","responsible coc","requested by","test status","billing type","test category","responsible department","scope object","scope","responsible process","process driver","team","cvs company name","language","branded for","responsible","language version owner","product group","folder name","name","title id"
+				'--------------------------------------------------------------------------------------------------------------------------------			
+				If lcase(sPropertyName)="projects list" Then
+					sPropertyName="Projects"
+				ElseIf lcase(sPropertyName)="Project2" Then
+					sPropertyName="Project"
+				End If	
+				'Added this code for negative testing of crete part with reman type - 23 Jan 2025-by Mohini
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If lcase(sPropertyName)="reman type" and lcase(sPropertyValue)="user is not in k_mod_addeditremaneng group" Then
+					sXpath=Replace(gEditBoxXpath,"~",sPropertyName)
+					Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "2", "xpath", sXpath)
+					'--------------------------------------------------------------------------------------------------------------------------------
+					Call	 Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Creation_Operation","Click",obj_AWCTeamcenterHome, "wedit_ObjectPropertyEditBox_2", "" ) 
+				
+					obj_AWCTeamcenterHome.WebElement("wele_ObjectCreationNotificationMsg").click
+					sStatusMesaage= Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "getroproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectCreationNotificationMsg"), "2", "innertext", "")	
+					obj_AWCTeamcenterHome.WebButton("wbtn_NotificationClose").Click
+					If instr(sStatusMesaage,sPropertyValue)>0 Then
+						Reporter.ReportEvent micPass, "Verify error message", "Successfully verified as error message [ " & sPropertyValue & " ]"
+						Fn_AWC_Object_Creation_Operation=True
+						Exit Function
+					Else
+						Reporter.ReportEvent micFail, "Verify error message", "Fail to verify error message [ " & sPropertyValue & " ]"
+						ExitComponent
+					End If
+				End If
+				'--------------------------------------------------------------------------------------------------------------------------------			
+				If lcase(sPropertyName)="ca owner 1" or lcase(sPropertyName)="ca owner 2" or lcase(sPropertyName)="ca owner 3" or lcase(sPropertyName)="ca owner 4" or lcase(sPropertyName)="ca owner 5"	Then
+					'--------------------------------------------------------------------------------------------------------------------------------
+					'Click on Corrective Actions tab of Create MCR Panel
+					'--------------------------------------------------------------------------------------------------------------------------------
+					Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"), "2", "innertext", gtabCorrectiveActions)
+					If Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome,"wele_AddPanelTabs","","","") =False Then
+						Reporter.ReportEvent micFail, "Click on [ "&gtabCorrectiveActions&" ] tab of Create Part panel", "Fail to click on [ "&gtabCorrectiveActions&" ] tab of Create Part panel"
+						ExitComponent
+					Else
+						Reporter.ReportEvent micPass, "Click on [ "&gtabCorrectiveActions&" ] tab of Create Part panel", "Successfully clicked on [ "&gtabCorrectiveActions&" ] tab of Create Part panel"
+					End If
+				End  IF	
+				'--------------------------------------------------------------------------------------------------------------------------------				
+				sXpath=Replace(gEditBoxXpath,"~",sPropertyName)
+				Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "2", "xpath", sXpath)
+				wait 2
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Creation_Operation","Click",obj_AWCTeamcenterHome, "wedit_ObjectPropertyEditBox_2", "" ) Then
+					wait 5
+					
+					sTempPropertyValue=Split(sPropertyValue,"~")
+					For jCounter = 0 To ubound(sTempPropertyValue)
+						'--------------------------------------------------------------------------------------------------------------------------------
+						If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValuePanel"), 30,50) Then
+							If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Creation_Operation ","set",obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "", trim(sTempPropertyValue(jCounter))) Then
+								Reporter.ReportEvent micPass, "Type [ " & sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box", "Successfully typed " &  sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box"
+							Else
+								Reporter.ReportEvent micFail, "Type [ " & sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box", "Fail to type [ " & sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box"
+								ExitComponent
+							End  If
+							'--------------------------------------------------------------------------------------------------------------------------------
+							Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), "2", "innertext", sTempPropertyValue(jCounter))
+							wait 2
+							 If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), 30,50)  Then
+								Call Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Creation_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"),"","","","")
+								Reporter.ReportEvent micPass, "Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field", "Successfully Selected the " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field"
+							Else
+								Reporter.ReportEvent micFail, "Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field", "Fail to Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field"
+								ExitComponent
+							End If
+							wait 5	
+							'--------------------------------------------------------------------------------------------------------------------------------							
+						Else
+							Reporter.ReportEvent micFail, "Enter " & sTempPropertyValue(jCounter) & " value into the " & sPropertyName & " edit box", "Fail to Create Business object of type  " & sObjType & " as [ " & sTempPropertyValue(jCounter) & " value is incorrect ]"
+							ExitComponent
+						End  If
+						'--------------------------------------------------------------------------------------------------------------------------------
+					Next
+				Else
+					Reporter.ReportEvent micFail, "Click in  " & sPropertyName & " list field", "Fail to Click in " & sPropertyName & " list field as [  List does not exist ]"
+					ExitComponent
+				End  IF		
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If lcase(sPropertyName) ="folder name" Then
+					sFolderName=sPropertyValue
+				End If
+				If lcase(sPropertyName) ="name" and lcase(sObjType) ="project folder" Then
+					sFolderName=sPropertyValue
+				End If
+			'---------------------------------------------------------------------------------------------------------------------------------
+			'Select the value from list field with have search edit box
+			Case "language2","title id2","complete kb used-in products report","complete y268432 legacy change questionnaire","is legacy product?"
+				If lcase(sPropertyName)="language2" Then
+					sPropertyName="Language"
+				ElseIf lcase(sPropertyName)="title id2" Then
+					sPropertyName="Title ID"	
+				End  IF	
+				
+				sXpath=Replace(gEditBoxXpath,"~",sPropertyName)
+				Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "2", "xpath", sXpath)
+				wait 2
+				'---------------------------------------------------------------------------------------------------------------------------------
+				If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Creation_Operation","Click",obj_AWCTeamcenterHome, "wedit_ObjectPropertyEditBox_2", "" ) Then
+					wait 5
+					
+					sTempPropertyValue=Split(sPropertyValue,"~")
+					'---------------------------------------------------------------------------------------------------------------------------------
+					For jCounter = 0 To ubound(sTempPropertyValue)
+						'---------------------------------------------------------------------------------------------------------------------------------
+						If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValuePanel"), 30,50) Then
+							sTemp=Split(trim(sTempPropertyValue(jCounter))," ")
+							'---------------------------------------------------------------------------------------------------------------------------------
+							If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Creation_Operation ","setnocheck",obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "", sTemp(0)) Then
+								Reporter.ReportEvent micPass, "Type [ " & sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box", "Successfully typed " &  sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box"
+							Else
+								Reporter.ReportEvent micFail, "Type [ " & sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box", "Fail to type [ " & sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box"
+								ExitComponent
+							End  If
+							'---------------------------------------------------------------------------------------------------------------------------------
+							Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), "2", "innertext", sTempPropertyValue(jCounter))
+							wait 2
+							'---------------------------------------------------------------------------------------------------------------------------------
+							 If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), 30,50)  Then
+								Call Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Creation_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"),"","","","")
+								Reporter.ReportEvent micPass, "Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field", "Successfully Selected the " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field"
+							Else
+								Reporter.ReportEvent micFail, "Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field", "Fail to Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field"
+								ExitComponent
+							End If
+							wait 5	
+							'---------------------------------------------------------------------------------------------------------------------------------							
+						Else
+							Reporter.ReportEvent micFail, "Enter " & sTempPropertyValue(jCounter) & " value into the " & sPropertyName & " edit box", "Fail to Create Business object of type  " & sObjType & " as [ " & sTempPropertyValue(jCounter) & " value is incorrect ]"
+							ExitComponent
+						End  If
+						'---------------------------------------------------------------------------------------------------------------------------------
+					Next
+					'---------------------------------------------------------------------------------------------------------------------------------
+				Else
+					Reporter.ReportEvent micFail, "Click in  " & sPropertyName & " list field", "Fail to Click in " & sPropertyName & " list field as [  List does not exist ]"
+					ExitComponent
+				End  IF		
+			'---------------------------------------------------------------------------------------------------------------------------------
+			'Select the value from list field(search field is not there under list)
+			Case "deviation type","document kind","application target","fast track","document group","team","use status","responsible","attribute name","old attribute value (main)","new attribute value (main)","old attribute value (secondary)","new attribute value (secondary)"
+					
+				sXpath=Replace(gEditBoxXpath,"~",sPropertyName)
+				
+				Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "2", "xpath", sXpath)
+				If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Creation_Operation","Click",obj_AWCTeamcenterHome, "wedit_ObjectPropertyEditBox_2", sPropertyValue ) Then
+					'---------------------------------------------------------------------------------------------------------------------------------
+					If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValuePanel"), 3, 5) Then
+						'---------------------------------------------------------------------------------------------------------------------------------
+						Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), "2", "innertext", sPropertyValue)
+						 If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), 3, 5) Then
+							Call Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Creation_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"),"","","","")
+							Reporter.ReportEvent micPass, "Select the  " & sPropertyValue & " value from  " & sPropertyName & " list field", "Successfully Selected the  " & sPropertyValue & " value from  " & sPropertyName & " list field"
+						 Else
+							Reporter.ReportEvent micFail, "Select the  " & sPropertyValue & " value from  " & sPropertyName & " list field", "Fail to Select the  " & sPropertyValue & " value from  " & sPropertyName & " list field"
+							ExitComponent
+						 End  IF
+						Call Fn_AWC_ReadyStatusSync(2)
+						'---------------------------------------------------------------------------------------------------------------------------------
+					Else
+						Reporter.ReportEvent micFail, "Enter " & sPropertyValue &" value into the " & sPropertyName & " edit box", "Fail to Create Business object of type  " & sObjType & " as [ " & sPropertyValue & " value is incorrect ]"
+						ExitComponent
+					End  If
+					'---------------------------------------------------------------------------------------------------------------------------------
+				Else
+					Reporter.ReportEvent micFail, "Click in  " & sPropertyName & " list field", "Fail to Click in " & sPropertyName & " list field as [  List does not exist ]"
+					ExitComponent
+				End  IF		
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Select the value from list field
+			Case "locations"
+				sXpath=Replace(gEditBoxXpath,"~",sPropertyName)
+				Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "2", "xpath", sXpath)
+			
+				If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Creation_Operation","click",obj_AWCTeamcenterHome, "wedit_ObjectPropertyEditBox_2", "" ) Then
+					sTempPropertyValue=Split(sPropertyValue,"~")
+					'---------------------------------------------------------------------------------------------------------------------------------
+					For jCounter = 0 To ubound(sTempPropertyValue)
+						'---------------------------------------------------------------------------------------------------------------------------------
+						If Fn_Web_UI_WebEdit_Operations(" Fn_AWC_Object_Creation_Operation","set",obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "",  sTempPropertyValue(jCounter) ) Then
+							Reporter.ReportEvent micPass, "Type " & sPropertyName & "  value in Edit Box", "Successfully Typed " & sTempPropertyValue(jCounter) & " value [ " & sPropertyName  & " ] in Edit Box"
+						Else
+							Reporter.ReportEvent micFail, "Type " & sPropertyName & " value in Edit Box", "Fail to Type [ " & sTempPropertyValue(jCounter) & " ] value [ " & sPropertyName & " ] in Edit Box"
+							ExitComponent
+						End  If
+						'---------------------------------------------------------------------------------------------------------------------------------
+						Call Fn_Web_UI_WebObject_Operations(" Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_Advance_Search_Dropdown_Values"),"", "title",sTempPropertyValue(jCounter))
+						If Fn_Web_UI_WebElement_Operations(" Fn_AWC_Object_Creation_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_Advance_Search_Dropdown_Values"),"","","","") Then
+							Reporter.ReportEvent micPass, "Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field", "Successfully Selected the " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field"
+						Else
+							Reporter.ReportEvent micFail, "Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field", "Fail to Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field"
+							ExitComponent
+						End If
+					Next	
+					'---------------------------------------------------------------------------------------------------------------------------------
+					Call Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Creation_Operation","click",obj_AWCTeamcenterHome, "wedit_ObjectPropertyEditBox_2", "" )
+					Call Fn_AWC_ReadyStatusSync(1)
+				Else
+					Reporter.ReportEvent micFail, "Click in  " & sPropertyName & " list field", "Fail to Click in " & sPropertyName & " list field as [  List does not exist ]"
+					ExitComponent
+				End  If	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Enter value in Text Area field
+			Case "folder description2","quality and safety","calibration comments","question/ topic","name2","projected volume yr 12","projected volume yr 22","projected volume yr 32","corrective action 1","payback in year","escalation level","additional information","customer part number","saleable only for","sales limitation","replacement product of","variant of existing product","branded for?","part number","customers/market","corrective action 2","corrective action 3","corrective action 4","corrective action 5","deviation requested 1","deviation requested 2","deviation requested 3","deviation requested 4","deviation requested 5","deviated spec is 1","deviated spec is 2","deviated spec is 3","deviated spec is 4","deviated spec is 5","synopsis","data","vehicle / usage type","vehicles per year (volume)","forecast if new part","kind of testing","supplier ppap quantity","priority comment","component","proposed solution (description in detail)","customer cr number","danger notes / special storage req","external id number","external creator","sample requirements","supplier name","customer plant location","reason for proposal","proposed solution","brief description","fixture comments","procedure comments","material comments","corrective action","test comments and conclusions","background","das software revision","esp software revision","abs software revision","vin number","vehicle model","vehicle make","vehicle description","non tc specification","comments","charge number","vendor","number of samples","engineering project number","objective","external document number","external creator","original doc","title 4","title 3","title 2","title 1","title en","title in doc. language","detail of revision","comment","description","name text area","title"
+				'---------------------------------------------------------------------------------------------------------------------------------	
+				If  lcase(sPropertyName)="name text area" Then
+					sPropertyName="Name"
+				ElseIf  lcase(sPropertyName)="name2" Then
+					sPropertyName="Name"
+				ElseIf  lcase(sPropertyName)="folder description2" Then
+					sPropertyName="Folder Description"
+				ElseIf  lcase(sPropertyName)="projected volume yr 12" Then
+					sPropertyName="projected volume yr 1"
+				ElseIf  lcase(sPropertyName)="projected volume yr 22" Then
+					sPropertyName="projected volume yr 2"
+				ElseIf  lcase(sPropertyName)="projected volume yr 32" Then
+					sPropertyName="projected volume yr 3"
+				End If					
+				If lcase(sPropertyName)="deviated spec is 1"  Then
+						'--------------------------------------------------------------------------------------------------------------------------------
+						'Click on Deviation Details tab of Create MCR Panel
+						'--------------------------------------------------------------------------------------------------------------------------------
+						Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"), "2", "innertext", gtabDeviationDetails)
+						If Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome,"wele_AddPanelTabs","","","") =False Then
+							Reporter.ReportEvent micFail, "Click on [ "&gtabDeviationDetails&" ] tab of Create Part panel", "Fail to click on [ "&gtabDeviationDetails&" ] tab of Create Part panel"
+							ExitComponent
+						Else
+							Reporter.ReportEvent micPass, "Click on [ "&gtabDeviationDetails&" ] tab of Create Part panel", "Successfully clicked on [ "&gtabDeviationDetails&" ] tab of Create Part panel"
+						End If
+					End  IF							
+					
+					If lcase(sPropertyName)="corrective action 1" or lcase(sPropertyName)="corrective action 2" or lcase(sPropertyName)="corrective action 3" or lcase(sPropertyName)="corrective action 4" or lcase(sPropertyName)="corrective action 5" Then 
+						'--------------------------------------------------------------------------------------------------------------------------------
+						'Click on Corrective Actions tab of Create MCR Panel
+						'--------------------------------------------------------------------------------------------------------------------------------
+						Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"), "2", "innertext", gtabCorrectiveActions)
+						If Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome,"wele_AddPanelTabs","","","") =False Then
+							Reporter.ReportEvent micFail, "Click on [ "&gtabCorrectiveActions&" ] tab of Create Part panel", "Fail to click on [ "&gtabCorrectiveActions&" ] tab of Create Part panel"
+							ExitComponent
+						Else
+							Reporter.ReportEvent micPass, "Click on [ "&gtabCorrectiveActions&" ] tab of Create Part panel", "Successfully clicked on [ "&gtabCorrectiveActions&" ] tab of Create Part panel"
+						End If
+					End  IF		
+				'---------------------------------------------------------------------------------------------------------------------------------
+				Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectTextArea"),"", "acc_name",trim(sPropertyName))
+				If Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "waituntilexist", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectTextArea"), "20000", "visible", "True") Then
+					'---------------------------------------------------------------------------------------------------------------------------------				
+					IF Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Creation_Operation","Set",obj_AWCTeamcenterHome.WebEdit("wedit_ObjectTextArea"), "", trim(sPropertyValue)) Then
+						Reporter.ReportEvent micPass, "Enter the value in [ "& sPropertyName &" ] field on Advanced search dialog", "Successfully entered the value [  "& sPropertyValue &" ] in [ " & sPropertyName & " ] field on Advanced search dialog "
+					Else
+						Reporter.ReportEvent micFail, "Enter the value in [ "& sPropertyName &" ] field on Advanced search dialog", "Fail to enter value [  "& sPropertyValue &" ] in [ " & sPropertyName & " ] field on Advanced search dialog"
+						ExitComponent
+					End  IF
+					Call Fn_AWC_ReadyStatusSync(2)	
+					'---------------------------------------------------------------------------------------------------------------------------------
+				Else
+					Reporter.ReportEvent micFail, "Verify existance of " & sPropertyName & " edit field.", sPropertyName & " edit field does not exist."
+					ExitComponent		
+				End If
+				If lcase(sPropertyName)="question/ topic" then
+					sQuestionTopic=sPropertyValue
+				End  IF
+				If lcase(sPropertyName)="folder description" and lcase(sObjType) ="project folder" Then 
+					sFolderDesc=sPropertyValue
+				End  IF
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Select the value from date field
+			Case "ca due date 1","cr phase 4 target completion date","cr phase 3 target completion date","start of production (sop)","oes commitment until","series oe until","ca due date 2","ca due date 3","ca due date 4","ca due date 4","effective to","effective from","date needed","engineering project due date","testing completion date","requested completion date","requested start date","crb target completion date"
+				If lcase(sPropertyName)="ca due date 1" or lcase(sPropertyName)="ca due date 2" or lcase(sPropertyName)="ca due date 3" or lcase(sPropertyName)="ca due date 4" or lcase(sPropertyName)="ca due date 5" Then
+					'--------------------------------------------------------------------------------------------------------------------------------
+					'Click on Corrective Actions tab of Create MCR Panel
+					'--------------------------------------------------------------------------------------------------------------------------------
+					Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"), "2", "innertext", gtabCorrectiveActions)
+					If Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome,"wele_AddPanelTabs","","","") =False Then
+						Reporter.ReportEvent micFail, "Click on [ "&gtabCorrectiveActions&" ] tab of Create Part panel", "Fail to click on [ "&gtabCorrectiveActions&" ] tab of Create Part panel"
+						ExitComponent
+					Else
+						Reporter.ReportEvent micPass, "Click on [ "&gtabCorrectiveActions&" ] tab of Create Part panel", "Successfully clicked on [ "&gtabCorrectiveActions&" ] tab of Create Part panel"
+					End If
+				End  IF	
+				Call Fn_AWC_Common_Business_Date_Panel_Operations(obj_AWCTeamcenterHome,"selectdate",trim(sPropertyName),trim(sPropertyValue))
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Case "project","projects"	
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Click on Add Project button 
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_Creation_Operation", "Click", obj_AWCTeamcenterHome, "wbtn_AddProject","","","") =False Then
+					Reporter.ReportEvent micFail, "Click on [ Add Project ] button ", "Fail to click on [ Add Project ] button"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on [ Add Project ] button", "Successfully clicked on [ Add Project ] button"
+				End If
+				Call  Fn_AWC_ReadyStatusSync(2)
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Select Project from list 
+				'--------------------------------------------------------------------------------------------------------------------------------
+				Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_Project"), "2", "innertext", sPropertyValue )
+				If Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Creation_Operation","Click",obj_AWCTeamcenterHome,"wele_Project",1,1,micLeftBtn) =False Then
+					Reporter.ReportEvent micFail, "Select the Project from list", "Fail to Select the Project from list"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Select the Project from list", "Successfully Selected the  " & sPropertyValue & "  Project"
+				End If	
+				Call  Fn_AWC_ReadyStatusSync(2)
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Click on Assign Project button 
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_Creation_Operation", "Click", obj_AWCTeamcenterHome, "wbtn_AssignProjects","","","") =False Then
+					Reporter.ReportEvent micFail, "Click on [ Assign ] button ", "Fail to click on [ Assign ] button"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on [ Assign ] button", "Successfully clicked on [ Assign ] button"
+				End If
+				Call  Fn_AWC_ReadyStatusSync(2)	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Select the checkbox value
+			Case "not deletable","affects other cocs/pgs","disallow not applicable","s/c? 1","sales total >= 15teur (each of the 3 years)?","series quantity >= 500 (each of the 3 years)?","project ros (over the 3 years) >= 10%?","s/c? 2","s/c? 3","s/c? 4","s/c? 5","batch tracing","fixture","procedure","material2","internal only?","secure?","public?","trailer","legal","core","warranty","all location access","uncouple obsolete revisions automatically","relate new revisions automatically"
+				If  lcase(sPropertyName)="material2" Then
+					sPropertyName="Material"
+				End If
+				sXpath=Replace(gCommonCheckBox2,"~",sPropertyName)
+				Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("welechk_CommonCheckBox"), "2", "xpath", sXpath)
+				IF WaitUntilExist(obj_AWCTeamcenterHome.WebElement("welechk_CommonCheckBox"), 60, 5) Then
+					Call Fn_Web_UI_WebCheckBox_Operations("Fn_AWC_Object_Creation_Operation","set",obj_AWCTeamcenterHome,"welechk_CommonCheckBox",sPropertyName,sPropertyValue)
+					Call Fn_AWC_ReadyStatusSync(1)		
+				End  IF	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Select the radio button value	
+			Case "enter id?","cybersecurity affected?","s/c or c/c characteristic affected?2","affects fit","affects form","affects function","affects performance","affects durability","default phantom part","hazardous material","licenses affected?","s/c or c/c characteristic affected?","spare parts affected?","tests necessary?","customer notification required?","inventory critical?","multiple plant release?","under export control (military use possible)","is an mcr required to ship product on this cr?","escalation needed?","customer ppap required?","potential cost impact?"
+					If  lcase(sPropertyName)="s/c or c/c characteristic affected?2" Then
+						sPropertyName="S/C or C/C Characteristic Affected?"
+					End If
+					sXpath=Replace(gCommonRadioButton2,"~",sPropertyName)
+					sXpath=Replace(sXpath,"*",sPropertyValue)
+					Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_CommonRadioButton_2"), "2", "xpath", sXpath)
+					If  Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome.WebElement("wele_CommonRadioButton_2"),"","","","") Then
+					 Reporter.ReportEvent micPass, "Select the  " & sPropertyName & " value", "Successfully Selected the  " & sPropertyName & "  value is a [ " & sPropertyValue & " ]"
+					ELse
+						Reporter.ReportEvent micFail, "Select the " & sPropertyName & " value", "Fail to Select the " & sPropertyName & "  value"
+						ExitComponent
+					End  IF	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Enter value in text field
+			Case "instrument number","ca notes 1","revision__kb5_RDCost1","revision__kb5_RDCost2","revision__kb5_RDCost3","revision__kb5_hk1total1","revision__kb5_hk1total2","revision__kb5_hk1total3","revision__kb5_Margin1","revision__kb5_Margin2","revision__kb5_Margin3","estimated hk1 [eur]","revision__kb5_rdcost1","revision__kb5_rdcost2" ,"revision__kb5_rdcost3" ,"revision__kb5_seriesqty1" ,"revision__kb5_seriesqty2" ,"revision__kb5_seriesqty3","revision__kb5_esthk11","revision__kb5_esthk12","revision__kb5_esthk13" ,"revision__kb5_salesprice1" ,"revision__kb5_salesprice2" ,"revision__kb5_salesprice3","revision__kb5_investtool1","revision__kb5_investtool2","revision__kb5_investtool3","revision__kb5_investprod1","revision__kb5_investprod2","revision__kb5_investprod3","project ros (over the 3 years) [%]","id","ca notes 2","ca notes 3","ca notes 4","ca notes 5","cp/cr number 1","cp/cr number 2","cp/cr number 3","cp/cr number 4","cp/cr number 5","ca tracking number 1","ca tracking number 2","ca tracking number 3","ca tracking number 4","ca tracking number 5","quantity","supplier claim number","incoming tracking no","plant number","folder description","projected volume yr 3","projected volume yr 2","projected volume yr 1","potential cost impact value","customer ppap quantity","annual savings or profit in '000'","total effort estimate for all functions in hours","priority ratio value","brief description text","single packaging height","single packaging width","single packaging length","shelf life (months)","product height (mm)","product width (mm)","product length (mm)","net weight (from r/d)","number of c/c","number of s/c","dpp local","document id addon","replacement for","replaced by","estimated hours","default quantity"
+				
+				If  lcase(sPropertyName)="instrument number" Then
+					sPropertyName="kb4_InstrumentNumber"
+				End  If
+				'--------------------------------------------------------------------------------------------------------------------------------
+					If lcase(sObjType)= "part" and lcase(sPropertyName)="default quantity" Then
+						'--------------------------------------------------------------------------------------------------------------------------------
+						'Click on Material Weight and Dimensions tab of Create Part Panel
+						'--------------------------------------------------------------------------------------------------------------------------------
+						Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"), "2", "innertext", gtabMaterialWeightAndDimension1)
+						If Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome,"wele_AddPanelTabs","","","") =False Then
+							Reporter.ReportEvent micFail, "Click on [ "&gtabMaterialWeightAndDimension1&" ] tab of Create Part panel", "Fail to click on [ "&gtabMaterialWeightAndDimension1&" ] tab of Create Part panel"
+							ExitComponent
+						Else
+							Reporter.ReportEvent micPass, "Click on [ "&gtabMaterialWeightAndDimension1&" ] tab of Create Part panel", "Successfully clicked on [ "&gtabMaterialWeightAndDimension1&" ] tab of Create Part panel"
+						End If
+					End  IF
+					'--------------------------------------------------------------------------------------------------------------------------------
+					'For SIR Creation , Click on commercial data tab
+					'--------------------------------------------------------------------------------------------------------------------------------
+					If lcase(sPropertyName)="revision__kb5_investtool1"or lcase(sPropertyName)="revision__kb5_RDCost3"or lcase(sPropertyName)="revision__kb5_RDCost2"or lcase(sPropertyName)="revision__kb5_RDCost1"or lcase(sPropertyName)="revision__kb5_hk1total3"or lcase(sPropertyName)="revision__kb5_hk1total2"or lcase(sPropertyName)="revision__kb5_hk1total1"or lcase(sPropertyName)="revision__kb5_Margin3"or lcase(sPropertyName)="revision__kb5_Margin2"or lcase(sPropertyName)="revision__kb5_Margin1"or lcase(sPropertyName)="estimated hk1 [eur]"or lcase(sPropertyName)="revision__kb5_investtool2" or lcase(sPropertyName)="revision__kb5_investtool3" or lcase(sPropertyName)="revision__kb5_investprod1" or lcase(sPropertyName)="revision__kb5_investprod2" or lcase(sPropertyName)="revision__kb5_investprod3" or lcase(sPropertyName)="revision__kb5_rdcost1" or lcase(sPropertyName)="revision__kb5_rdcost2" or lcase(sPropertyName)="revision__kb5_rdcost3" or lcase(sPropertyName)="revision__kb5_seriesqty1" or lcase(sPropertyName)="revision__kb5_seriesqty2" or lcase(sPropertyName)="revision__kb5_seriesqty3" or lcase(sPropertyName)="revision__kb5_esthk11" or lcase(sPropertyName)="revision__kb5_esthk12" or lcase(sPropertyName)="revision__kb5_esthk13"  or lcase(sPropertyName)="revision__kb5_salesprice1" or lcase(sPropertyName)="revision__kb5_salesprice2" or lcase(sPropertyName)="revision__kb5_salesprice3" Then
+						Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"), "2", "innertext", gCoData)
+						If Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome,"wele_AddPanelTabs","","","") =False Then
+							Reporter.ReportEvent micFail, "Click on [ "&gCoData&" ] tab of Create SIR panel", "Fail to click on [ "&gCoData&" ] tab of Create SIR panel"
+							ExitComponent
+						Else
+							Reporter.ReportEvent micPass, "Click on [ "&gCoData&" ] tab of Create SIR panel", "Successfully clicked on [ "&gCoData&" ] tab of Create SIR panel"
+						End If
+					End  IF	
+					'--------------------------------------------------------------------------------------------------------------------------------
+					If lcase(sPropertyName)="brief description text" Then
+						sPropertyName="Brief Description"
+					End If
+					'--------------------------------------------------------------------------------------------------------------------------------
+					sXpath=Replace(gEditBoxXpath,"~",sPropertyName)
+					Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "2", "xpath", sXpath)
+					If Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "waituntilexist", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "20000", "visible", "True") Then
+						'--------------------------------------------------------------------------------------------------------------------------------
+						IF Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Creation_Operation","Set",obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "", trim(sPropertyValue)) Then
+							Reporter.ReportEvent micPass, "Enter the value in [ "& sPropertyName &" ] field on creation dialog", "Successfully entered the value [  "& sPropertyValue &" ] in [ " & sPropertyName & " ] field on creation dialog "
+						Else
+							Reporter.ReportEvent micFail, "Enter the value in [ "& sPropertyName &" ] field on creation dialog", "Fail to enter value [  "& sPropertyValue &" ] in [ " & sPropertyName & " ] field on creation dialog"
+							ExitComponent
+						End  IF
+						Call Fn_AWC_ReadyStatusSync(2)	
+						'--------------------------------------------------------------------------------------------------------------------------------
+					Else
+						Reporter.ReportEvent micFail, "Verify existance of " & sPropertyName & " edit field.", sPropertyName & " edit field does not exist."
+						ExitComponent		
+					End If
+					'--------------------------------------------------------------------------------------------------------------------------------
+					If lcase(sPropertyName)="folder description" Then
+						sFolderDesc=sPropertyValue
+					End  IF
+			'--------------------------------------------------------------------------------------------------------------------------------	
+			Case "location-makeby indicator"
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Click on Production/Purchasing tab of Create Part Panel
+				'--------------------------------------------------------------------------------------------------------------------------------
+				Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"), "2", "innertext", gtabProductionPurchasing1)
+				If Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome,"wele_AddPanelTabs","","","") =False Then
+					Reporter.ReportEvent micFail, "Click on [ "&gtabProductionPurchasing1&" ] tab of Create Part panel", "Fail to click on [ "&gtabProductionPurchasing1&" ] tab of Create Part panel"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on [ "&gtabProductionPurchasing1&" ] tab of Create Part panel", "Successfully clicked on [ "&gtabProductionPurchasing1&" ] tab of Create Part panel"
+				End If
+				Call Fn_AWC_ReadyStatusSync(1)	
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Add location value
+				'--------------------------------------------------------------------------------------------------------------------------------
+				sTempValue=Split(sPropertyValue,"*")
+				
+				sTempLocation=Split(sTempValue(0),"~")
+				sTempMakeBuy=Split(sTempValue(1),"~")
+				'---------------------------------------------------------------------------------------------------------------------------------
+				For jCounter = 0 to Ubound(sTempLocation)
+					Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox"), "2", "acc_name", gLocation)
+					Call Fn_Web_UI_WebEdit_Operations("Create an object","Click",obj_AWCTeamcenterHome, "wedit_ObjectPropertyEditBox", "" ) 
+					'---------------------------------------------------------------------------------------------------------------------------------
+					If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValuePanel"), 3, 5) Then
+						Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), "2", "innertext", sTempLocation(jCounter))
+						'---------------------------------------------------------------------------------------------------------------------------------
+						If  WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), 3, 5)  Then
+							 Call Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"),"","","","")
+							 Reporter.ReportEvent micPass, "Select the  " & gLocation & " value", "Successfully Selected the  " & gLocation & "  value is a [ " & sTempLocation(jCounter) & " ]"
+						ELse
+							Reporter.ReportEvent micFail, "Select the " & gLocation & " value", "Fail to Select the " & gLocation & "  value"
+							ExitComponent
+						End  IF	
+						Call Fn_AWC_ReadyStatusSync(1)
+						'---------------------------------------------------------------------------------------------------------------------------------
+					Else
+						Reporter.ReportEvent micFail, "Enter " & gLocation & "  Value", "Fail to Create Business object of type  " & sObjType & " as [ " & gLocation & " Value is incorrect ]"
+						ExitComponent
+					End  If
+					'--------------------------------------------------------------------------------------------------------------------------------
+					'Add make/buy indicator value
+					'--------------------------------------------------------------------------------------------------------------------------------
+					Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox"), "2", "acc_name", gMakeBuyIndicator1)
+					Call Fn_Web_UI_WebEdit_Operations("Create an object","Click",obj_AWCTeamcenterHome, "wedit_ObjectPropertyEditBox", "" ) 
+					'---------------------------------------------------------------------------------------------------------------------------------
+					If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValuePanel"), 3, 5) Then
+						Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), "2", "innertext", sTempMakeBuy(jCounter))
+						'---------------------------------------------------------------------------------------------------------------------------------
+						If  WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), 3, 5)  Then
+							 Call Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"),"","","","")
+							 Reporter.ReportEvent micPass, "Select the  " & gMakeBuyIndicator1 & " value", "Successfully Selected the  " & gMakeBuyIndicator1 & "  value is a [ " & sTempMakeBuy(jCounter) & " ]"
+						ELse
+							Reporter.ReportEvent micFail, "Select the " & gMakeBuyIndicator1 & " value", "Fail to Select the " & gMakeBuyIndicator1 & "  value"
+							ExitComponent
+						End  IF	
+						Call Fn_AWC_ReadyStatusSync(1)
+						'---------------------------------------------------------------------------------------------------------------------------------
+					Else
+						Reporter.ReportEvent micFail, "Enter " & gMakeBuyIndicator1 & "  Value", "Fail to Create Business object of type  " & sObjType & " as [ " & gMakeBuyIndicator1 & " Value is incorrect ]"
+						ExitComponent
+					End  If
+					'--------------------------------------------------------------------------------------------------------------------------------
+					'Click on Add Entry button 
+					'--------------------------------------------------------------------------------------------------------------------------------
+					If Fn_WEB_UI_WebButton_Operations("Create an object", "Click", obj_AWCTeamcenterHome, "wbtn_Add_Entry","","","") =False Then
+						Reporter.ReportEvent micFail, "Click on [ Add Entry ] button ", "Fail to click on [ Add Entry ] button"
+						ExitComponent
+					Else
+						Reporter.ReportEvent micPass, "Click on [ Add Entry ] button", "Successfully clicked on [ Add Entry ] button"
+					End If
+					Call  Fn_AWC_ReadyStatusSync(2)
+				Next
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Case "mcr"	
+				sTempValue=split(sPropertyValue,"~")
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Click on Search MCR button 
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If Fn_WEB_UI_WebButton_Operations("Create an object", "Click", obj_AWCTeamcenterHome, "wbtn_SearchMCR","","","") =False Then
+					Reporter.ReportEvent micFail, "Click on [ Search MCR ] button ", "Fail to click on [ Search MCR ] button"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on [ Search MCR ] button", "Successfully clicked on [ Search MCR ] button"
+				End If
+				Call  Fn_AWC_ReadyStatusSync(2)
+				
+				'Enter MCR ID
+				Call Fn_Web_UI_WebEdit_Operations("Create an object","Set",obj_AWCTeamcenterHome.WebEdit("wedit_Search"), "", trim(sTempValue(0)) )
+				'Click search button
+				Call Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome,"wele_SearchMagnifier",1,1,micLeftBtn)
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Select MCR from list 
+				'--------------------------------------------------------------------------------------------------------------------------------
+				Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_Project"), "2", "innertext", sTempValue(1) )
+				If Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome,"wele_Project",1,1,micLeftBtn) =False Then
+					Reporter.ReportEvent micFail, "Select the Project from list", "Fail to Select the Project from list"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Select the MCR from list", "Successfully Selected the  " & sTempValue(1) & "  MCR"
+				End If	
+				Call  Fn_AWC_ReadyStatusSync(2)
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Click on Assign  button 
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If Fn_WEB_UI_WebButton_Operations("Create an object", "Click", obj_AWCTeamcenterHome, "wbtn_Assign","","","") =False Then
+					Reporter.ReportEvent micFail, "Click on [ Assign ] button ", "Fail to click on [ Assign ] button"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on [ Assign ] button", "Successfully clicked on [ Assign ] button"
+				End If
+				Call  Fn_AWC_ReadyStatusSync(2)	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Case "attachment"	
+					'--------------------------------------------------------------------------------------------------------------------------------
+					sTempValue=split(sPropertyValue,"~")
+					'--------------------------------------------------------------------------------------------------------------------------------
+					'Click on Add button 
+					'--------------------------------------------------------------------------------------------------------------------------------
+					If Fn_WEB_UI_WebButton_Operations("Create an object", "Click", obj_AWCTeamcenterHome, "wbtn_Add_Attachment","","","") =False Then
+						Reporter.ReportEvent micFail, "Click on [ Add ] button ", "Fail to click on [ Add ] button"
+						ExitComponent
+					Else
+						Reporter.ReportEvent micPass, "Click on [ Add ] button", "Successfully clicked on [ Add ] button"
+					End If
+					Call  Fn_AWC_ReadyStatusSync(2)
+					
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Click on Search tab of Relate Panel
+				'--------------------------------------------------------------------------------------------------------------------------------
+				Call Fn_Web_UI_WebObject_Operations("Fn_Common_Business_Add_To_Relation_Creations_Search_Section", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"), "2", "innertext", gtabSearch)
+				
+				If Fn_Web_UI_WebElement_Operations("Fn_Common_Business_Add_To_Relation_Creations_Search_Section","Click",obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"),"","","","")=False Then
+					Reporter.ReportEvent micFail, "Click on [ "&gtabSearch&" ] tab of Add panel", "Fail to click on [ "&gtabSearch&" ] tab of Add panel"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on [ "&gtabSearch&" ] tab of Add panel", "Successfully clicked on [ "&gtabSearch&" ] tab of Add panel"
+				End If
+				Call Fn_AWC_ReadyStatusSync(1)
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'set criteria in Search edit box
+				'--------------------------------------------------------------------------------------------------------------------------------
+				sID=sTempValue(1)
+				If Fn_Web_UI_WebObject_Operations("Fn_Common_Business_Add_To_Relation_Creations_Search_Section ", "waituntilexist", obj_AWCTeamcenterHome.WebEdit("wedt_Search_Edit_Add_Panel"), "20000", "visible", "true")Then
+					'---------------------------------------------------------------------------------------------------------------------------------
+					If Fn_Web_UI_WebEdit_Operations("Fn_Common_Business_Add_To_Relation_Creations_Search_Section ","Set",obj_AWCTeamcenterHome, "wedt_Search_Edit_Add_Panel", sID) Then
+						Reporter.ReportEvent micPass, "set [" & sID & "]  in Search edit box.", "Successfully set [" & sID &"] in Search edit box."
+					Else
+						Reporter.ReportEvent micFail, "set [" & sID & "] in Search edit box.", "Fail to set [" & sID & "] in Search edit box."
+						ExitComponent
+					End  If
+					'---------------------------------------------------------------------------------------------------------------------------------
+				Else
+					Reporter.ReportEvent micFail, "Search edit box does not exist.", "Search edit box does not exist."
+					ExitComponent	
+				End If
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Click on Search magnifier
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If Fn_Web_UI_WebElement_Operations("Fn_Common_Business_Add_To_Relation_Creations_Search_Section ","Click",obj_AWCTeamcenterHome,"wele_Search_Magnifire_Add_Panel","","","")=False Then
+					Reporter.ReportEvent micFail, "Click on Search magnifier of Relate panel", "Fail to click on Search magnifier of Relate panel"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on Search magnifier of Relate panel", "Successfully clicked on Search magnifier of Relate panel"
+				End If
+				
+				Call Fn_AWC_ReadyStatusSync(1)
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Select Object from search result
+				'--------------------------------------------------------------------------------------------------------------------------------
+				Call Fn_Web_UI_WebObject_Operations("Fn_Common_Business_Add_To_Relation_Creations_Search_Section ", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_SearchResult_List_Listwithsummary"), "2", "innertext",sTempValue(0) )
+				If Fn_Web_UI_WebElement_Operations("Fn_Common_Business_Add_To_Relation_Creations_Search_Section ","Click",obj_AWCTeamcenterHome,"wele_SearchResult_List_Listwithsummary","","","")= False Then
+					Reporter.ReportEvent micFail, "Click on [ "&sTempValue(0)&" ] from search result.", "Fail to click on [ "&sTempValue(0)&" ] from search result."
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on [ "&sTempValue(0)&" ] from search result.", "Successfully clicked on [ "&sTempValue(0)&" ] from search result."
+				End If
+				Call Fn_AWC_ReadyStatusSync(1)
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Click on Add button 
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If Fn_WEB_UI_WebButton_Operations("Create an object", "Click", obj_AWCTeamcenterHome, "wbtn_Add","","","") =False Then
+					Reporter.ReportEvent micFail, "Click on [ Add ] button ", "Fail to click on [ Add ] button"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on [ Add ] button", "Successfully clicked on [ Add ] button"
+				End If
+				Call  Fn_AWC_ReadyStatusSync(2)
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Case to store value of create multiple parts and its count
+			Case "create multiple parts","number of parts to be created (max value : 6)"
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If  lcase(sPropertyName)="create multiple parts" Then
+					bCreateMulParts= lcase(sPropertyValue)
+				ElseIf  lcase(sPropertyName)="number of parts to be created (max value : 6)" Then
+					iCountParts= lcase(sPropertyValue)
+				End If			
+			'--------------------------------------------------------------------------------------------------------------------------------		
+		End Select
+		'--------------------------------------------------------------------------------------------------------------------------------
+	Next	
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Select case(lcase(sObjType))
+		'--------------------------------------------------------------------------------------------------------------------------------
+		Case "instrument","create change request","project folder","sales document","private folder","release folder","engineering document","manufacturing document","tex document","tr document","note","transfer folder"
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click Add button
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_Creation_Operation", "Click", obj_AWCTeamcenterHome, "wbtn_Add","","","") =False Then
+				Reporter.ReportEvent micFail, "Click on [ Add ] button ", "Fail to click on [ Add ] button"
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Click on [ Add ] button", "Successfully clicked on [ Add ] button"
+			End If
+		'--------------------------------------------------------------------------------------------------------------------------------
+		Case "create change proposal","create mcr","create sir","add new saleable item"
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Create Button
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If Fn_WEB_UI_WebButton_Operations("Create an object", "Click", obj_AWCTeamcenterHome, "wbtn_Create","","","") = False Then
+				Reporter.ReportEvent micFail, "Click on [ Create ] Button", "Fail to click on [ Create ] Button"
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Click on [ Create ] Button", "Successfully clicked on [ Create ] Button"
+			End If
+		'--------------------------------------------------------------------------------------------------------------------------------
+		Case "create checklist template"
+				If sQuestionTopic <>"" Then
+					'--------------------------------------------------------------------------------------------------------------------------------
+					'Click on Add Entry button to add question/topic 
+					'--------------------------------------------------------------------------------------------------------------------------------
+					If obj_AWCTeamcenterHome.WebButton("wbtn_Add_Entry").exist(5)	 Then
+						If Fn_WEB_UI_WebButton_Operations("Create an object", "Click", obj_AWCTeamcenterHome, "wbtn_Add_Entry","","","") = False Then
+							Reporter.ReportEvent micFail, "Click on [ Add Entry ] Button on Create Checklist Template Panel", "Fail to click on [ Add Entry ] Button on Create Checklist Template Panel"
+							ExitComponent
+						Else
+							Reporter.ReportEvent micPass, "Click on [ Add Entry ] Button on Create Checklist Template Panel", "Successfully clicked on [ Add Entry ] Button on Create Checklist Template Panel"
+						End If
+					End If
+				End  IF	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Create Checklist Template Button
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If Fn_WEB_UI_WebButton_Operations("Create an object", "Click", obj_AWCTeamcenterHome, "wbtn_CreateChTemplate","","","") = False Then
+				Reporter.ReportEvent micFail, "Click on [ Create Checklist Template ] Button on Create Checklist Template Panel", "Fail to click on [ Create Checklist Template ] Button on Create Checklist Template Panel"
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Click on [ Create Checklist Template ] Button on Create Checklist Template Panel", "Successfully clicked on [ Create Checklist Template ] Button on Create Checklist Template Panel"
+			End If
+		'--------------------------------------------------------------------------------------------------------------------------------		
+		'If object type is part then click on multiple parts tab 
+		Case "part" 
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If Fn_Web_UI_WebObject_Operations("Create an object", "exist", obj_AWCTeamcenterHome.WebButton("wbtn_More_TabStrip"), "5", "", "") Then
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Click on More button 
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If Fn_WEB_UI_WebButton_Operations("Create an object", "Click", obj_AWCTeamcenterHome, "wbtn_More_TabStrip","","","") =False Then
+					Reporter.ReportEvent micFail, "Click on [ More ] button ", "Fail to click on [ More ] button"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on [ More ] button", "Successfully clicked on [ More ] button"
+				End If
+				Call  Fn_AWC_ReadyStatusSync(2)
+			End  IF	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Multi Part? of Create Part Panel
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"), "2", "innertext", "Multi Part?")
+			If Fn_Web_UI_WebElement_Operations("Create an object","Click",obj_AWCTeamcenterHome,"wele_AddPanelTabs","","","") =False Then
+				Reporter.ReportEvent micFail, "Click on [ Multi Part? ] tab of Create Part panel", "Fail to click on [ Multi Part? ] tab of Create Part panel"
+				ExitComponent
+			Else																			
+				Reporter.ReportEvent micPass, "Click on [ Multi Part? ] tab of Create Part panel", "Successfully clicked on [ Multi Part? ] tab of Create Part panel"
+			End If
+			Call Fn_AWC_ReadyStatusSync(1)	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Select Create Multiple Parts check box
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If bCreateMulParts="true" Then
+				sXpath=Replace(gCommonCheckBox2,"~",gCreateMulParts)
+				Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebElement("welechk_CommonCheckBox"), "2", "xpath", sXpath)
+				Call Fn_Web_UI_WebCheckBox_Operations("Create an object","set",obj_AWCTeamcenterHome,"welechk_CommonCheckBox",gCreateMulParts,bCreateMulParts )
+				Call Fn_AWC_ReadyStatusSync(1)	
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Enter Number Of Parts To Be Created  value
+				'--------------------------------------------------------------------------------------------------------------------------------
+				Call Fn_Web_UI_WebObject_Operations("Create an object", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox"), "2", "acc_name", gNumberOfPartsToBeCreated)
+				If Fn_Web_UI_WebEdit_Operations("Create an object","Set",obj_AWCTeamcenterHome, "wedit_ObjectPropertyEditBox", iCountParts ) Then
+					Reporter.ReportEvent micPass, "Type " & gNumberOfPartsToBeCreated & "  value in Edit Box", "Successfully Typed " & gNumberOfPartsToBeCreated & " value [ " & iCountParts & " ] in Edit Box"
+				Else
+					Reporter.ReportEvent micFail, "Type " & gNumberOfPartsToBeCreated & " value in Edit Box", "Fail to Type [ " & gNumberOfPartsToBeCreated & " ] value [ " & iCountParts & " ] in Edit Box"
+					ExitComponent
+				End  If
+				'--------------------------------------------------------------------------------------------------------------------------------
+			End  IF	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on Create Button
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If Fn_WEB_UI_WebButton_Operations("Create an object", "Click", obj_AWCTeamcenterHome, "wbtn_Create","","","") = False Then
+				Reporter.ReportEvent micFail, "Click on [ Create ] Button on Create Part Panel", "Fail to click on [ Create ] Button on Create Part Panel"
+				ExitComponent
+			Else
+				Reporter.ReportEvent micPass, "Click on [ Create ] Button on Create Part Panel", "Successfully clicked on [ Create ] Button on Create Part Panel"
+			End If
+	'--------------------------------------------------------------------------------------------------------------------------------			
+	End Select
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Verify notification message
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If lcase(sPerformance)="false" or sPerformance="" Then
+		If Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "waituntilexist", obj_AWCTeamcenterHome.WebElement("wele_ObjectCreationNotificationMsg"), "500000", "visible", "True") Then
+			obj_AWCTeamcenterHome.WebElement("wele_ObjectCreationNotificationMsg").click
+			sStatusMesaage= Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "getroproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectCreationNotificationMsg"), "2", "innertext", "")	
+			obj_AWCTeamcenterHome.WebButton("wbtn_NotificationClose").Click
+		End If
+	End If
+	If lcase(sPerformance)="true" Then
+		Call Fn_AWC_ReadyStatusSync(2)
+		If lcase(sObjType)="create change proposal" Then
+			excelFileName="AWC2406_ChangeProposal Document.xlsx"
+		ElseIf lcase(sObjType)="tex document" Then
+			excelFileName="AWC2406_Tex Document.xlsx"
+		ElseIf lcase(sObjType)="engineering document" Then
+			excelFileName="AWC2406_Engineering Document.xlsx"
+		ElseIf lcase(sObjType)="manufacturing document" Then
+			excelFileName="AWC2406_Manufactoring Document.xlsx"
+		ElseIf lcase(sObjType)="tr document" Then
+			excelFileName="AWC2406_TestRequest Document.xlsx"	
+		ElseIf lcase(sObjType)="create mcr" Then
+			excelFileName="AWC2406_MCR Document.xlsx"	
+		ElseIf lcase(sObjType)="part" Then
+			excelFileName="AWC2406_Part.xlsx"	
+		ElseIf lcase(sObjType)="sales document" Then
+			excelFileName="AWC2406_Sales Document.xlsx"	
+		ElseIf lcase(sObjType)="create change request" Then
+			excelFileName="AWC2406_ChangeRequest Document.xlsx"	
+		ElseIf lcase(sObjType)="create sir" Then
+			excelFileName="AWC2406_SIR Document.xlsx"			
+		End If
+		sColumnNm= sHeaderText&"_Add_"&Now		
+		 folderPath= getTempFolder()
+		 excelFilePath = folderPath & "\" & excelFileName
+		call Fn_FSO_Perfomance_Monitor_Operation("AddNewColumn",folderPath,excelFileName,"Add",sColumnNm,"")
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Click on Settings -> Performace Monitor
+		'--------------------------------------------------------------------------------------------------------------------------------
+		If  Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Creation_Operation ","Click",obj_AWCTeamcenterHome,"wele_UserSessionBar_Settings","","","")  =False Then
+			Reporter.ReportEvent micFail, "Click on [ Settings ] on primary toolbar", "Fail to click on [ Settings ] on primary toolbar"
+			ExitComponent
+		Else
+			Reporter.ReportEvent micPass, "Click on [ Settings ] on primary toolbar", "Successfully clicked on [ Settings ] on primary toolbar"
+		End If
+		Call  Fn_AWC_ReadyStatusSync(1)
+		
+		Call Fn_AWC_Common_Business_Primary_Toolbar_Operations(obj_AWCTeamcenterHome,"Monitoring","Performance Monitor")
+		Call  Fn_AWC_ReadyStatusSync(1)
+		ExitComponent
+	End If
+		'--------------------------------------------------------------------------------------------------------------------------------	
+		If  lcase(sObjType)<> "instrument" and lcase(sObjType)<> "create checklist template" and lcase(sObjType)<> "create mcr"and lcase(sObjType)<> "create change request" and lcase(sObjType)<> "create change proposal" and lcase(sObjType)<> "create sir"  and lcase(sObjType)<> "tr document" and lcase(sObjType)<> "part" and lcase(sObjType)<> "note"and lcase(sObjType)<> "tex document" and lcase(sObjType)<> "manufacturing document" and lcase(sObjType)<> "engineering document" and lcase(sObjType)<> "sales document" and lcase(sObjType)<> "private folder"and lcase(sObjType)<> "project folder" and lcase(sObjType)<> "release folder" Then
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If instr(sStatusMesaage,sID)>0 Then
+				Reporter.ReportEvent micPass, "Fn_AWC_Object_Creation_Operation", "Successfully Fn_AWC_Object_Creation_Operation as notification message  [ "&  sStatusMesaage  & " ] contains id ] " & sID
+			Else
+				Reporter.ReportEvent micFail, "Fn_AWC_Object_Creation_Operation", "Fail to Fn_AWC_Object_Creation_Operation as [ Notification message does not contains id ]" & sID
+				ExitComponent
+			End If	
+			'--------------------------------------------------------------------------------------------------------------------------------			
+		ElseIf lcase(sObjType)= "part" Then
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If instr(sStatusMesaage,"created successfully")>0 Then
+				Reporter.ReportEvent micPass, "Verify Notification message", "Successfully verified notification message which is [ "&  sStatusMesaage  & " ]"
+				'If multiple parts = true
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If lcase(bCreateMulParts) = "true" Then
+					sTemp = split(sStatusMesaage,"""")
+					sTemp1 =Split(sTemp(1),", ")
+					sID = Join(sTemp1,";")
+					'--------------------------------------------------------------------------------------------------------------------------------
+					For iCounter = 0 To Ubound(sTemp1)
+						sTemp2= sTemp1(iCounter)&",000"
+						'--------------------------------------------------------------------------------------------------------------------------------
+						If iCounter>0 Then
+							sTemp3=sTemp3&";"&sTemp2
+						else
+							sTemp3=sTemp2
+						End If
+						'--------------------------------------------------------------------------------------------------------------------------------
+					Next
+					Fn_AWC_Object_Creation_Operation = sTemp3 & "~" & sID
+					'--------------------------------------------------------------------------------------------------------------------------------
+				Else
+					sTemp = split(sStatusMesaage,"""")
+					sID =sTemp(1)
+					Fn_AWC_Object_Creation_Operation = sTemp(1) & ",000~" & sID
+				End If
+				'--------------------------------------------------------------------------------------------------------------------------------
+			Else
+				Reporter.ReportEvent micFail, "Verify Notification message", "Fail to Create the KB_MANUFACTURING object as [ Fail to verify notification message ]"
+				ExitComponent
+			End If	
+			'--------------------------------------------------------------------------------------------------------------------------------
+		End  IF
+'	End  If
+	sTempValue=split(sStatusMesaage,"""")
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Store created object value
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If lcase(sObjType)="sales document"  Then
+		sOjectNodeName=sTempValue(1)
+	ElseIf lcase(sObjType)="engineering document"  Then
+		sOjectNodeName=sTempValue(1)
+	ElseIf lcase(sObjType)="create mcr"  Then
+		sOjectNodeName=sTempValue(1)
+	ElseIf lcase(sObjType)="instrument"  Then
+		sOjectNodeName=sTempValue(1)
+	ElseIf lcase(sObjType)="create sir"  Then
+		sOjectNodeName=sTempValue(1)
+	ElseIf lcase(sObjType)="create change proposal"  Then
+		sOjectNodeName=split(sTempValue(1),"/")(0)
+		sTempNodeName=sTempValue(1)
+	ElseIf lcase(sObjType)="create checklist template"  Then
+		sOjectNodeName=split(sTempValue(1),"/")(0)
+		sTempNodeName=sTempValue(1)	
+	ElseIf lcase(sObjType)="create change request"  Then
+		sTempNodeName= Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Creation_Operation", "getroproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectHeader_2"), "", "innertext", "")
+		sOjectNodeName=sTempNodeName
+	ElseIf lcase(sObjType)="tr document"  Then
+		sOjectNodeName=sTempValue(1)
+	ElseIf lcase(sObjType)="tex document"  Then
+		sOjectNodeName=sTempValue(1)
+	ElseIf lcase(sObjType)="manufacturing document"  Then
+		sOjectNodeName=sTempValue(1)
+	ElseIf  lcase(sObjType)="private folder" Then
+		sOjectNodeName=sFolderName & "," & sFolderDesc
+	ElseIf  lcase(sObjType)="release folder"Then	
+		sTempNodeName=sTempValue(1)
+		sTemp = split(sStatusMesaage, "/")
+		sTempValue=len(sTemp(0))
+		sID = mid(sTemp(0),2,sTempValue)
+		sOjectNodeName=sID
+	ElseIf lcase(sObjType)="note"  Then
+		sOjectNodeName=sTempValue(1)
+	ElseIf lcase(sObjType)="transfer folder"  Then
+		sOjectNodeName=sTempValue(1)
+	ElseIf  lcase(sObjType)="project folder" Then
+		sOjectNodeName=sFolderDesc & "," & sFolderName
+	End If  
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If lcase(sObjType)= "sales document" Then
+		Fn_AWC_Object_Creation_Operation = sOjectNodeName & "~" & sID
+	ElseIf lcase(sObjType)= "engineering document" Then
+		Fn_AWC_Object_Creation_Operation = sOjectNodeName & "~" & sID
+	ElseIf lcase(sObjType)= "create mcr" Then
+		Fn_AWC_Object_Creation_Operation = sOjectNodeName
+	ElseIf lcase(sObjType)= "instrument" Then
+		Fn_AWC_Object_Creation_Operation = sOjectNodeName
+	ElseIf lcase(sObjType)= "create sir" Then
+		Fn_AWC_Object_Creation_Operation = sOjectNodeName
+	ElseIf lcase(sObjType)= "create change proposal" Then
+		Fn_AWC_Object_Creation_Operation = sOjectNodeName & "~" & sTempNodeName
+	ElseIf lcase(sObjType)= "create checklist template" Then
+		Fn_AWC_Object_Creation_Operation = sOjectNodeName & "~" & sTempNodeName
+	ElseIf lcase(sObjType)= "create change request" Then
+		sID=split(sOjectNodeName,"/")(0)
+		Fn_AWC_Object_Creation_Operation = sOjectNodeName & "~" & sID
+	ElseIf lcase(sObjType)= "tr document" Then
+		Fn_AWC_Object_Creation_Operation = sOjectNodeName & "~" & sID
+	ElseIf lcase(sObjType)= "tex document" Then
+		Fn_AWC_Object_Creation_Operation = sOjectNodeName & "~" & sID
+	ElseIf lcase(sObjType)= "manufacturing document" Then
+		Fn_AWC_Object_Creation_Operation = sOjectNodeName & "~" & sID
+	ElseIf  lcase(sObjType)="private folder"Then	
+		Fn_AWC_Object_Creation_Operation=sFolderName & "," & sFolderDesc
+	ElseIf  lcase(sObjType)="project folder"Then	
+		Fn_AWC_Object_Creation_Operation=sFolderDesc & "," & sFolderName
+	ElseIf  lcase(sObjType)="release folder" Then
+		Fn_AWC_Object_Creation_Operation = sOjectNodeName & "~" & sTempNodeName
+	ElseIf  lcase(sObjType)="note" Then
+		Fn_AWC_Object_Creation_Operation=sOjectNodeName
+	ElseIf  lcase(sObjType)="transfer folder" Then
+		Fn_AWC_Object_Creation_Operation = sID  & "~" & sID
+	End If
+	'-----------------------------------------------------------------------------------------------------------------------------------------------------------	
+	If Err.Number<> 0 Then
+		Reporter.ReportEvent micFail, "Fn_AWC_Object_Creation_Operation", "Fail to perform [ Fn_AWC_Object_Creation_Operation ]  Operation due to [ " & Err.Description & " ]"
+		ExitComponent
+	Else
+		Reporter.ReportEvent micPass, "Fn_AWC_Object_Creation_Operation", "Successfully performed [ Fn_AWC_Object_Creation_Operation ] operation "
+	End If
+	'-----------------------------------------------------------------------------------------------------------------------------------------------------------	
+	'Set object nothing
+	Set obj_AWCTeamcenterHome=Nothing
+	Set objWshShell=Nothing
+	'-----------------------------------------------------------------------------------------------------------------------------------------------------------	
+End Function
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header Start 
+'Function Name				:	Fn_AWC_Object_SaveAs_Operation
+'Function Description		:	Function used to create an object
+'Function Parameters		: 	 1.sObjType : Business Object Type
+'								 2.sProObj : Primary Object ro save as
+'								3.sdic : Dictionary variable to store the property name and property value on creation dialog
+'								4.sPerformance : Performance monitor
+'Function Return Value	   	: 	Newly Saved Object
+'Wrapper Function	    	 	: 	NA
+'Function Pre-requisite	 	:	AWC should be open and Primary Object is visible in navigation list
+'Function Usage		   	 :	Call  Fn_AWC_Object_SaveAs_Operation(Parameter("str_object_type") ,Parameter("str_PrimaryObject") ,objDic,Parameter("str_Performance") )
+'History			     			:
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Developer Name			 |	Date			 |	      Reviewer			
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Mohini Deshmukh		   	|  20 Jan 2025	    	|	 				 
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header End
+Public Function Fn_AWC_Object_SaveAs_Operation(sObjType,sProObj,sdic,sPerformance)
+	Err.Clear
+	'-------------------------------------------------------------------------------------------------------------------------------
+	'Variable Declaration
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Dim obj_AWCTeamcenterHome
+	Dim sNewObj,sTempProperites,sTempPropertyValues,sPropertyName,sPropertyValue,sXpath,sStatusMesaage,sTempValue,sTempPropertyValue
+	Dim sTempLocation,sTempMakeBuy
+	Dim iPropertyCount,iCounter,jCounter
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Get AWC PLM window object from xml
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Set obj_AWCTeamcenterHome=Eval(SearchAndLoadResourceByName("ActiveWorkspace2406_OR.xml").GetValue("wpage_AWCTeamcenterHome"))
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Select the Item from navigation list
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If sProObj <>"" Then
+		Call Fn_AWC_Object_Navigation_Operations(obj_AWCTeamcenterHome,"select", sProObj)
+	End IF
+	'-----------------------------------------------------------------------------------------------------------------------------------------------------------	
+	'Click the Save as or Revise  toolbar button and Select Save as or Revise -> Save As menu
+	'-----------------------------------------------------------------------------------------------------------------------------------------------------------	
+	Call Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_SaveAs_Operation", "click", obj_AWCTeamcenterHome, "wbtn_SaveAsorRevise","","","")
+	Call Fn_AWC_Common_Business_Primary_Toolbar_Operations(obj_AWCTeamcenterHome,gSaveAs,"")
+	'--------------------------------------------------------------------------------------------------------------------------------	
+	'Enter property values on Save As dialog		
+	iPropertyCount=sdic.Count
+	sTempProperites=sdic.Keys
+	sTempPropertyValues=sdic.items
+	'--------------------------------------------------------------------------------------------------------------------------------
+	For iCounter=0 to iPropertyCount-1
+		sPropertyName=sTempProperites(iCounter)
+		sPropertyValue=sTempPropertyValues(iCounter)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		Select Case lcase(sPropertyName)
+		'--------------------------------------------------------------------------------------------------------------------------------
+			Case "language","team","use status","branded for","saleable only to customer(s)","sales channel limitation"," sales index"
+				sXpath=Replace(gEditBoxXpath,"~",sPropertyName)
+				Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "2", "xpath", sXpath)
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_SaveAs_Operation","Click",obj_AWCTeamcenterHome, "wedit_ObjectPropertyEditBox_2", "" ) Then
+					sTempPropertyValue=Split(sPropertyValue,"~")
+					'--------------------------------------------------------------------------------------------------------------------------------
+					For jCounter = 0 To ubound(sTempPropertyValue)
+						'--------------------------------------------------------------------------------------------------------------------------------
+						If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValuePanel"), 10,2) Then
+							If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_SaveAs_Operation ","set",obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "", trim(sTempPropertyValue(jCounter))) Then
+								Reporter.ReportEvent micPass, "Type [ " & sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box", "Successfully typed " &  sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box"
+							Else
+								Reporter.ReportEvent micFail, "Type [ " & sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box", "Fail to type [ " & sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box"
+								ExitComponent
+							End  If
+							'--------------------------------------------------------------------------------------------------------------------------------
+							Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), "2", "innertext", sTempPropertyValue(jCounter))
+							 If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), 10,2)  Then
+								Call Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_SaveAs_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"),"","","","")
+								Reporter.ReportEvent micPass, "Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field", "Successfully Selected the " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field"
+							Else
+								Reporter.ReportEvent micFail, "Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field", "Fail to Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field"
+								ExitComponent
+							End If	
+							'--------------------------------------------------------------------------------------------------------------------------------							
+						Else
+							Reporter.ReportEvent micFail, "Enter " & sTempPropertyValue(jCounter) & " value into the " & sPropertyName & " edit box", "Fail to save as object of type  " & sObjType & " as [ " & sTempPropertyValue(jCounter) & " value is incorrect ]"
+							ExitComponent
+						End  If
+						'--------------------------------------------------------------------------------------------------------------------------------
+					Next
+				Else
+					Reporter.ReportEvent micFail, "Click in  " & sPropertyName & " list field", "Fail to Click in " & sPropertyName & " list field as [  List does not exist ]"
+					ExitComponent
+				End  IF	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Select Projects
+			Case "projects"	
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Click on Add Project button 
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_SaveAs_Operation", "Click", obj_AWCTeamcenterHome, "wbtn_AddProject","","","") =False Then
+					Reporter.ReportEvent micFail, "Click on [ Add Project ] button ", "Fail to click on [ Add Project ] button"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on [ Add Project ] button", "Successfully clicked on [ Add Project ] button"
+				End If
+				Call  Fn_AWC_ReadyStatusSync(2)
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Select Project from list 
+				'--------------------------------------------------------------------------------------------------------------------------------
+				Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_Project"), "2", "innertext", sPropertyValue )
+				If Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_SaveAs_Operation","Click",obj_AWCTeamcenterHome,"wele_Project",1,1,micLeftBtn) =False Then
+					Reporter.ReportEvent micFail, "Select the Project from list", "Fail to Select the Project from list"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Select the Project from list", "Successfully Selected the  " & sPropertyValue & "  Project"
+				End If
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Click on Assign Project button 
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_SaveAs_Operation", "Click", obj_AWCTeamcenterHome, "wbtn_AssignProjects","","","") =False Then
+					Reporter.ReportEvent micFail, "Click on [ Assign ] button ", "Fail to click on [ Assign ] button"
+					ExitComponent
+				Else
+					Reporter.ReportEvent micPass, "Click on [ Assign ] button", "Successfully clicked on [ Assign ] button"
+				End If
+				Call  Fn_AWC_ReadyStatusSync(2)
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Click on checkbox
+			Case "secure?","batch tracing"	
+				sXpath=Replace(gCommonCheckBox2,"~",sPropertyName)
+				Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("welechk_CommonCheckBox"), "2", "xpath", sXpath)
+				'--------------------------------------------------------------------------------------------------------------------------------
+				IF WaitUntilExist(obj_AWCTeamcenterHome.WebElement("welechk_CommonCheckBox"), 60, 5) Then
+					Call Fn_Web_UI_WebCheckBox_Operations("Fn_AWC_Object_SaveAs_Operation","set",obj_AWCTeamcenterHome,"welechk_CommonCheckBox",sPropertyName,sPropertyValue)
+					Call Fn_AWC_ReadyStatusSync(1)		
+				End  IF	
+			'--------------------------------------------------------------------------------------------------------------------------------	
+			'Update location,make/buy indicator
+			Case "location-make/buy indicator"
+				
+				sTempPropertyValue=Split(sPropertyValue,"*")
+				
+				sTempLocation=Split(sTempPropertyValue(0),"~")
+				sTempMakeBuy=Split(sTempPropertyValue(1),"~")
+				
+				For jCounter = 0 to Ubound(sTempLocation)
+					sXpath=Replace(gEditBoxXpath,"~",gLocation)
+					Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "2", "xpath", sXpath)
+					'--------------------------------------------------------------------------------------------------------------------------------
+					If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_SaveAs_Operation","Click",obj_AWCTeamcenterHome, "wedit_ObjectPropertyEditBox_2", "" ) Then
+						'--------------------------------------------------------------------------------------------------------------------------------
+						If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValuePanel"), 10,2) Then
+							'--------------------------------------------------------------------------------------------------------------------------------
+							If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_SaveAs_Operation ","set",obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "", trim(sTempLocation(jCounter))) Then
+								Reporter.ReportEvent micPass, "Type [ " & sTempLocation(jCounter) & " value in [ " & gLocation & " ] edit Box", "Successfully typed " &  sTempLocation(jCounter) & " value in [ " & gLocation & " ] edit Box"
+							Else
+								Reporter.ReportEvent micFail, "Type [ " & sTempLocation(jCounter) & " value in [ " & gLocation & " ] edit Box", "Fail to type [ " & sTempLocation(jCounter) & " value in [ " & gLocation & " ] edit Box"
+								ExitComponent
+							End  If
+							'--------------------------------------------------------------------------------------------------------------------------------
+							Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), "2", "innertext", sTempLocation(jCounter))
+							 If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), 10,2)  Then
+								Call Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_SaveAs_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"),"","","","")
+								Reporter.ReportEvent micPass, "Select the  " & sTempLocation(jCounter) & " value from  " & gLocation & " list field", "Successfully Selected the " & sTempLocation(jCounter) & " value from  " & gLocation & " list field"
+							Else
+								Reporter.ReportEvent micFail, "Select the  " & sTempLocation(jCounter) & " value from  " & gLocation & " list field", "Fail to Select the  " & sTempLocation(jCounter) & " value from  " & gLocation & " list field"
+								ExitComponent
+							End If	
+							'--------------------------------------------------------------------------------------------------------------------------------							
+						Else
+							Reporter.ReportEvent micFail, "Enter " & sTempLocation(jCounter) & " value into the " & gLocation & " edit box", "Fail to save as object of type  " & sObjType & " as [ " & sTempLocation(jCounter) & " value is incorrect ]"
+							ExitComponent
+						End  If
+						'--------------------------------------------------------------------------------------------------------------------------------
+					Else
+						Reporter.ReportEvent micFail, "Click in  " & gLocation & " list field", "Fail to Click in " & gLocation & " list field as [  List does not exist ]"
+						ExitComponent
+					End  IF		
+					'--------------------------------------------------------------------------------------------------------------------------------
+					'Select Make/Buy Indicator
+					 sXpath=Replace(gEditBoxXpath,"~",gMakeBuyIndicator1)
+					Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "2", "xpath", sXpath)
+					'--------------------------------------------------------------------------------------------------------------------------------
+					If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_SaveAs_Operation","Click",obj_AWCTeamcenterHome, "wedit_ObjectPropertyEditBox_2", "" ) Then
+						'--------------------------------------------------------------------------------------------------------------------------------
+						If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValuePanel"), 10,2) Then
+							If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_SaveAs_Operation ","set",obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "", trim(sTempMakeBuy(jCounter))) Then
+								Reporter.ReportEvent micPass, "Type [ " & sTempMakeBuy(jCounter) & " value in [ " & gMakeBuyIndicator1 & " ] edit Box", "Successfully typed " &  sTempMakeBuy(jCounter) & " value in [ " & gMakeBuyIndicator1 & " ] edit Box"
+							Else
+								Reporter.ReportEvent micFail, "Type [ " & sTempMakeBuy(jCounter) & " value in [ " & gMakeBuyIndicator1 & " ] edit Box", "Fail to type [ " & sTempMakeBuy(jCounter) & " value in [ " & gMakeBuyIndicator1 & " ] edit Box"
+								ExitComponent
+							End  If
+							'--------------------------------------------------------------------------------------------------------------------------------
+							Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), "2", "innertext", sTempMakeBuy(jCounter))
+							 If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), 10,2)  Then
+								Call Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_SaveAs_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"),"","","","")
+								Reporter.ReportEvent micPass, "Select the  " & sTempMakeBuy(jCounter) & " value from  " & gMakeBuyIndicator1 & " list field", "Successfully Selected the " & sTempMakeBuy(jCounter) & " value from  " & gMakeBuyIndicator1 & " list field"
+							Else
+								Reporter.ReportEvent micFail, "Select the  " & sTempMakeBuy(jCounter) & " value from  " & gMakeBuyIndicator1 & " list field", "Fail to Select the  " & sTempMakeBuy(jCounter) & " value from  " & gMakeBuyIndicator1 & " list field"
+								ExitComponent
+							End If	
+							'--------------------------------------------------------------------------------------------------------------------------------							
+						Else
+							Reporter.ReportEvent micFail, "Enter " & sTempMakeBuy(jCounter) & " value into the " & gMakeBuyIndicator1 & " edit box", "Fail to save as object of type  " & sObjType & " as [ " & sTempMakeBuy(jCounter) & " value is incorrect ]"
+							ExitComponent
+						End  If
+						'--------------------------------------------------------------------------------------------------------------------------------
+					Else
+						Reporter.ReportEvent micFail, "Click in  " & gMakeBuyIndicator1 & " list field", "Fail to Click in " & gMakeBuyIndicator1 & " list field as [  List does not exist ]"
+						ExitComponent
+					End  IF	
+					'--------------------------------------------------------------------------------------------------------------------------------
+					'Click on Add Entry button 
+					'--------------------------------------------------------------------------------------------------------------------------------
+					If Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_SaveAs_Operation", "Click", obj_AWCTeamcenterHome, "wbtn_Add_Entry","","","") =False Then
+						Reporter.ReportEvent micFail, "Click on [ Add Entry ] button ", "Fail to click on [ Add Entry ] button"
+						ExitComponent
+					Else
+						Reporter.ReportEvent micPass, "Click on [ Add Entry ] button", "Successfully clicked on [ Add Entry ] button"
+					End If
+					Call  Fn_AWC_ReadyStatusSync(2)
+					'--------------------------------------------------------------------------------------------------------------------------------	
+				Next
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Select the radio button value	
+				Case "default phantom part","hazardous material","under export control (military use possible)","contained in sales bom only?","software included?"
+					sXpath=Replace(gCommonRadioButton2,"~",sPropertyName)
+					sXpath=Replace(sXpath,"*",sPropertyValue)
+					Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_CommonRadioButton_2"), "2", "xpath", sXpath)
+					If  Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_SaveAs_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_CommonRadioButton_2"),"","","","") Then
+					 Reporter.ReportEvent micPass, "Select the  " & sPropertyName & " value", "Successfully Selected the  " & sPropertyName & "  value is a [ " & sPropertyValue & " ]"
+					ELse
+						Reporter.ReportEvent micFail, "Select the " & sPropertyName & " value", "Fail to Select the " & sPropertyName & "  value"
+						ExitComponent
+					End  IF	
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Enter  value in text filed
+				Case "software version code"
+					sXpath=Replace(gEditBoxXpath,"~",sPropertyName)
+					Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "2", "xpath", sXpath)
+					If Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "waituntilexist", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "20000", "visible", "True") Then
+						'--------------------------------------------------------------------------------------------------------------------------------
+						IF Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_SaveAs_Operation","Set",obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "", trim(sPropertyValue)) Then
+							Reporter.ReportEvent micPass, "Enter the value in [ "& sPropertyName &" ] field on Save As dialog", "Successfully entered the value [  "& sPropertyValue &" ] in [ " & sPropertyName & " ] field on Save As dialog "
+						Else
+							Reporter.ReportEvent micFail, "Enter the value in [ "& sPropertyName &" ] field on Save As dialog", "Fail to enter value [  "& sPropertyValue &" ] in [ " & sPropertyName & " ] field on Save As dialog"
+							ExitComponent
+						End  IF
+						Call Fn_AWC_ReadyStatusSync(2)	
+						'--------------------------------------------------------------------------------------------------------------------------------
+					Else
+						Reporter.ReportEvent micFail, "Verify existance of " & sPropertyName & " edit field.", sPropertyName & " edit field does not exist."
+						ExitComponent		
+					End If	
+			'--------------------------------------------------------------------------------------------------------------------------------				
+	         End  Select	
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Next
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Click on Save As button 
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_SaveAs_Operation", "Click", obj_AWCTeamcenterHome, "wbtn_SaveAs_On_SaveAs_Dialog","","","") =False Then
+		Reporter.ReportEvent micFail, "Click on [ Save As ] button ", "Fail to click on [ Save As ] button"
+		ExitComponent
+	Else
+		Reporter.ReportEvent micPass, "Click on [ Save As ] button", "Successfully clicked on [ Save As ] button"
+	End If
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Verify notification message
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If obj_AWCTeamcenterHome.WebElement("wele_ObjectCreationNotificationMsg").WaitProperty("visible","true") Then
+		obj_AWCTeamcenterHome.WebElement("wele_ObjectCreationNotificationMsg").Click
+		sStatusMesaage= Fn_Web_UI_WebObject_Operations("Create a new object from an existing object via pirmary toolbar comand Save As or Revise - Save As", "getroproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectCreationNotificationMsg"), "2", "innertext", "")
+		obj_AWCTeamcenterHome.WebButton("wbtn_NotificationClose").Click
+		If instr( sStatusMesaage,"was saved")>0 Then
+			Reporter.ReportEvent micPass, "Verify notification message", "Successfully verified notification message which is [ "&  sStatusMesaage  & " ]"
+		Else
+			Reporter.ReportEvent micFail, "Verify notification message" , "Failed to verify notification message as notification message is  " & sStatusMesaage 
+			ExitComponent		
+		End If	
+	End  IF
+	Call Fn_AWC_ReadyStatusSync(1)
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Click Versions-> Revision History tab
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If lcase(sObjType)="part" Then
+		Call Fn_AWC_Object_Navigation_WorkArea_Panel_Operations(obj_AWCTeamcenterHome,"selectview_in_section","Table",gVersion & "~" & gRevisionHistory)
+	Else
+		Call Fn_AWC_Object_Navigation_WorkArea_Panel_Operations(obj_AWCTeamcenterHome,"selectview_in_section","Table",gVersions & "~" & gRevisionHistory)
+	End If
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Fetch newly saved object value
+	'--------------------------------------------------------------------------------------------------------------------------------
+	sNewObj= Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "getroproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectHeader_2"), "2", "innertext", "")
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Verify Newly Saved Object under Versions-> Revision History tab
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_attachments_Added_Table_2"), "2", "innertext",sNewObj )
+	If Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "exist", obj_AWCTeamcenterHome.WebElement("wele_attachments_Added_Table_2"), "2", "", "") Then
+		Reporter.ReportEvent micPass, "Verify [ "&sNewObj&" ] is available under  " & gRevisionHistory & " table list", "Successfully verified [ "&sNewObj&" ] is available under  " & gRevisionHistory & " table list"	
+	Else
+		Reporter.ReportEvent micFail, "Verify [ "&sNewObj&" ] is available under  " & gRevisionHistory & " table list", "Failed to verify [ "&sNewObj&" ] is available under  " & gRevisionHistory & " table list"
+		ExitComponent	
+	End If
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Click Versions-> Copied From tab
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If lcase(sObjType)="part" Then
+		Call Fn_AWC_Object_Navigation_WorkArea_Panel_Operations(obj_AWCTeamcenterHome,"selectview_in_section","Table",gVersion & "~" & gCopiedFrom)
+	Else
+		Call Fn_AWC_Object_Navigation_WorkArea_Panel_Operations(obj_AWCTeamcenterHome,"selectview_in_section","Table",gVersions & "~" & gCopiedFrom)
+	End  IF	
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Verify Primary Object under Versions-> Copied From tab
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_attachments_Added_Table_2"), "2", "innertext",sProObj )
+	If Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_SaveAs_Operation", "exist", obj_AWCTeamcenterHome.WebElement("wele_attachments_Added_Table_2"), "2", "", "") Then
+		Reporter.ReportEvent micPass, "Verify [ "&sProObj&" ] is available under  " & gCopiedFrom & " table list", "Successfully verified [ "&sProObj&" ] is available under  " & gCopiedFrom & " table list"
+	Else
+		Reporter.ReportEvent micFail, "Verify ["&sProObj&"] is available under  " & gCopiedFrom & " table list", "Failed to verify [ "&sProObj&" ] is available under  " & gCopiedFrom & " table list"
+		ExitComponent	
+	End If
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Click  back button
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Call Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_SaveAs_Operation", "click", obj_AWCTeamcenterHome, "wbtn_GoBack","","","")
+	Call Fn_AWC_ReadyStatusSync(1)
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Fn_AWC_Object_SaveAs_Operation=sNewObj
+	'-----------------------------------------------------------------------------------------------------------------------------------------------------------	
+	If Err.Number<> 0 Then
+		Reporter.ReportEvent micFail, " Fn_AWC_Object_SaveAs_Operation", "Fail to perform [ Fn_AWC_Object_SaveAs_Operation ]  operation due to [ " & Err.Description & " ]"
+		ExitComponent
+	Else
+		Reporter.ReportEvent micPass, "Fn_AWC_Object_SaveAs_Operation", "Successfully performed [ Fn_AWC_Object_SaveAs_Operation ] operation "
+	End If
+	'-----------------------------------------------------------------------------------------------------------------------------------------------------------	
+	'Release the object 
+	Set obj_AWCTeamcenterHome=Nothing
+	'--------------------------------------------------------------------------------------------------------------------------------
+End  Function
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header Start 
+'Function Name				:	Fn_AWC_Object_Copy_To_Existing_Operation
+'Function Description		:   Function used to copy to existiong operation from search and palette section
+'Function Parameters		:   1.sObjectType : Object Type
+'								2.sPriObject : Primary object 
+'								3.sSecObject : Object to be search
+'								4.sTabNm : Tab Name
+'								5.sSecNm : Section Name
+'								6.sPanelTitleNm : Paneltitle name either palette or Search
+'								8.sdic : for properties on copy to existing dialog
+'Function Return Value	   	: 	
+'Wrapper Function	    	 	: 	NA
+'Function Pre-requisite	 	:	AWC should be open and object should be selected
+'Function Usage		   	: Call Fn_AWC_Object_Copy_To_Existing_Operation(Parameter("str_ObjectType") ,Parameter("str_PriObject") ,Parameter("str_SecObject") ,Parameter("str_TabName") ,Parameter("str_SecName") ,Parameter("str_PanelName") ,sdic)
+'History			     			:
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Developer Name				|	Date				|	      Reviewer			
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Mohini Deshmukh		   	|  27 Jan 2025	    	|	 				 
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header End
+Public Function Fn_AWC_Object_Copy_To_Existing_Operation(sObjectType,sPriObject,sSecObject,sTabNm,sSecNm,sPanelTitleNm,sdic)
+
+	Err.Clear
+	'-------------------------------------------------------------------------------------------------------------------------------
+	'Variable Declaration
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Dim obj_AWCTeamcenterHome
+	Dim iCounter,iPropertyCount,jCounter
+	Dim sTempPropertyValues,sTempProperites,sXpath,sPropertyValue,sPropertyName,sTempTab,sID,sStatusMesaage,sTempPropertyValue
+	Fn_AWC_Object_Copy_To_Existing_Operation=False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Get AWC PLM window object from xml
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Set obj_AWCTeamcenterHome=Eval(SearchAndLoadResourceByName("ActiveWorkspace2406_OR.xml").GetValue("wpage_AWCTeamcenterHome"))
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Select the Item from navigation list
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If sPriObject <>"" Then
+		Call Fn_AWC_Object_Navigation_Operations(obj_AWCTeamcenterHome,"select", sPriObject)
+	End IF
+	'-----------------------------------------------------------------------------------------------------------------------------------------------------------	
+	'Click the Save as or Revise  toolbar button and Select Save as or Revise -> Save As menu
+	'-----------------------------------------------------------------------------------------------------------------------------------------------------------	
+	Call Fn_WEB_UI_WebButton_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "click", obj_AWCTeamcenterHome, "wbtn_SaveAsorRevise","","","")
+	Call Fn_AWC_Common_Business_Primary_Toolbar_Operations(obj_AWCTeamcenterHome,gCopyToExisting,"")
+	'--------------------------------------------------------------------------------------------------------------------------------	
+	'Enter property values on Save As dialog		
+	iPropertyCount=sdic.Count
+	sTempProperites=sdic.Keys
+	sTempPropertyValues=sdic.items
+	'--------------------------------------------------------------------------------------------------------------------------------
+	For iCounter=0 to iPropertyCount-1
+		sPropertyName=sTempProperites(iCounter)
+		sPropertyValue=sTempPropertyValues(iCounter)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		Select Case lcase(sPropertyName)
+		'--------------------------------------------------------------------------------------------------------------------------------
+			Case "team"
+				sXpath=Replace(gEditBoxXpath,"~",sPropertyName)
+				Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "settoproperty", obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "2", "xpath", sXpath)
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Copy_To_Existing_Operation","Click",obj_AWCTeamcenterHome, "wedit_ObjectPropertyEditBox_2", "" ) Then
+					sTempPropertyValue=Split(sPropertyValue,"~")
+					'--------------------------------------------------------------------------------------------------------------------------------
+					For jCounter = 0 To ubound(sTempPropertyValue)
+						'--------------------------------------------------------------------------------------------------------------------------------
+						If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValuePanel"), 10,2) Then
+							If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Copy_To_Existing_Operation ","set",obj_AWCTeamcenterHome.WebEdit("wedit_ObjectPropertyEditBox_2"), "", trim(sTempPropertyValue(jCounter))) Then
+								Reporter.ReportEvent micPass, "Type [ " & sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box", "Successfully typed " &  sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box"
+							Else
+								Reporter.ReportEvent micFail, "Type [ " & sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box", "Fail to type [ " & sTempPropertyValue(jCounter) & " value in [ " & sPropertyName & " ] edit Box"
+								ExitComponent
+							End  If
+							'--------------------------------------------------------------------------------------------------------------------------------
+							Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), "2", "innertext", sTempPropertyValue(jCounter))
+							 If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"), 10,2)  Then
+								Call Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Copy_To_Existing_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_ObjectListValue"),"","","","")
+								Reporter.ReportEvent micPass, "Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field", "Successfully Selected the " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field"
+							Else
+								Reporter.ReportEvent micFail, "Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field", "Fail to Select the  " & sTempPropertyValue(jCounter) & " value from  " & sPropertyName & " list field"
+								ExitComponent
+							End If	
+							'--------------------------------------------------------------------------------------------------------------------------------							
+						Else
+							Reporter.ReportEvent micFail, "Enter " & sTempPropertyValue(jCounter) & " value into the " & sPropertyName & " edit box", "Fail to save as object of type  " & sObjType & " as [ " & sTempPropertyValue(jCounter) & " value is incorrect ]"
+							ExitComponent
+						End  If
+						'--------------------------------------------------------------------------------------------------------------------------------
+					Next
+				Else
+					Reporter.ReportEvent micFail, "Click in  " & sPropertyName & " list field", "Fail to Click in " & sPropertyName & " list field as [  List does not exist ]"
+					ExitComponent
+				End  IF	
+			'--------------------------------------------------------------------------------------------------------------------------------
+		End Select
+	Next	
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Select panel tab either Palette or Search
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If instr(lcase(sPanelTitleNm),"palette")>0 Then
+		sTempTab=Split(sPanelTitleNm,"~")
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Click on Palette tab of Relate Panel
+		'--------------------------------------------------------------------------------------------------------------------------------
+		Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"), "2", "innertext", gtabPalette)
+		If Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Copy_To_Existing_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"),"","","","")=False Then
+			Reporter.ReportEvent micFail, "Click on [ "&gtabPalette&" ] tab of Add panel", "Fail to click on [ "&gtabPalette&" ] tab of Add panel"
+			ExitComponent
+		Else
+			Reporter.ReportEvent micPass, "Click on [ "&gtabPalette&" ] tab of Add panel", "Successfully clicked on [ "&gtabPalette&" ] tab of Add panel"
+		End If
+		Call Fn_AWC_ReadyStatusSync(1)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Select sections on Palette Panel
+		'--------------------------------------------------------------------------------------------------------------------------------		
+		Select Case lcase(sTempTab(1))
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Select Favorite section from palette	
+			Case "favorites"
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Select object from favorites section if it is not already selected
+				'--------------------------------------------------------------------------------------------------------------------------------
+				Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_Selected_object_Favorites_Palette_Add_Panel"), "2", "innertext",sSecObject )
+				If Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "exist", obj_AWCTeamcenterHome.WebElement("wele_Selected_object_Favorites_Palette_Add_Panel"), "2", "","" )=False Then			
+					'--------------------------------------------------------------------------------------------------------------------------------
+					Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_object_Favorites_Palette_Add_Panel"), "2", "innertext",sSecObject )
+					If Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Copy_To_Existing_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_object_Favorites_Palette_Add_Panel"),"","","","")=False Then
+						Reporter.ReportEvent micFail, "Select [ "&sSecObject&" ] from  " & sTempTab(1)  & " section.", "Fail to Select [ "&sSecObject&" ] from " & sTempTab(1)  & " section"
+						ExitComponent
+					Else
+						Reporter.ReportEvent micPass, "Select [ "&sSecObject&" ] from " & sTempTab(1)  & "  section", "Successfully Selected [ "&sSecObject&" ] from  " & sTempTab(1)  & "  section"
+					End If
+					'--------------------------------------------------------------------------------------------------------------------------------
+				Else
+					Reporter.ReportEvent micPass, "Select [ "&sSecObject&" ] from " & sTempTab(1)  & "  section", "Already [ "&sSecObject&"  ] is selected from  " & sTempTab(1)  & "  section"
+				End  IF					
+			'--------------------------------------------------------------------------------------------------------------------------------	
+			'Select Clipboard section from palette	
+			Case "clipboard"
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Select object from Clipboard section  if it is not already selected
+				'--------------------------------------------------------------------------------------------------------------------------------
+				Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_Selected_object_Clipboard_Palette_Add_Panel"), "2", "innertext",sSecObject )
+				If Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "exist", obj_AWCTeamcenterHome.WebElement("wele_Selected_object_Clipboard_Palette_Add_Panel"), "2", "","" )=False Then			
+					'--------------------------------------------------------------------------------------------------------------------------------
+					Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_object_Clipboard_Palette_Add_Panel"), "2", "innertext",sSecObject )
+					If Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Copy_To_Existing_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_object_Clipboard_Palette_Add_Panel"),"","","","")=False Then
+						Reporter.ReportEvent micFail, "Select [ "&sSecObject&" ] from  " & sTempTab(1)  & " section.", "Fail to Select [ "&sSecObject&" ] from " & sTempTab(1)  & " section"
+						ExitComponent
+					Else
+						Reporter.ReportEvent micPass, "Select [ "&sSecObject&" ] from " & sTempTab(1)  & "  section", "Successfully Selected [ "&sSecObject&" ] from  " & sTempTab(1)  & "  section"
+					End If
+					'--------------------------------------------------------------------------------------------------------------------------------
+				Else
+					Reporter.ReportEvent micPass, "Select [ "&sSecObject&" ] from " & sTempTab(1)  & "  section", "Already [ "&sSecObject&"  ] is selected from  " & sTempTab(1)  & "  section"
+				End  IF		
+			'--------------------------------------------------------------------------------------------------------------------------------	
+			'Select Recent section from palette	
+			Case "recent"
+				'--------------------------------------------------------------------------------------------------------------------------------
+				'Select object from Recent section  if it is not already selected
+				'--------------------------------------------------------------------------------------------------------------------------------
+				Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_Selected_object_Recent_Palette_Add_Panel"), "2", "innertext",sSecObject )
+				If Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "exist", obj_AWCTeamcenterHome.WebElement("wele_Selected_object_Recent_Palette_Add_Panel"), "2", "","" )=False Then			
+					'--------------------------------------------------------------------------------------------------------------------------------
+					Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_object_Recent_Palette_Add_Panel"), "2", "innertext",sSecObject )
+					If Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Copy_To_Existing_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_object_Recent_Palette_Add_Panel"),"","","","")=False Then
+						Reporter.ReportEvent micFail, "Select [ "&sSecObject&" ] from  " & sTempTab(1)  & " section.", "Fail to Select [ "&sSecObject&" ] from " & sTempTab(1)  & " section"
+						ExitComponent
+					Else
+						Reporter.ReportEvent micPass, "Select [ "&sSecObject&" ] from " & sTempTab(1)  & "  section", "Successfully Selected [ "&sSecObject&" ] from  " & sTempTab(1)  & "  section"
+					End If
+					'--------------------------------------------------------------------------------------------------------------------------------
+				Else
+					Reporter.ReportEvent micPass, "Select [ "&sSecObject&" ] from " & sTempTab(1)  & "  section", "Already [ "&sSecObject&"  ] is selected from  " & sTempTab(1)  & "  section"
+				End  IF	
+				'--------------------------------------------------------------------------------------------------------------------------------					
+		End Select
+		'--------------------------------------------------------------------------------------------------------------------------------		
+	Else
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Click on Search tab of Relate Panel
+		'--------------------------------------------------------------------------------------------------------------------------------
+		Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"), "2", "innertext", gtabSearch)
+		
+		If Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Copy_To_Existing_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_AddPanelTabs"),"","","","")=False Then
+			Reporter.ReportEvent micFail, "Click on [ "&gtabSearch&" ] tab of Add panel", "Fail to click on [ "&gtabSearch&" ] tab of Add panel"
+			ExitComponent
+		Else
+			Reporter.ReportEvent micPass, "Click on [ "&gtabSearch&" ] tab of Add panel", "Successfully clicked on [ "&gtabSearch&" ] tab of Add panel"
+		End If
+		Call Fn_AWC_ReadyStatusSync(1)	
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'set criteria in Search edit box
+		'--------------------------------------------------------------------------------------------------------------------------------
+		sID=Split(sSecObject,",")(0)
+		If Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation ", "waituntilexist", obj_AWCTeamcenterHome.WebEdit("wedt_Search_Edit_Add_Panel"), "20000", "visible", "true")Then
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If Fn_Web_UI_WebEdit_Operations("Fn_AWC_Object_Copy_To_Existing_Operation ","Set",obj_AWCTeamcenterHome, "wedt_Search_Edit_Add_Panel", sID) Then
+				Reporter.ReportEvent micPass, "set [" & sID & "]  in Search edit box.", "Successfully set [" & sID &"] in Search edit box."
+			Else
+				Reporter.ReportEvent micFail, "set [" & sID & "] in Search edit box.", "Fail to set [" & sID & "] in Search edit box."
+				ExitComponent
+			End  If
+			'--------------------------------------------------------------------------------------------------------------------------------	
+		Else
+			Reporter.ReportEvent micFail, "Search edit box does not exist.", "Search edit box does not exist."
+			ExitComponent	
+		End If
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Click on Search magnifier
+		'--------------------------------------------------------------------------------------------------------------------------------
+		If Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Copy_To_Existing_Operation ","Click",obj_AWCTeamcenterHome,"wele_Search_Magnifire_Add_Panel","","","")=False Then
+			Reporter.ReportEvent micFail, "Click on Search magnifier of Relate panel", "Fail to click on Search magnifier of Relate panel"
+			ExitComponent
+		Else
+			Reporter.ReportEvent micPass, "Click on Search magnifier of Relate panel", "Successfully clicked on Search magnifier of Relate panel"
+		End If
+		Call Fn_AWC_ReadyStatusSync(1)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Select Object from search result
+		'--------------------------------------------------------------------------------------------------------------------------------
+		Call Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation ", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_SearchResult_List_Listwithsummary"), "2", "innertext",sSecObject )
+		If Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Copy_To_Existing_Operation ","Click",obj_AWCTeamcenterHome,"wele_SearchResult_List_Listwithsummary","","","")= False Then
+			Reporter.ReportEvent micFail, "Click on [ "&sSecObject&" ] from search result.", "Fail to click on [ "&sSecObject&" ] from search result."
+			ExitComponent
+		Else
+			Reporter.ReportEvent micPass, "Click on [ "&sSecObject&" ] from search result.", "Successfully clicked on [ "&sSecObject&" ] from search result."
+		End If
+		Call Fn_AWC_ReadyStatusSync(1)
+	End IF	
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Click on Save  button 
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If Fn_Web_UI_WebElement_Operations("Fn_AWC_Object_Copy_To_Existing_Operation","Click",obj_AWCTeamcenterHome.WebElement("wele_Save_Copy_Existing"),"","","","") =False Then
+		Reporter.ReportEvent micFail, "Click on [ Save  ] button ", "Fail to click on [ Save  ] button"
+		ExitComponent
+	Else
+		Reporter.ReportEvent micPass, "Click on [ Save  ] button", "Successfully clicked on [ Save ] button"
+	End If
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Verify notification message
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If obj_AWCTeamcenterHome.WebElement("wele_ObjectCreationNotificationMsg").WaitProperty("visible","true") Then
+		obj_AWCTeamcenterHome.WebElement("wele_ObjectCreationNotificationMsg").Click
+		sStatusMesaage= Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "getroproperty", obj_AWCTeamcenterHome.WebElement("wele_ObjectCreationNotificationMsg"), "2", "innertext", "")
+		If instr(lcase(sStatusMesaage),"is successful")>0 Then
+			Reporter.ReportEvent micPass, "Verify Notification message", "Successfully verified notification message which is [ "&  sStatusMesaage  & " ]"
+		Else
+			Reporter.ReportEvent micFail, "Verify Notification message", "Fail to verify notification message ["&sStatusMesaage&"]"
+			ExitComponent
+		End If 
+		obj_AWCTeamcenterHome.WebButton("wbtn_NotificationClose").Click
+	End If
+	Call Fn_AWC_ReadyStatusSync(2)
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Select Tab ->Section and select Table view
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Call Fn_AWC_Object_Navigation_WorkArea_Panel_Operations(obj_AWCTeamcenterHome,"selectview_in_section","Table",sTabNm & "~" & sSecNm )	
+	Call Fn_AWC_ReadyStatusSync(2)
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Verify added object
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Call Fn_Web_UI_WebObject_Operations(" Fn_AWC_Object_Copy_To_Existing_Operation", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_attachments_Added_Table_2"), "2", "innertext",sSecObject )
+	If Fn_Web_UI_WebObject_Operations("Fn_AWC_Object_Copy_To_Existing_Operation", "exist", obj_AWCTeamcenterHome.WebElement("wele_attachments_Added_Table_2"), "2", "", "")=False Then
+		Reporter.ReportEvent micFail, "Verify [ "& sSecObject &" ] is added under " & sTabNm & "->" & sSecNm & " table list.", "Fail to verify [ "& sSecObject &" ] is added under " & sTabNm & "->" & sSecNm  & " table list."
+		ExitComponent
+	Else
+		Reporter.ReportEvent micPass, "Verify [ "& sSecObject &" ] is added under " & sTabNm & "->" & sSecNm & " table list.", "Successfully verified that [ "& sSecObject &" ] is added under " & sTabNm & "->" & sSecNm & " table list."
+	End  If	
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Click on Clear Selection
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If obj_AWCTeamcenterHome.WebButton("wbtn_SelectAll_ClearSelections_ResultPanel").exist  Then
+		Call Fn_WEB_UI_WebButton_Operations("", "click", obj_AWCTeamcenterHome, "wbtn_SelectAll_ClearSelections_ResultPanel","","","")	
+	End If
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Click on workflow history tab
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Call Fn_AWC_Common_Business_Verify_Properties_Operations(obj_AWCTeamcenterHome,"",gWorkflowHistory,"","","")
+	'-----------------------------------------------------------------------------------------------------------------------------------------------------------	
+	If Err.Number<> 0 Then
+		Reporter.ReportEvent micFail, "Fn_AWC_Object_Copy_To_Existing_Operation", "Fail to perform [ Fn_AWC_Object_Copy_To_Existing_Operation ]  operation due to [ " & Err.Description & " ]"
+		ExitComponent
+	Else
+		Reporter.ReportEvent micPass, "Fn_AWC_Object_Copy_To_Existing_Operation ", "Successfully performed [ Fn_AWC_Object_Copy_To_Existing_Operation ] operation "
+		Fn_AWC_Object_Copy_To_Existing_Operation=True
+	End If
+	'-----------------------------------------------------------------------------------------------------------------------------------------------------------	
+	'Set object nothing
+	Set obj_AWCTeamcenterHome=Nothing
+	'-----------------------------------------------------------------------------------------------------------------------------------------------------------	
+End Function
+

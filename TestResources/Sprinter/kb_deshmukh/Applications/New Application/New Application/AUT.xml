@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutDefinition objectID="0">
+  <IsDefault>False</IsDefault>
+  <ID>e13e20fe-4608-410f-b5ac-a9f7a4ce5525</ID>
+  <Name>New Application</Name>
+  <Description isNull="True" />
+  <AddinsDefinition objectID="1">
+    <Elements isCollection="True">
+      <String>Web</String>
+    </Elements>
+  </AddinsDefinition>
+  <ExecutionType>Web</ExecutionType>
+  <StationsAutDefinition objectID="2">
+    <RecorderAutDefinition objectID="3">
+      <ExecutionDefinition objectID="4">
+        <ExecutionType>Web</ExecutionType>
+        <Browser>IEXPLORE</Browser>
+        <URL></URL>
+        <WebReplayType>Event</WebReplayType>
+        <Path isNull="True" />
+        <Arguments isNull="True" />
+        <WorkingFolder isNull="True" />
+        <IsSapUI5>False</IsSapUI5>
+        <Job isNull="True" />
+        <NetworkProfiles isNull="True" />
+      </ExecutionDefinition>
+      <RunMode>CreateNew</RunMode>
+      <CloseAutAtRunEnd>False</CloseAutAtRunEnd>
+    </RecorderAutDefinition>
+    <Elements isCollection="True">
+      <StationAutDefinition cyclicReferenceObjectID="3" />
+    </Elements>
+  </StationsAutDefinition>
+</AutDefinition>

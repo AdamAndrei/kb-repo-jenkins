@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Owners>
+  <OwnerId>2383</OwnerId>
+  <OwnerType>RESOURCES</OwnerType>
+  <Name><![CDATA[AWC_Chromium]]></Name>
+  <FSRoot><![CDATA[resources\2383]]></FSRoot>
+  <FSPath><![CDATA[resources\2383\APPLICATIONAREA_SCRIPT]]></FSPath>
+  <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\AWC_Chromium]]></QCPath>
+  <FileName>APPLICATIONAREA_SCRIPT</FileName>
+  <SubType>Application Area</SubType>
+  <Owner>
+    <OwnerId>2383</OwnerId>
+    <OwnerType>RESOURCES</OwnerType>
+    <Name><![CDATA[AWC_Chromium]]></Name>
+    <FSRoot><![CDATA[resources\2383]]></FSRoot>
+    <FSPath><![CDATA[resources\2383\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\AWC_Chromium]]></QCPath>
+    <FileName>APPLICATIONAREA_SCRIPT</FileName>
+    <SubType>Application Area</SubType>
+    <Relation>
+      <RelatedId>10423</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Action1]]></Name>
+      <FSRoot><![CDATA[resources\2383]]></FSRoot>
+      <FSPath><![CDATA[resources\2383\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\AWC_Chromium]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>10421</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Main Test Flow]]></Name>
+      <FSRoot><![CDATA[resources\2383]]></FSRoot>
+      <FSPath><![CDATA[resources\2383\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\AWC_Chromium]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>1992</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[ActiveX.txt]]></Name>
+      <FSRoot><![CDATA[resources\1992]]></FSRoot>
+      <FSPath><![CDATA[resources\1992]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\ActiveX.txt]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>4</Order>
+      <FileName>ActiveX.txt</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>10422</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\2383]]></FSRoot>
+      <FSPath><![CDATA[resources\2383\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\AWC_Chromium]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>1996</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Visual_Basic.txt]]></Name>
+      <FSRoot><![CDATA[resources\1996]]></FSRoot>
+      <FSPath><![CDATA[resources\1996]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Visual_Basic.txt]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>5</Order>
+      <FileName>Visual_Basic.txt</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+  </Owner>
+  <Owner>
+    <OwnerId>10423</OwnerId>
+    <OwnerType>USER_ASSETS</OwnerType>
+    <Name><![CDATA[Action1]]></Name>
+    <FSRoot><![CDATA[resources\2383]]></FSRoot>
+    <FSPath><![CDATA[resources\2383\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\AWC_Chromium]]></QCPath>
+    <Relation>
+      <RelatedId>10422</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\2383]]></FSRoot>
+      <FSPath><![CDATA[resources\2383\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\AWC_Chromium]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>1</Order>
+    </Relation>
+  </Owner>
+</Owners>

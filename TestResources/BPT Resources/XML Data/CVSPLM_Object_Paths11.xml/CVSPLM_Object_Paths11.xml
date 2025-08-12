@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dictionary>
+  <Item>
+    <Key>CVSPLM_Login</Key>
+    <Val>JavaWindow("CVSPLM_Login")</Val>
+  </Item>
+  <Item>
+    <Key>eCenter_MaineWindow</Key>
+    <Val>JavaWindow("eCenter_R_AND_D")</Val>
+  </Item>
+  <Item>
+    <Key>CreateEngineeringDocument</Key>
+    <Val>JavaWindow("eCenter_Common").JavaDialog("CreateEngineeringDocument")</Val>
+  </Item>
+  <Item>
+    <Key>CreateSalesDocument</Key>
+    <Val>JavaWindow("eCenter_Common").JavaDialog("CreateSalesDocument")</Val>
+  </Item>
+  <Item>
+    <Key>UpdateEngineeringDocument</Key>
+    <Val>JavaWindow("eCenter_Common").JavaDialog("UpdateEngineeringDocument")</Val>
+  </Item>
+  <Item>
+    <Key>CVSPLM</Key>
+    <Val>JavaWindow("eCenter_Common").JavaDialog("CVSPLM")</Val>
+  </Item>
+  <Item>
+    <Key>QueryAndRelate</Key>
+    <Val>JavaWindow("eCenter_Common").JavaDialog("QueryAndRelate")</Val>
+  </Item>
+  <Item>
+    <Key>QueryAllDocument</Key>
+    <Val>JavaWindow("QueryAllDocument")</Val>
+  </Item>
+  <Item>
+    <Key>CreateDocumentRequest</Key>
+    <Val>JavaWindow("eCenter_Common").JavaDialog("CreateDocumentRequest")</Val>
+  </Item>
+  <!--************Dialogs under eCenter Main Window**************-->
+  <Item>
+    <Key>AddLocaLFile</Key>
+    <Val>JavaWindow("eCenter_R_AND_D").JavaDialog("AddLocalFile")</Val>
+  </Item>
+   <Item>
+    <Key>CheckCompleteness</Key>
+    <Val>JavaWindow("eCenter_R_AND_D").JavaDialog("CheckCompleteness")</Val>
+  </Item>
+  <Item>
+    <Key>Submit</Key>
+    <Val>JavaWindow("eCenter_R_AND_D").JavaDialog("Submit")</Val>
+  </Item>
+  <Item>
+    <Key>ConfirmExitApplication</Key>
+    <Val>JavaWindow("eCenter_R_AND_D").JavaDialog("ConfirmExitApplication")</Val>
+  </Item>
+  <Item>
+    <Key>Update</Key>
+    <Val>JavaWindow("eCenter_R_AND_D").JavaDialog("Update")</Val>
+  </Item>
+  
+</Dictionary>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Owners>
+  <OwnerId>2611</OwnerId>
+  <OwnerType>RESOURCES</OwnerType>
+  <Name><![CDATA[app area]]></Name>
+  <FSRoot><![CDATA[resources\2611]]></FSRoot>
+  <FSPath><![CDATA[resources\2611\APPLICATIONAREA_SCRIPT]]></FSPath>
+  <QCPath><![CDATA[Resources\test\app area]]></QCPath>
+  <FileName>APPLICATIONAREA_SCRIPT</FileName>
+  <SubType>Application Area</SubType>
+  <Owner>
+    <OwnerId>2611</OwnerId>
+    <OwnerType>RESOURCES</OwnerType>
+    <Name><![CDATA[app area]]></Name>
+    <FSRoot><![CDATA[resources\2611]]></FSRoot>
+    <FSPath><![CDATA[resources\2611\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\test\app area]]></QCPath>
+    <FileName>APPLICATIONAREA_SCRIPT</FileName>
+    <SubType>Application Area</SubType>
+    <Relation>
+      <RelatedId>2393</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Common.txt]]></Name>
+      <FSRoot><![CDATA[resources\2393]]></FSRoot>
+      <FSPath><![CDATA[resources\2393]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Common.txt]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>3</Order>
+      <FileName>Common.txt</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>26575</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\2611]]></FSRoot>
+      <FSPath><![CDATA[resources\2611\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\test\app area]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>26576</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Action1]]></Name>
+      <FSRoot><![CDATA[resources\2611]]></FSRoot>
+      <FSPath><![CDATA[resources\2611\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\test\app area]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>1992</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[ActiveX.txt]]></Name>
+      <FSRoot><![CDATA[resources\1992]]></FSRoot>
+      <FSPath><![CDATA[resources\1992]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\ActiveX.txt]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>4</Order>
+      <FileName>ActiveX.txt</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>26574</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Main Test Flow]]></Name>
+      <FSRoot><![CDATA[resources\2611]]></FSRoot>
+      <FSPath><![CDATA[resources\2611\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\test\app area]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>1996</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Visual_Basic.txt]]></Name>
+      <FSRoot><![CDATA[resources\1996]]></FSRoot>
+      <FSPath><![CDATA[resources\1996]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Visual_Basic.txt]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>5</Order>
+      <FileName>Visual_Basic.txt</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+  </Owner>
+  <Owner>
+    <OwnerId>26576</OwnerId>
+    <OwnerType>USER_ASSETS</OwnerType>
+    <Name><![CDATA[Action1]]></Name>
+    <FSRoot><![CDATA[resources\2611]]></FSRoot>
+    <FSPath><![CDATA[resources\2611\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\test\app area]]></QCPath>
+    <Relation>
+      <RelatedId>26575</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\2611]]></FSRoot>
+      <FSPath><![CDATA[resources\2611\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\test\app area]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>1</Order>
+    </Relation>
+  </Owner>
+</Owners>

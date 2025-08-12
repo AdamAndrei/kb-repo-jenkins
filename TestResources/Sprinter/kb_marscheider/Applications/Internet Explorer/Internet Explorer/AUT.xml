@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutDefinition objectID="0">
+  <IsDefault>False</IsDefault>
+  <ID>65fb7872-5285-41fe-a54f-814da926c38c</ID>
+  <Name>Internet Explorer</Name>
+  <Description isNull="True" />
+  <AddinsDefinition objectID="1">
+    <Elements isCollection="True">
+      <String>Web</String>
+      <String>Java</String>
+    </Elements>
+  </AddinsDefinition>
+  <ExecutionType>NonWeb</ExecutionType>
+  <StationsAutDefinition objectID="2">
+    <RecorderAutDefinition objectID="3">
+      <ExecutionDefinition objectID="4" type="HP.MirrorTesting.Common.NonWebExecutionDefinition, HP.Sprinter.Common">
+        <Path>C:\Program Files (x86)\Internet Explorer\iexplore.exe</Path>
+        <Arguments></Arguments>
+        <WorkingFolder></WorkingFolder>
+      </ExecutionDefinition>
+      <RunMode>CreateNew</RunMode>
+      <CloseAutAtRunEnd>False</CloseAutAtRunEnd>
+    </RecorderAutDefinition>
+    <Elements isCollection="True">
+      <StationAutDefinition cyclicReferenceObjectID="3" />
+    </Elements>
+  </StationsAutDefinition>
+</AutDefinition>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StationsDefinitionContainer objectID="0">
+  <Collection objectID="1">
+    <Elements isCollection="True">
+      <StationDefinition objectID="2">
+        <MachineDefinition objectID="3">
+          <Location objectID="4" type="HP.MirrorTesting.BL.Data.TestDefinitionData.RunDefinition.Host.LocationDefinition, HP.Sprinter.BL.Data">
+            <HostNameOrAddress>localhost</HostNameOrAddress>
+            <HostName>localhost</HostName>
+            <Address isNull="True" />
+          </Location>
+          <Credentials objectID="5" type="HP.MirrorTesting.BL.Data.TestDefinitionData.RunDefinition.Host.CredentialsDefinition, HP.Sprinter.BL.Data">
+            <EncryptedPassword isNull="True" />
+            <Username isNull="True" />
+            <FullUsername isNull="True" />
+            <UserDomain isNull="True" />
+          </Credentials>
+          <CredentialsInfo objectID="6">
+            <Source>CurrUser</Source>
+          </CredentialsInfo>
+        </MachineDefinition>
+        <AgentDefinition objectID="7">
+          <Name>Primary</Name>
+          <Description>Primary Machine</Description>
+          <ImageSource>Host</ImageSource>
+          <Protocol>Pipe</Protocol>
+          <StationType>Recorder</StationType>
+        </AgentDefinition>
+        <StationAutDefinitionPointer objectID="8">
+          <PointedID>0</PointedID>
+          <PointerType>StationAut</PointerType>
+        </StationAutDefinitionPointer>
+        <IsExcluded>False</IsExcluded>
+        <LastModificationTime isNull="True" />
+      </StationDefinition>
+    </Elements>
+  </Collection>
+</StationsDefinitionContainer>

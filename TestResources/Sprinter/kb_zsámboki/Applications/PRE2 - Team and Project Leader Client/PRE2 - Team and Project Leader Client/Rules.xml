@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RulesContainer objectID="0">
+  <PropertyRules objectID="1">
+    <RulesDictionary objectID="2">
+      <Elements isCollection="True" />
+    </RulesDictionary>
+    <Elements isCollection="True" />
+  </PropertyRules>
+  <CutRules objectID="3">
+    <Elements isCollection="True" />
+  </CutRules>
+</RulesContainer>

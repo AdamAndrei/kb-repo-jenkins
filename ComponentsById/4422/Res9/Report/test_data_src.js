@@ -1,0 +1,1 @@
+﻿var __testDataSource={items:[{dataFilePath:'Default.xlsx',dataFileFormat:'excel',dataFileFolder:'C:\\MBT-REPOS\\kb-repo\\ComponentsById\\4422\\Res9',namePairs:[]}]};

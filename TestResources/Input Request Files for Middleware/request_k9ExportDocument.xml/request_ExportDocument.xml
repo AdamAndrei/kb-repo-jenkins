@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Request version="1.0">
+	<!--
+Session data
+Not content of the MKS export. Will be added by the Java tool
+-->
+	<Session name="Middleware" password="M;ddle08" encrypt="true">
+		<RequestID value="RequestID"/>
+		<Class value="Class"/>
+		<CompanyName value="CompanyName"/>
+		<Application value="Application"/>
+	</Session>
+	<Client type="register" client_computer_name="defiant" client_ip="10.0.131.33"
+client_language="en_us"/>
+	<Server timeout="10000" database_scope="unknown"/>
+	<!--
+End of Session data
+-->
+	<Data>
+		<Method value="k9ExportDocument">
+			<Parameter value="parameter">
+				<MTIObject value="METJ02zhI0EBhB" type="COM.metaphasetech.mot.MTIObject" attributeName="Constant" CurDbName="" metaclassname="KB4_ExportPkgRevision">
+					<item_id>
+						<JavaElement value="EP002466" type="java.lang.String"/>
+					</item_id>
+					<kb4_Language>
+						<JavaElement value="DE" type="java.lang.String"/>
+					</kb4_Language>
+					<item_revision_id>
+						<JavaElement value="000" type="java.lang.String"/>
+					</item_revision_id>
+					<object_type>
+						<JavaElement value="KB4_ExportPkgRevision" type="java.lang.String"/>
+					</object_type>
+				</MTIObject>
+			</Parameter>
+		</Method>
+	</Data>
+</Request>

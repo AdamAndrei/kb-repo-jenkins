@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutDefinition objectID="0">
+  <IsDefault>False</IsDefault>
+  <ID>9be5a3b2-2e32-4c5a-8e8b-09c6e0f87141</ID>
+  <Name>ExecutionFlowResourceForm</Name>
+  <Description isNull="True" />
+  <AddinsDefinition objectID="1">
+    <Elements isCollection="True">
+      <String>.NET</String>
+      <String>WPF</String>
+    </Elements>
+  </AddinsDefinition>
+  <ExecutionType>Desktop</ExecutionType>
+  <StationsAutDefinition objectID="2">
+    <RecorderAutDefinition objectID="3">
+      <ExecutionDefinition objectID="4">
+        <ExecutionType>Desktop</ExecutionType>
+        <Browser isNull="True" />
+        <URL isNull="True" />
+        <WebReplayType>Event</WebReplayType>
+        <Path>C:\Users\kleinekj\AppData\Local\HP\ALM-Client\15.01.1.0_952\ALM-Client.exe</Path>
+        <Arguments isNull="True" />
+        <WorkingFolder isNull="True" />
+        <IsSapUI5>False</IsSapUI5>
+        <Job isNull="True" />
+        <NetworkProfiles isNull="True" />
+      </ExecutionDefinition>
+      <RunMode>CreateNew</RunMode>
+      <CloseAutAtRunEnd>False</CloseAutAtRunEnd>
+    </RecorderAutDefinition>
+    <Elements isCollection="True">
+      <StationAutDefinition cyclicReferenceObjectID="3" />
+    </Elements>
+  </StationsAutDefinition>
+</AutDefinition>

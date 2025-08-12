@@ -1,0 +1,158 @@
+﻿Option explicit
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'Function List
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'		Function Name					|     Developer							|		Date	|	Comment
+'- - - - - - - - - - - - - - - - - ----------------------------| - - - - - - - - - - - - - - - ----------------------------------| - - - - ----------------- - - | - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'001.	Fn_Common_GenerateLog		|	Mohini.Deshmukh@knorr-bremse.com	|	26-Aug-2021	|	This function is Use to rint the log
+'002.	Fn_AWC_ReadyStatusSync		|	Mohini.Deshmukh@knorr-bremse.com	|	09-Sep-2020	  	|	This function is Use to perform the syn operation for web page
+'003.	WaitUntilExist					|	Mohini.Deshmukh@knorr-bremse.com	|	26-Feb-2020	|	This function is Use to Wait Until Object Loaded.
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -@Function Header Start
+' Name:		Fn_Common_GenerateLog
+' Purpose:	To print the log
+' Input:
+'		sAction 	  	- 	Name of Action 
+'		sReportStepName - 	Report Step Name
+'		Details 		-	Message details
+' Output:	To print the status
+' Remarks:	
+'Function Usage		     :	Call Fn_Common_GenerateLog("Pass","Select the Relations tab","Successfully Selected the Relations tab")        
+'						Call Fn_Common_GenerateLog("Fail","Select the Relations tab", "Fail to Select the Relations tab")
+'						Call Fn_Common_GenerateLog("done","File name is entered ", "")
+'						Call Fn_Common_GenerateLog("warning","File name should not start with number", "")
+'History			     :
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'	Developer Name				|	Date			|	Rev. No.   	|	      Reviewer		|	Changes Done	
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'	Mohini Deshmukh			    |  26-Aug-2021	    |	 1.0		|	  					| 		Created
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -@Function Header End
+Public Function Fn_Common_GenerateLog(sAction,sReportStepName,Details)
+	Err.Clear
+	
+	Select Case lcase(sAction)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Case to  send the pass message to the test report
+		Case "pass"
+			 Reporter.ReportEvent micPass, sReportStepName, Details
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Case to  send the fail message to the test report
+		Case "fail"
+			 Reporter.ReportEvent micFail, sReportStepName, Details
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Case to send the message to the test report without affecting the Pass/Fail status of the Test
+		Case "done"
+			Reporter.ReportEvent micDone, sReportStepName, Details
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Case to send the warning message to the run results and does not affect the status of the test/component.
+		Case "warning"
+			Reporter.ReportEvent micWarning, sReportStepName, Details
+			
+	End Select
+	
+End  Function
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -@Function Header Start
+' Name:		Fn_AWC_ReadyStatusSync
+' Purpose:	wait for application util load
+' Input:
+'iIterations 	  	- 	No. of iterations
+' Remarks:	
+'Function Usage		     :	Call Fn_AWC_ReadyStatusSync(2)
+'History			     :
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'	Developer Name				|	Date			|	Rev. No.   	|	      Reviewer		|	Changes Done	
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'	Mohini Deshmukh			    |  26-Aug-2021	    |	 1.0		|	  					| 		Created
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -@Function Header End
+Public Function Fn_AWC_ReadyStatusSync(iIterations)
+	Dim iCounter,iCount
+	Dim bFlag
+	Dim objAWCDefaultPage
+	
+	Fn_AWC_ReadyStatusSync=False
+	bFlag=False
+	Reporter.Filter = rfDisableAll
+	
+'	Set objAWCDefaultPage=Browser("creationtime:=0" , "title:=.*CVS PLM.*|.*Home - Home.*").Page("title:=.*CVS PLM.*|.*Home - Home.*")
+	Set objAWCDefaultPage=Browser("creationtime:=0")
+	objAWCDefaultPage.Sync
+	
+	Reporter.Filter = rfEnableAll
+	
+'	For iCounter=1 To iIterations
+'		'Checking Existance of UserName link
+'		If Fn_Web_UI_WebObject_Operations("Fn_AWC_ReadyStatusSync","Exist",objAWCDefaultPage.WebElement("class:=.*aw-state-userName.*","html tag:=A"),3,"","") Then
+'			bFlag=True
+'			wait 1
+'			Exit For
+'		End If
+'	Next
+'	IF bFlag=False Then
+'		Exit Function
+'	End IF
+
+	For iCounter = 1 to iIterations
+		bFlag=False
+		Reporter.Filter = rfDisableAll
+		If Fn_Web_UI_WebObject_Operations("Fn_AWC_ReadyStatusSync","Exist",objAWCDefaultPage,4,"","") Then
+			For iCount = 1 To 30
+				Reporter.Filter = rfDisableAll
+				If Fn_Web_UI_WebObject_Operations("Fn_AWC_ReadyStatusSync","Exist",objAWCDefaultPage.WebElement("class:=aw-layout-progressBar","html tag:=DIV"),2,"","") Then
+					On Error Resume Next
+					Reporter.Filter = rfDisableAll
+					If Cint(objAWCDefaultPage.WebElement("class:=aw-layout-progressBar","html tag:=DIV").GetROProperty("height"))=0 Then
+						bFlag=True
+						Exit For
+					Else
+						wait 1
+					End If					
+					Reporter.Filter = rfEnableAll
+					On Error GoTo 0
+				Else
+					bFlag=False
+					Exit For	
+				End If	
+			Next			
+		Else
+			Exit Function	
+		End If
+	Next
+	IF bFlag=True Then
+		Fn_AWC_ReadyStatusSync=True
+	End IF
+	Reporter.Filter = rfEnableAll
+ End  Function
+ '- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -@Function Header Start
+' Name:		WaitUntilExist	
+' Purpose: 	Wait Until Object Loaded		
+' Input:	Object 		-	Name of Object
+'		Iteration	-	No of iteration
+'		Duration	-	Duration Period	
+' Output				:	False/True	-	If Object will loaded in duration * no.of iteration	
+' Remarks:	
+' Author:	Mohini Deshmukh	
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -@Function Header End
+Public Function WaitUntilExist(ByRef pObj, ByVal pIntIteration, ByVal pIntDuration)
+    Dim lIntOldFilter
+	Dim lStrObjectName
+	Dim i
+	
+	lIntOldFilter = Reporter.Filter 
+	Reporter.Filter = 2 'rfEnableErrorsOnly 
+	lStrObjectName = pObj.Tostring()
+	WaitUntilExist = False
+	For i=0 To pIntIteration 
+		If pObj.Exist(0) Then
+			Reporter.Filter = lIntOldFilter
+			Reporter.ReportEvent micDone, "WaitUntilExist: Object Found" , lStrObjectName & " Exist. Waiting Time =  " & i * pIntDuration & " Seconds", pObj
+			WaitUntilExist = True
+			Exit Function
+		End If
+
+		Wait pIntDuration
+	Next
+	Reporter.Filter = lIntOldFilter
+	Reporter.ReportEvent micDone, "WaitUntilExist: Object Not Found" , lStrObjectName &  "  Not Exist. Waiting Time =  " & pIntIteration * pIntDuration & " Seconds", pObj
+
+End Function

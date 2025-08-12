@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Dictionary>
+<Item>
+    <Key>Browser</Key>
+    <Val>Browser("Browser")</Val>
+  </Item>
+  <Item>
+    <Key>wpage_AWCTeamcenterHome</Key>
+    <Val>Browser("Browser").Page("wpage_AWCTeamcenterHome")</Val>
+  </Item>
+   <Item>
+    <Key>wtab_QuickAdvanced</Key>
+    <Val>Browser("Browser").Page("wpage_AWCTeamcenterHome").WebTabStrip("wtab_QuickAdvanced")</Val>
+  </Item>
+  <Item>
+    <Key>wlist_SearchResult</Key>
+    <Val>Browser("Browser").Page("wpage_AWCTeamcenterHome").WebList("wlst_SearchResult")</Val>
+  </Item>
+</Dictionary>

@@ -1,0 +1,1051 @@
+﻿Option Explicit
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'001. Fn_FSO_Operations				|	Mohini.Deshmukh@knorr-bremse.com		|	16-May-2022	|	Function used to perform the file operations
+'002 Fn_FSO_VerifyText				|	Mohini.Deshmukh@knorr-bremse.com		|	27-July-2022	|	Function used to perform Text Verification operation from file
+'003 Fn_FSO_ExcelOperations			|	Mohini.Deshmukh@knorr-bremse.com		|	14-June-2023	|	Function used to perform Excel operations
+'004.Fn_FSO_Perfomance_Monitor_Operation    | Pooja.Bondarde@knorr-bremse.com  |27-Oct-2023 | Function is used to monitor Permance for various actions
+'005.Fn_FSO_DownloadResource			| Pooja.Bondarde@knorr-bremse.com  |21-Nov-2023 | Function is used to Download Resource from ALM
+'006.Fn_FSO_UploadResource			| Pooja.Bondarde@knorr-bremse.com  |21-Nov-2023 | Function is used to Download Resource from ALM
+'007. Fn_FSO_XMLOperations			|	Mohini.Deshmukh@knorr-bremse.com		|	1-Aug-2024	|	Function used to perform the xml operations
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header Start 
+'Function Name				    :	Fn_FSO_Operations
+'Function Description			    :	Function used to perform operations on File.
+'Function Parameters		    :     1.sAction: Action name
+'						    	    :    2.sDirpath : Directory path from local drive
+'							    :    3.sFileName : File name from local drive
+'Function Return Value	 	   : 	True or False
+'Wrapper Function	    	    	   : 	 NA
+'Function Pre-requisite	           :	
+'Function Usage		     	 	   :    Call Fn_FSO_Operations("fileexist","C:\Temp" ,"desktop1.txt")
+'							   	Call Fn_FSO_Operations("deletefile","C:\Temp" ,"desktop1.txt")
+'History			    			  :
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Developer Name				|	Date			|	Rev. No.   	|	      Reviewer		|	Changes Done	
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Mohini Deshmukh			    |  16-May-2022	    |	 1.0		|	 				 	| 		Created
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header End
+Public Function Fn_FSO_Operations(sAction,sDirpath,sFileName)
+	Err.Clear
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Initially set function return value as False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Fn_FSO_Operations = False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Variable Declaration
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Dim objFSO,objFolder
+	Dim sFolderPath,sFilePath
+	Dim bFlag,File
+	bFlag=False
+	
+	'-------------------------------------------------------------------------------------------------------------------------------
+	'Create FSO Object
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Set objFSO=CreateObject("Scripting.FileSystemObject")
+	
+	IF sDirpath="" Then
+		sFolderPath="C:\Users\"& Environment.Value("UserName") &"\Downloads"
+	Else
+		sFolderPath=sDirpath
+	End IF
+	
+	sFilePath=sFolderPath &"\" & sFileName
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Select Case lcase(sAction)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Case to verify the existance from local drive
+		Case "fileexist"
+			
+			Set objFolder=objFSO.GetFolder(sFolderPath)
+			For Each File in objFolder.Files
+				If trim(File.Name)= trim(sFileName) Then
+					Reporter.ReportEvent micPass, "Verify the [ " & cstr(sFileName) & " ] file at " & sFolderPath  , "Successfully verified that [ " & cstr(sFileName) & " ] file is exist at " & sFolderPath 
+					Fn_FSO_Operations=True
+					bFlag=True
+					Exit For
+				End If
+			Next
+			If bFlag=False then
+''				Reporter.ReportEvent micFail, "Verify the [ " & cstr(sFileName) & " ] file at " & sFolderPath  , "Fail to verify [ " & cstr(sFileName) & " ] file at " & sFolderPath & " as file [ " & cstr(sFileName) & " ]  does not exist at " & sFolderPath
+				Fn_FSO_Operations=False
+			End IF
+			Set objFolder=Nothing
+		'--------------------------------------------------------------------------------------------------------------------------------	
+		'Case to delete file from the from local drive
+		Case "deletefile"
+			
+			If objFSO.FileExists( sFilePath) Then
+				objFSO.DeleteFile sFilePath
+			End If
+				
+			Set objFolder=objFSO.GetFolder(sFolderPath)
+			For Each File in objFolder.Files
+				If trim(File.Name)=trim(sFileName) Then
+					Reporter.ReportEvent micFail, "Delete [ " & cstr(sFileName) & " ] file from " & sFolderPath  , "Fail to delete [ " & cstr(sFileName) & " ] file from " & sFolderPath & " as file [ " & cstr(sFileName) & " ] is exist at " & sFolderPath
+					Fn_FSO_Operations=False
+					Exit For
+				End If
+			Next
+			Reporter.ReportEvent micPass, "Delete [ " & cstr(sFileName) & " ] file from " & sFolderPath  , "Successfully deleted [ " & cstr(sFileName) & " ] file from " & sFolderPath 
+			Fn_FSO_Operations=True
+			Set objFolder=Nothing
+		'--------------------------------------------------------------------------------------------------------------------------------			
+	End select	
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Report any unexpected runtime error
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If Err.Number <> 0 Then
+		Reporter.ReportEvent micFail, "Fn_FSO_Operations", "Fail To perform operation [ " & Cstr(sAction) & " ] due to error number [ " & Cstr(Err.Number) & " ] with error description [ " & Cstr(Err.Description) & " ]"
+		Fn_FSO_Operations = False
+	Else
+		Fn_FSO_Operations = True
+	End If	
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Release objects
+	'--------------------------------------------------------------------------------------------------------------------------------	
+	Set objFSO = Nothing
+'--------------------------------------------------------------------------------------------------------------------------------	
+End Function
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header Start 
+'Function Name				:	Fn_FSO_VerifyText
+'Function Description			:	Function used to performText Verification operation from file
+'Function Parameters		:     1.sAction: Action name
+'						    	:     2. sFileName : File Name 
+'							:     3. sFileName : Property values which we want to verify
+'Function Return Value	 	:     True or False
+'Wrapper Function	    	       :      NA
+'Function Pre-requisite	       :     File must be open
+'Function Usage		               :    Call Fn_FSO_VerifyText("verifypdfdata",Parameter("str_FileName"),Parameter("str_PropertyValues"))
+'History			    	:
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Developer Name				|	Date			|	Rev. No.   	|	      Reviewer		|	Changes Done	
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Mohini Deshmukh			    |  27-July-2022	    |	 1.0		|	 				 	| 		Created
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header End
+'Public Function Fn_FSO_VerifyText(sAction,sFileName,sPropertyValues)
+'	Err.Clear
+'	'--------------------------------------------------------------------------------------------------------------------------------
+'	'Initially set function return value as False
+'	'--------------------------------------------------------------------------------------------------------------------------------
+'	Fn_FSO_VerifyText = False
+'	'--------------------------------------------------------------------------------------------------------------------------------
+'	'Variable Declaration
+'	'--------------------------------------------------------------------------------------------------------------------------------
+'	Dim objWscript,objClip,objFile,objFSO,objToolbar
+'	Dim sData,sFilePath,sPropertyName,sTempFileName
+'	Dim bFlag
+'	Dim iCounter
+'	'--------------------------------------------------------------------------------------------------------------------------------
+'	Select Case lcase(sAction)
+'		'--------------------------------------------------------------------------------------------------------------------------------
+'		'Case verify data from PDF
+'		Case "verifypdfdata"
+'			sTempFileName=Split(sFileName,".")
+'			Call Fn_Web_UI_WebObject_Operations("Fn_Common_Business_Verify_Properties_Operations", "settoproperty", PDFApplication("app_PDFApplication"), "", "name", sTempFileName(0) & ".*")
+'			sFilePath="C:\Users\"& Environment.Value("UserName") & "\Downloads\"& sFileName
+'			'--------------------------------------------------------------------------------------------------------------------------------
+'			'Open the PDF file in PDF Utility
+'			'--------------------------------------------------------------------------------------------------------------------------------
+'			PDFUtil.Open sFilePath
+'			wait 3
+'			'--------------------------------------------------------------------------------------------------------------------------------
+'			'Get all text
+'			'--------------------------------------------------------------------------------------------------------------------------------
+'			sData=PDFApplication("app_PDFApplication").PDFPage("page_PDFPage").GetText
+'			wait 3
+'			'--------------------------------------------------------------------------------------------------------------------------------
+'			'Verify data in PDF
+'			'--------------------------------------------------------------------------------------------------------------------------------
+'			bFlag=False
+'			sPropertyName=Split(sPropertyValues,"~")
+'			For iCounter = 0 To ubound(sPropertyName)
+'				'--------------------------------------------------------------------------------------------------------------------------------
+'				If instr(sData,sPropertyName(iCounter))>0 Then
+'					Reporter.ReportEvent micPass, "Verify the  data in PDF ", "Successfully verified the [ "& sPropertyName(iCounter) &" ] value is available in PDF"
+'					bFlag=True
+'				Else
+'					bFlag=False				
+'				End If
+'				'--------------------------------------------------------------------------------------------------------------------------------
+'				If bFlag=False Then
+'					Reporter.ReportEvent micFail, "Fail to verify  the  data in PDF file ", "Fail to verify   [ "& sPropertyName(iCounter) &" ] value in PDF file"
+'				End If	
+'				'--------------------------------------------------------------------------------------------------------------------------------
+'			Next
+'			'--------------------------------------------------------------------------------------------------------------------------------
+'			If bFlag=False Then
+'				Reporter.ReportEvent micFail, "Verify  the  data in PDF file ", "Fail to verify   data in PDF file"
+'				ExitComponent
+'			End If	
+'			'--------------------------------------------------------------------------------------------------------------------------------
+'			PDFApplication("app_PDFApplication").Close
+'		'--------------------------------------------------------------------------------------------------------------------------------	
+'		End  Select	
+'	'--------------------------------------------------------------------------------------------------------------------------------
+'	'Report any unexpected runtime error
+'	'--------------------------------------------------------------------------------------------------------------------------------
+'	If Err.Number <> 0 Then
+'		Reporter.ReportEvent micFail, "Fn_FSO_VerifyText", "Fail To perform operation [ " & Cstr(sAction) & " ] due to error number [ " & Cstr(Err.Number) & " ] with error description [ " & Cstr(Err.Description) & " ]"
+'		Fn_FSO_VerifyText = False
+'	Else
+'		Fn_FSO_VerifyText = True
+'	End If	
+'	'--------------------------------------------------------------------------------------------------------------------------------
+'	'Release objects
+'	'--------------------------------------------------------------------------------------------------------------------------------	
+'	Set objFSO = Nothing
+'	Set objWscript=Nothing
+'	Set objClip=Nothing
+'	Set objFile=Nothing
+Public Function Fn_FSO_VerifyText(sAction,sFileName,sPropertyValues)
+	Err.Clear
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Initially set function return value as False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Fn_FSO_VerifyText = False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Variable Declaration
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Dim objWscript,objClip,objFile,objFSO,objToolbar
+	Dim sData1,sFilePath,sPropertyName,sTempFileName,sData2,sFolderPath,sFileName1
+	Dim bFlag
+	Dim iCounter
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Select Case lcase(sAction)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Case verify data from PDF
+		Case "verifypdfdata"
+			sTempFileName=Split(sFileName,".")
+			Call Fn_Web_UI_WebObject_Operations("Fn_Common_Business_Verify_Properties_Operations", "settoproperty", PDFApplication("app_PDFApplication"), "", "name", sTempFileName(0) & ".*")
+			sFilePath="C:\Users\"& Environment.Value("UserName") & "\Downloads\"& sFileName
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Open the PDF file in PDF Utility
+			'--------------------------------------------------------------------------------------------------------------------------------
+			PDFUtil.Open sFilePath
+			wait 3
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Get all text
+			'--------------------------------------------------------------------------------------------------------------------------------
+			PDFApplication("app_PDFApplication").Click
+			PDFApplication("app_PDFApplication").Type micTab
+			PDFApplication("app_PDFApplication").Type micTab
+			wait 3
+			
+			sFolderPath = Environment("SystemTempDir")
+			sFileName1 = "TestFile.bmp"
+			sFilePath = sFolderPath&"\"&sFileName1
+			If Fn_FSO_DownloadResource(sFolderPath,sFileName1) = True Then
+				PDFApplication("app_PDFApplication").CaptureBitmap sFilePath, True
+				sData1 = TextUtil.GetTextFromImage(sFilePath)
+			Else
+				Reporter.ReportEvent micFail, "Fail to download ["&sFileName1&"] from ALM resource ", "Fail to download   [ "& sFileName1 &" ] from ALM resource"
+				ExitComponent
+			End If
+'			--------------------------------------------------------------------------------------------------------------------------------
+			'Get all text
+			'--------------------------------------------------------------------------------------------------------------------------------
+			sData2=PDFApplication("app_PDFApplication").PDFPage("page_PDFPage").GetText
+			wait 3
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Verify data in PDF
+			'--------------------------------------------------------------------------------------------------------------------------------
+			bFlag=False
+			sPropertyName=Split(sPropertyValues,"~")
+			For iCounter = 0 To ubound(sPropertyName)
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If instr(sData2,sPropertyName(iCounter))>0 Then
+					Reporter.ReportEvent micPass, "Verify the  data in PDF ", "Successfully verified the [ "& sPropertyName(iCounter) &" ] value is available in PDF"
+					bFlag=True
+				ElseIf instr(sData1,sPropertyName(iCounter))>0 Then
+					Reporter.ReportEvent micPass, "Verify the  data in PDF ", "Successfully verified the [ "& sPropertyName(iCounter) &" ] value is available in PDF"
+					bFlag=True
+				Else
+					bFlag=False				
+				End If
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If bFlag=False Then
+					Reporter.ReportEvent micFail, "Fail to verify  the  data in PDF file ", "Fail to verify   [ "& sPropertyName(iCounter) &" ] value in PDF file"
+				End If	
+				'--------------------------------------------------------------------------------------------------------------------------------
+			Next
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If bFlag=False Then
+				Reporter.ReportEvent micFail, "Verify  the  data in PDF file ", "Fail to verify   data in PDF file"
+				ExitComponent
+			End If	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			PDFApplication("app_PDFApplication").Close	
+		End  Select	
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Report any unexpected runtime error
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If Err.Number <> 0 Then
+		Reporter.ReportEvent micFail, "Fn_FSO_VerifyText", "Fail To perform operation [ " & Cstr(sAction) & " ] due to error number [ " & Cstr(Err.Number) & " ] with error description [ " & Cstr(Err.Description) & " ]"
+		Fn_FSO_VerifyText = False
+	Else
+		Fn_FSO_VerifyText = True
+	End If	
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Release objects
+	'--------------------------------------------------------------------------------------------------------------------------------	
+	Set objFSO = Nothing
+	Set objWscript=Nothing
+	Set objClip=Nothing
+	Set objFile=Nothing
+'--------------------------------------------------------------------------------------------------------------------------------		
+End  Function	
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header Start 
+'Function Name				    :	Fn_FSO_ExcelOperations
+'Function Description			    :	Function used to perform operations on Excel file.
+'Function Parameters		    :     1.sAction: Action name
+'						    	    :    2.sFilePath : File path of excel from local drive
+'							    :    3.sSrcSheetNm : Source sheet name from excel
+'							    :    4.sDestSheetNm : Destination sheet name from datatable
+'Function Return Value	 	   : 	
+'Wrapper Function	    	    	   : 	 NA
+'Function Pre-requisite	           :	
+'Function Usage		     	  :   Call  Fn_FSO_ExcelOperations("importsheet" , "C:\Users\deshmukm\Desktop\AWC\Read Excel\Basic Data.xlsx","" ,"PartSheet","Part","","")
+'							 : Call Fn_FSO_ExcelOperations("validatecellvalue","","tv_kb_bom_multi_level_EXCEL_v11.xlsx","","","","Part Number","K136915N03")	
+'                                                 : Call Fn_FSO_ExcelOperations("validatemptycolumn","","tv_kb_bom_multi_level_documents_EXCEL_OOXML.xlsx","","","","Effective From","")
+''History			    			  :
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Developer Name				|	Date			|	Rev. No.   	|	      Reviewer		|	Changes Done	
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Mohini Deshmukh			|  14-June-2023	    |	 1.0		|	 				 	| 		Created
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header End
+Public Function Fn_FSO_ExcelOperations(sAction,sFilePath,sFileName,sSrcSheetNm,sDestSheetNm,sRowNumber,sColumnName,sValue)
+	Err.Clear
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Variable Declaration
+	'--------------------------------------------------------------------------------------------------------------------------------	
+	Dim objExcel,objWorkbook,objSheet
+	Dim iRowCount,iColCount,iCount,jCount,iCounter
+	Dim sColumnIndex,sCellValue,sTempColumNm,sTempVal
+	Set objExcel = CreateObject("Excel.Application")
+			
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Select Case lcase(sAction)
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Case Import excel sheet into datatable and return the rowcount from datatable
+		Case "importsheet"
+			'--------------------------------------------------------------------------------------------------------------------------------	
+			Datatable.ImportSheet  sFilePath ,sSrcSheetNm,sDestSheetNm
+			iRowCount=DataTable.GetSheet(sDestSheetNm).GetRowCount
+			Fn_FSO_ExcelOperations= iRowCount
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Case to validate values from excel		
+		Case "validatecellvalue"	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If sFilePath="" Then
+				sFilePath="C:\Users\"& Environment.Value("UserName") & "\Downloads\" & sFileName
+			End If
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Set objWorkbook = objExcel.Workbooks.Open(sFilePath)
+			'--------------------------------------------------------------------------------------------------------------------------------
+			' Select the desired worksheet (by index or name)
+			If sSrcSheetNm="" Then
+				Set objSheet = objWorkbook.Sheets(1) ' Access the first sheet
+			End If
+			'--------------------------------------------------------------------------------------------------------------------------------
+			' Find the column index by searching for the column name in the first row
+			iRowCount = objSheet.UsedRange.Rows.Count
+			iColCount = objSheet.UsedRange.Columns.Count
+			
+			sTempColumNm=Split(sColumnName,"~")
+			sTempVal=Split(sValue,"~")
+			
+			For jCount = 0 To ubound(sTempColumNm)
+				sColumnIndex=-1
+				'Column name is not at the first row in execl , so iterating rows as well 
+				For iCounter = 1 To iRowCount
+					For iCount = 1 To iColCount
+						'--------------------------------------------------------------------------------------------------------------------------------
+						If objSheet.Cells(iCounter, iCount).Value = sTempColumNm(jCount) Then
+						       sColumnIndex = iCount
+							 Exit For
+					       End If
+					       '--------------------------------------------------------------------------------------------------------------------------------
+					Next
+				Next
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If sColumnIndex = -1 Then
+				    Reporter.ReportEvent micFail, "Column not found in excel","Failed to verify column as column " & sTempColumNm(jCount) & " not found in excel"
+				    Fn_FSO_ExcelOperations=False
+				End  IF
+				 '--------------------------------------------------------------------------------------------------------------------------------  
+				'Validate cell value 
+				For iCount =sColumnIndex To iRowCount
+					  sCellValue = objSheet.Cells(iCount, sColumnIndex).Value
+					If sCellValue=sTempVal(jCount) Then
+						Reporter.ReportEvent micPass, "Verify [ " & sTempColumNm(jCount) & " ] column value", "Successfully verified that data [ "&sTempVal(jCount) &" ] is available in [ " & sTempColumNm(jCount) & " ] column"
+						Fn_FSO_ExcelOperations=True
+						Exit For
+					End If
+		  		Next
+		  		'--------------------------------------------------------------------------------------------------------------------------------
+		  		If sCellValue<>sTempVal(jCount)   Then
+		  			Reporter.ReportEvent micFail, "Verify [ " & sTempColumNm(jCount) & " ] column value","Failed to verify data  [ "&sTempVal(jCount)  &" ] in  [ " & sTempColumNm(jCount) & " ] column"
+				End  IF
+			Next	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			' Close the workbook and quit Excel
+			objWorkbook.Close False
+			objExcel.Quit
+			'--------------------------------------------------------------------------------------------------------------------------------
+			' Release objects
+			Set objSheet = Nothing
+			Set objWorkbook = Nothing
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Case to validate column is not empty  from excel		
+		Case "validatemptycolumn"	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			If sFilePath="" Then
+				sFilePath="C:\Users\"& Environment.Value("UserName") & "\Downloads\" & sFileName
+			End If
+			'--------------------------------------------------------------------------------------------------------------------------------
+			Set objWorkbook = objExcel.Workbooks.Open(sFilePath)
+			'--------------------------------------------------------------------------------------------------------------------------------
+			' Select the desired worksheet (by index or name)
+			If sSrcSheetNm="" Then
+				Set objSheet = objWorkbook.Sheets(1) ' Access the first sheet
+			End If
+			'--------------------------------------------------------------------------------------------------------------------------------
+			' Find the column index by searching for the column name in the first row
+			iRowCount = objSheet.UsedRange.Rows.Count
+			iColCount = objSheet.UsedRange.Columns.Count
+			
+			sTempColumNm=Split(sColumnName,"~")
+			For jCount = 0 To ubound(sTempColumNm)
+				sColumnIndex=-1
+				'Column name is not at the first row in execl , so iterating rows as well 
+				For iCounter = 1 To iRowCount
+					For iCount = 1 To iColCount
+					    If objSheet.Cells(iCounter, iCount).Value = sTempColumNm(jCount) Then
+					        sColumnIndex = iCount
+					        Exit For
+					    End If
+					Next
+				Next	
+				'--------------------------------------------------------------------------------------------------------------------------------
+				If sColumnIndex = -1 Then
+				    Reporter.ReportEvent micFail, "Column not found in excel","Failed to verify column as column " & sTempColumNm(jCount) & " not found in excel"
+				    Fn_FSO_ExcelOperations=False
+				End  IF
+				 '--------------------------------------------------------------------------------------------------------------------------------  
+				'Validate cell value 
+				For iCount = sColumnIndex To iRowCount
+					  sCellValue = objSheet.Cells(iCount, sColumnIndex).Value
+					If sCellValue<>"" Then
+						Reporter.ReportEvent micPass, "Verify [ " & sTempColumNm(jCount) & " ] column value is not empty as It contains [ " &sCellValue& " ] ", "Successfully verified that column  [ " & sTempColumNm(jCount) & " ] contains [ "&sCellValue&" ] value"
+						Fn_FSO_ExcelOperations=True
+					Else
+						Reporter.ReportEvent micFail, "Verify [ " & sTempColumNm(jCount) & " ] column value is not empty ","Failed to verify   [ "& sTempColumNm(jCount) &" ]  column value as It is empty "
+						Fn_FSO_ExcelOperations=False
+						Exit For
+					End If
+		  		Next
+			Next	
+			'--------------------------------------------------------------------------------------------------------------------------------
+			' Close the workbook and quit Excel
+			objWorkbook.Close False
+			objExcel.Quit
+			'--------------------------------------------------------------------------------------------------------------------------------
+			' Release objects
+			Set objSheet = Nothing
+			Set objWorkbook = Nothing
+		'--------------------------------------------------------------------------------------------------------------------------------	
+	End  Select
+	Set objExcel = Nothing
+End  Function		
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header Start 
+'Function Name				    :	Fn_FSO_Perfomance_Monitor_Operation
+'Function Description			    :	Function used to Monitor performance operations.
+'Function Parameters		    :     1.sAction: Action name
+'								: 2. sFolderPath: Folder path from local drive
+'						    	    :    3.sFileName : Name of Excel file
+'							    :    4.sSheetNm : sheet name from excel
+'							    :    5.sColumnNm : New Column Name 
+'							    :   
+'Function Return Value	 	   : 	NA
+'Wrapper Function	    	    	   : 	 NA
+'Function Pre-requisite	           :	
+'Function Usage		     	 	   :   Call  Fn_FSO_Perfomance_Monitor_Operation("AddNewColumn" , "C:\Temp","File.xlsx" ,"Sheet1","Create","")
+'History			    			  :
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Developer Name				|	Date			|	Rev. No.   	|	      Reviewer		|	Changes Done	
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Pooja Bondarde			|  27-Oct-2023	    |	 1.0		|	 				 	| 		Created
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header End
+Public Function Fn_FSO_Perfomance_Monitor_Operation(sAction,sFolderPath,sFileName,sSheetNm,sColumnNm,sDic)
+	Err.Clear
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Initially set function return value as False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Fn_FSO_Perfomance_Monitor_Operation = False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Variable Declaration
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Dim objExcel,objWorkbook,objWorksheet,nextAvailableColumn,sTemp1,obj_AWCTeamcenterHome,i,fileSystem,sheetExists,sFilePath
+	Dim myAttributes,myArray()
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Set Home Object
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Set obj_AWCTeamcenterHome=Eval(SearchAndLoadResourceByName("ActiveWorkspace_OR.xml").GetValue("wpage_AWCTeamcenterHome"))
+	'--------------------------------------------------------------------------------------------------------------------------------
+	' Create an instance of the Excel Application object
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Set objExcel = CreateObject("Excel.Application")
+	'--------------------------------------------------------------------------------------------------------------------------------
+	' Create an instance of the File System object
+	'--------------------------------------------------------------------------------------------------------------------------------
+	sFilePath = sFolderPath&"\"&sFileName
+	if Fn_FSO_DownloadResource(sFolderPath,sFileName) = True Then
+		Reporter.ReportEvent micPass, "File Downloaded Sucessfully. ", "Successfully Downloaded ["&sFileName&"] to Folder Path["&sFolderPath&"]"
+	Else
+		Reporter.ReportEvent micFail, "Failed to download File.","Failed to verify  ["&sFileName&"] is downloaded to Folder Path["&sFolderPath&"]"
+	End If
+	
+	'--------------------------------------------------------------------------------------------------------------------------------
+	' Open the Excel file
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Set objWorkbook = objExcel.Workbooks.Open(sFilePath)
+	'--------------------------------------------------------------------------------------------------------------------------------
+	' Reference the worksheet you want to work with 
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Set objWorksheet = objWorkbook.Worksheets(sSheetNm)
+
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Select Case lcase(sAction)
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Case to Add New Column to existing Excel
+	Case "addnewcolumn"		
+		'--------------------------------------------------------------------------------------------------------------------------------
+		' Attribute Names in Array
+		'--------------------------------------------------------------------------------------------------------------------------------
+		myAttributes = Array("Total Time", "Total Network Time", "Vis Server Time","Total SOA Requests","Total HTTP Requests","Total EMM Requests","DOM Node Count","DOM Tree Depth","Number of Unique Components","Number of Component Renders")
+		'--------------------------------------------------------------------------------------------------------------------------------
+		' Determine the next available column
+		'--------------------------------------------------------------------------------------------------------------------------------
+		nextAvailableColumn = objWorksheet.UsedRange.Columns.Count + 1
+		'--------------------------------------------------------------------------------------------------------------------------------
+		' Add the new column name to the first row
+		'--------------------------------------------------------------------------------------------------------------------------------
+		objWorksheet.Cells(1, nextAvailableColumn).Value = sColumnNm
+		
+		
+		For i = 0 To UBound(myAttributes)
+		ReDim Preserve myArray(i)
+		Call Fn_Web_UI_WebObject_Operations("Fn_Common_Business_Verify_Properties_Operations", "settoproperty", obj_AWCTeamcenterHome.WebElement("wele_Property_Name_On_Performance_Monitor"), "", "innertext", myAttributes(i))
+		sTemp1 = Fn_Web_UI_WebObject_Operations("Fn_Common_Business_Verify_Properties_Operations","getroproperty",obj_AWCTeamcenterHome.WebElement("wele_Property_Value_On_Performance_Monitor"),"","innertext","")  
+		myArray(i)=sTemp1
+		' Populate data in the new column
+		objWorksheet.Cells(i + 2, nextAvailableColumn).Value = myArray(i)
+		Next
+		'--------------------------------------------------------------------------------------------------------------------------------
+		' save the Excel file
+		'--------------------------------------------------------------------------------------------------------------------------------
+		 objWorkbook.Save
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'  close the Excel file and quit Excel
+		'--------------------------------------------------------------------------------------------------------------------------------
+		 objWorkbook.Close
+		 objExcel.Quit
+	End  Select 
+		Wait 5
+		 If Fn_FSO_UploadResource("1192", "Test Resource", sFileName, sFolderPath) = True Then
+		 	Reporter.ReportEvent micPass, "File Uploaded Sucessfully. ", "Successfully Uploaded ["&sFileName&"] to Folder Path["&sFolderPath&"]"
+		Else
+			Reporter.ReportEvent micFail, "Failed to Upload File.","Failed to verify  ["&sFileName&"] is Uploaded to Folder Path["&sFolderPath&"]"
+		End If
+		 '--------------------------------------------------------------------------------------------------------------------------------
+		'Report any unexpected runtime error
+		'--------------------------------------------------------------------------------------------------------------------------------
+		If Err.Number <> 0 Then
+			Reporter.ReportEvent micFail, "Fn_FSO_Perfomance_Monitor_Operation", "Fail To perform operation [ " & Cstr(sAction) & " ] due to error number [ " & Cstr(Err.Number) & " ] with error description [ " & Cstr(Err.Description) & " ]"
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'  close the Excel file and quit Excel
+			'--------------------------------------------------------------------------------------------------------------------------------
+			 objWorkbook.Close
+			 objExcel.Quit
+			Fn_FSO_Perfomance_Monitor_Operation = False
+		Else
+			Fn_FSO_Perfomance_Monitor_Operation = True
+		End If	
+		'--------------------------------------------------------------------------------------------------------------------------------
+		' Release the objects
+		'--------------------------------------------------------------------------------------------------------------------------------
+		Set objWorksheet = Nothing
+		Set objWorkbook = Nothing
+		Set objExcel = Nothing
+'--------------------------------------------------------------------------------------------------------------------------------		
+End  Function
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header Start 
+'Function Name				    :	Fn_FSO_Create_Excel_With_Predefined_Data
+'Function Description			    :	Function used to create New Excel with Predefined Data
+'Function Parameters		    :    
+'						    	    :    1.sFilePath : File path of excel from local drive
+'							    :    2.sSheetNm : sheet name from excel
+'							    :    3.sColumnNm : Column Heading 
+'							    :  4.sData: Array of Data
+'							    :   
+'Function Return Value	 	   : 	NA
+'Wrapper Function	    	    	   : 	 NA
+'Function Pre-requisite	           :	
+'Function Usage		     	 	   :   Call  Fn_FSO_Create_Excel_With_Predefined_Data("C:\Temp\File.xlsx" ,"Sheet1","Create","Array")
+'History			    			  :
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Developer Name				|	Date			|	Rev. No.   	|	      Reviewer		|	Changes Done	
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Pooja Bondarde			|  27-Oct-2023	    |	 1.0		|	 				 	| 		Created
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header End
+Public Function Fn_FSO_Create_Excel_With_Predefined_Data(sFilePath,sSheetNm,sColumnNm,sData)
+	Err.Clear
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Initially set function return value as False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Fn_FSO_Create_Excel_With_Predefined_Data = False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Variable Declaration
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Dim objExcel,objWorkbook,objWorksheet,i
+	'--------------------------------------------------------------------------------------------------------------------------------
+	' Create an instance of the Excel Application object
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Set objExcel = CreateObject("Excel.Application")
+		' Create a new Excel workbook
+	Set objWorkbook = objExcel.Workbooks.Add
+	
+	' Activate the first sheet
+	Set objWorksheet = objWorkbook.Sheets("sheet1")
+	objWorksheet.Name = sSheetNm
+	objWorksheet.Activate
+	
+	'--------------------------------------------------------------------------------------------------------------------------------
+	' Add the new column name to the first row
+	'--------------------------------------------------------------------------------------------------------------------------------
+	objWorksheet.Cells(1, 1).Value = sColumnNm
+	For i = 0 To UBound(sData)
+	' Populate data in the new column
+	objWorksheet.Cells(i + 2, 1).Value = sData(i)
+	Next
+	' Save the Excel file
+	objWorkbook.SaveAs sFilePath
+	objWorkbook.Close
+	objExcel.Quit
+	 '--------------------------------------------------------------------------------------------------------------------------------
+	'Report any unexpected runtime error
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If Err.Number <> 0 Then
+		Reporter.ReportEvent micFail, "Fn_FSO_Create_Excel_With_Predefined_Data", "Fail To perform operation [ " & Cstr(sAction) & " ] due to error number [ " & Cstr(Err.Number) & " ] with error description [ " & Cstr(Err.Description) & " ]"
+
+		Fn_FSO_Create_Excel_With_Predefined_Data = False
+	Else
+		Fn_FSO_Create_Excel_With_Predefined_Data = True
+	End If
+	'--------------------------------------------------------------------------------------------------------------------------------
+	' Release the objects
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Set objWorksheet = Nothing
+	Set objWorkbook = Nothing
+	Set objExcel = Nothing
+	'--------------------------------------------------------------------------------------------------------------------------------		
+End  Function
+	
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header Start 
+'Function Name				    :	Fn_FSO_DownloadResource
+'Function Description			    :	Function used to Download resource from ALM.
+'Function Parameters		    :     1.sFilePath: Path where Resource file will download.
+'						    	    :    2.sResourceName : Name of Resource in ALM
+'Function Return Value	 	   : 	File Path
+'Wrapper Function	    	    	   : 	 NA
+'Function Pre-requisite	           :	
+'Function Usage		     	 	   :    Call Fn_FSO_DownloadResource("C:\Temp" ,"Engineering Document.xlsx")
+'							   	
+'History			    			  :
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Developer Name				|	Date			|	Rev. No.   	|	      Reviewer		|	Changes Done	
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Pooja Bondarde			    |  21-Nov-2023	    |	 1.0		|	 				 	| 		Created
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header End
+Public Function Fn_FSO_DownloadResource(sFilePath,sResourceName)
+'--------------------------------------------------------------------------------------------------------------------------------
+	'Initially set function return value as False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Fn_FSO_DownloadResource = False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Variable Declaration
+	'--------------------------------------------------------------------------------------------------------------------------------
+    	Dim fso, oTDC, oResourceFactory, oRoot, oSub, iTotalItems, ItemCtr, CurItem,sTemp
+    '--------------------------------------------------------------------------------------------------------------------------------
+    ' Create a File System Object
+    '--------------------------------------------------------------------------------------------------------------------------------
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    '--------------------------------------------------------------------------------------------------------------------------------
+    ' Set up Quality Center connection
+    '--------------------------------------------------------------------------------------------------------------------------------
+    Set oTDC = QCUtil.QCConnection
+    Set oResourceFactory = oTDC.QCResourceFactory
+    Set oRoot = oResourceFactory.NewList("")
+    Set oSub = Nothing
+    
+    iTotalItems = oRoot.Count
+    '--------------------------------------------------------------------------------------------------------------------------------
+    ' Iterate through available resources to find the matching one
+    '--------------------------------------------------------------------------------------------------------------------------------
+    For ItemCtr = 1 To iTotalItems
+        CurItem = oRoot.Item(ItemCtr).Name
+        If UCase(CurItem) = UCase(sResourceName) Then
+            Set oSub = oRoot.Item(ItemCtr)
+            Exit For
+        End If
+    Next
+    '--------------------------------------------------------------------------------------------------------------------------------
+    ' If the resource exists, download it
+    '--------------------------------------------------------------------------------------------------------------------------------
+    If Not oSub Is Nothing Then
+    '--------------------------------------------------------------------------------------------------------------------------------
+        ' Check if the file already exists at the destination
+        '--------------------------------------------------------------------------------------------------------------------------------
+     	sTemp = sFilePath&"\"&sResourceName   
+        If fso.FileExists(sTemp) Then
+        '--------------------------------------------------------------------------------------------------------------------------------
+            ' Delete the existing file before downloading the new one
+            '--------------------------------------------------------------------------------------------------------------------------------
+            fso.DeleteFile sTemp
+        End If
+        '--------------------------------------------------------------------------------------------------------------------------------
+        ' Download the resource
+        '--------------------------------------------------------------------------------------------------------------------------------
+        oSub.Refresh()
+        Wait 3
+        oSub.DownloadResource sFilePath, True
+        oSub.Refresh()
+        Reporter.ReportEvent micPass, "Download [" & sResourceName & "] in File Path [" & sFilePath & "].", "Successfully downloaded [" & sResourceName & "] in File Path [" & sFilePath & "]."
+    Else
+    '--------------------------------------------------------------------------------------------------------------------------------
+        ' Report that the file is not found
+        '--------------------------------------------------------------------------------------------------------------------------------
+        Reporter.ReportEvent micFail, "Resource not found.", "The resource [" & sResourceName & "] does not exist."
+    End If
+    	 '--------------------------------------------------------------------------------------------------------------------------------
+	'Report any unexpected runtime error
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If Err.Number <> 0 Then
+		Reporter.ReportEvent micFail, "Fn_FSO_DownloadResource", "Fail To perform operation [ Download Resource ] due to error number [ " & Cstr(Err.Number) & " ] with error description [ " & Cstr(Err.Description) & " ]"
+
+		Fn_FSO_DownloadResource = False
+	Else
+		Fn_FSO_DownloadResource = True
+	End If
+    '--------------------------------------------------------------------------------------------------------------------------------
+    ' Clean up unnecessary objects
+    '--------------------------------------------------------------------------------------------------------------------------------
+    Set oRoot = Nothing
+    Set oResourceFactory = Nothing
+    Set oTDC = Nothing
+End  Function
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header Start 
+'Function Name				    :	Fn_FSO_UploadResource
+'Function Description			    :	Function used to Upload resource from ALM.
+'Function Parameters		    :     1.sFilePath: Path From where Resource file will Upload.
+'						    	    :    2.sResourceName : Name of Resource in ALM
+'Function Return Value	 	   : 	File Path
+'Wrapper Function	    	    	   : 	 NA
+'Function Pre-requisite	           :	
+'Function Usage		     	 	   :    Call Fn_FSO_UploadResource("C:\Temp" ,"Engineering Document.xlsx")
+'							   	
+'History			    			  :
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Developer Name				|	Date			|	Rev. No.   	|	      Reviewer		|	Changes Done	
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Pooja Bondarde			    |  21-Nov-2023	    |	 1.0		|	 				 	| 		Created
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header End
+
+ Public Function Fn_FSO_UploadResource(resourceFolderId, fileType, fileName, fileParentFolderPath)
+ 
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Initially set function return value as False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Fn_FSO_UploadResource = False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'--- Represents a file or folder stored in the Quality Center repository
+	'--------------------------------------------------------------------------------------------------------------------------------
+   	 Dim resource
+     '--------------------------------------------------------------------------------------------------------------------------------
+    '--- Represents a QC resource folder.
+     '--------------------------------------------------------------------------------------------------------------------------------
+   	 Dim resourceFolder
+     '--------------------------------------------------------------------------------------------------------------------------------
+    '--- Services for managing QC resources.
+     '--------------------------------------------------------------------------------------------------------------------------------
+   	 Dim resourceFactory
+     '--------------------------------------------------------------------------------------------------------------------------------
+    '--- Services for managing QC resource folders.
+     '--------------------------------------------------------------------------------------------------------------------------------
+   	 Dim resourceFolderFactory 
+     '--------------------------------------------------------------------------------------------------------------------------------
+    '--- Services to manage resource storage.
+     '-------------------------------------------------------------------------------------------------------------------------------- '--------------------------------------------------------------------------------------------------------------------------------
+    Dim testResourceStorage
+    Dim resourceItem
+    Dim resourceFound
+    Dim TDConn,currItem,ItemCount,currResourceList
+	
+    Set TDConn = QCUtil.QCConnection
+    Set resourceFolderFactory = TDConn.QCResourceFolderFactory
+    Set resourceFolder = resourceFolderFactory.Item(resourceFolderId)
+    Set resourceFactory = resourceFolder.QCResourceFactory
+    Set currResourceList = resourceFactory.NewList("")
+    
+    For ItemCount = 1 To currResourceList.Count
+        currItem = currResourceList.Item(ItemCount).Name
+        If UCase(currItem) = UCase(fileName) Then
+            Set resourceItem = currResourceList.Item(ItemCount)
+            resourceFound = True
+            Exit For
+        End If
+    Next
+
+   If Not resourceFound Then
+    '--------------------------------------------------------------------------------------------------------------------------------
+    '--- Create a resource
+     '--------------------------------------------------------------------------------------------------------------------------------
+        Set resourceItem = resourceFactory.AddItem(fileName)
+        resourceItem.ResourceType = fileType
+        resourceItem.fileName = fileName
+        resourceItem.Post
+' 	--------------------------------------------------------------------------------------------------------------------------------
+        '--- Check if the resources added successfully
+         '--------------------------------------------------------------------------------------------------------------------------------
+        Set currResourceList = resourceFactory.NewList("")
+        For ItemCount = 1 To currResourceList.Count
+            currItem = currResourceList.Item(ItemCount).Name
+            If UCase(currItem) = UCase(fileName) Then
+                resourceFound = True
+                Exit For
+            End If
+        Next
+
+        If resourceFound Then
+        	'--------------------------------------------------------------------------------------------------------------------------------
+            '--- Attach the file to resource
+              '--------------------------------------------------------------------------------------------------------------------------------
+            resourceItem.vC.CheckOut ""
+            Set testResourceStorage = resourceItem
+            testResourceStorage.UploadResource fileParentFolderPath, True
+            resourceItem.vC.CheckIn "Automated check-in by utility"
+            Wait 3
+'            resourceItem.Refresh()
+        Else
+             oFile.WriteLine ("Recently added new resource not found on ALM.Try again later.")
+             Exit Function
+        End If
+    Else
+        resourceItem.Refresh()
+        Wait 2
+        resourceItem.vC.CheckOut ""
+         resourceItem.Refresh()
+         Wait 2
+        Set testResourceStorage = resourceItem
+        testResourceStorage.Post
+         resourceItem.Refresh()
+         Wait 2
+        testResourceStorage.UploadResource fileParentFolderPath, True
+        resourceItem.vC.CheckIn "Automated check-in by utility"
+        Wait 3
+'        resourceItem.Refresh()
+    End If
+
+    Set resourceFolderFactory = Nothing
+    Set resourceFolder = Nothing
+    Set resourceFactory = Nothing
+    Set currResourceList = Nothing
+    
+'	If Not TDConn Is Nothing Then
+' 	 '--------------------------------------------------------------------------------------------------------------------------------
+'	    ' Disconnect from ALM
+'	      '--------------------------------------------------------------------------------------------------------------------------------
+'	    TDConn.Logout ' Logout from the ALM server
+'	    TDConn.ReleaseConnection ' Release the connection
+'	    Set TDConn = Nothing ' Set the object reference to Nothing to release memory
+'	End If
+    	 '--------------------------------------------------------------------------------------------------------------------------------
+	'Report any unexpected runtime error
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If Err.Number <> 0 Then
+		Reporter.ReportEvent micFail, "Fn_FSO_UploadResource", "Fail To perform operation [ Upload Resource ] due to error number [ " & Cstr(Err.Number) & " ] with error description [ " & Cstr(Err.Description) & " ]"
+
+		Fn_FSO_UploadResource = False
+	Else
+		Fn_FSO_UploadResource = True
+	End If
+   End Function
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header Start 
+'Function Name				    :	Fn_FSO_XMLOperations
+'Function Description			    :	Function used to perform XML operations 
+'Function Parameters		    :     1.sAction: Action name
+'						    	    :    2.sFileName : File name from local drive
+'							    :    3.sParameterNm : XML Node name
+'							    :    4.sParameterVal : XML Node value
+'Function Return Value	 	   : 	True or False
+'Wrapper Function	    	    	   : 	 NA
+'Function Pre-requisite	           :	
+'Function Usage		     	 :    Call Fn_FSO_XMLOperations("validatecreoaparameters","C:\Temp" ,"id","K123452")
+'								Call  Fn_FSO_XMLOperations("setnodevalue",sFileName,sParameterNm,sParameterVal)
+'History			    			  :
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Developer Name				|	Date			|	Rev. No.   	|	      Reviewer		|	Changes Done	
+'----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'	Mohini Deshmukh			    |  1-Jun-2024	    |	 1.0		|	 				 	| 		Created
+'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------@Function Header End
+Public Function Fn_FSO_XMLOperations(sAction,sFileName,sParameterNm,sParameterVal)
+	Err.Clear
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Initially set function return value as False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Fn_FSO_XMLOperations = False
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Variable Declaration
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Dim objXML,objParameterNode
+	Dim sTempParameterNm,sTempsParameterVal,sAttributValue,sData
+	Dim jCount,iCount,iNodeCount
+	Dim sNodelist, sItem,sKey
+	Dim sTempParamNm,sTempParaVal
+	Dim Processes,Process,NotepadProcess,NotepadPlusProcess
+	'--------------------------------------------------------------------------------------------------------------------------------
+	NotepadProcess="Notepad.exe"		
+	NotepadPlusProcess="notepad++.exe"
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Set Processes = GetObject("winmgmts:").InstancesOf("Win32_Process")
+	'--------------------------------------------------------------------------------------------------------------------------------
+	For Each Process In Processes
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Check the "notepad.exe" process if exist then terminate it 
+		'--------------------------------------------------------------------------------------------------------------------------------
+		If StrComp(Process.Name, NotepadProcess, vbTextCompare) = 0 Then 
+		      Process.Terminate()                                   
+		 End If
+		  '--------------------------------------------------------------------------------------------------------------------------------
+		If StrComp(Process.Name, NotepadPlusProcess, vbTextCompare) = 0 Then 
+		      Process.Terminate()                                   
+		  End If
+	Next
+	'--------------------------------------------------------------------------------------------------------------------------------
+	Set objXML = CreateObject("Microsoft.XMLDOM")
+	objXML.async = False
+	wait 5
+	objXML.Load (sFileName)
+	
+	wait 10
+	Do While objXML.readyState <> 4
+	    wait  5 ' wait 10 seconds
+	Loop
+	'--------------------------------------------------------------------------------------------------------------------------------
+	  Select Case lcase(sAction)
+	 '--------------------------------------------------------------------------------------------------------------------------------	
+		 'Validate Creo attributes value from xml
+	 	Case "validatecreoaparameters"
+	 		Set objParameterNode = objXML.SelectNodes("/CreoParamSet/Parameter") 'Selecting all Parameter nodes
+	 		
+	 		sTempParameterNm=Split(sParameterNm,"~") 'Splitting Parameters
+	 		sTempsParameterVal=Split(sParameterVal,"~") 'Splitting Parameters values
+	 		'--------------------------------------------------------------------------------------------------------------------------------	
+	 		For jCount = 0 To ubound(sTempParameterNm)
+		 		'--------------------------------------------------------------------------------------------------------------------------------	
+		 		For iCount = 0 To objParameterNode.Length - 1
+				     sAttributValue = objParameterNode(iCount).getAttribute("Name") 'Reading values for Name attribute
+				       '--------------------------------------------------------------------------------------------------------------------------------	
+				       If sAttributValue=sTempParameterNm(jCount) Then
+				   		sData= objParameterNode(iCount).ChildNodes(1).Text
+						'--------------------------------------------------------------------------------------------------------------------------------	
+						If sData=sTempsParameterVal(jCount)Then
+							Reporter.ReportEvent micPass, "Validate "& sTempParameterNm(jCount) &" attribute value", "Successfully validated "& sTempParameterNm(jCount) &" attribute value as   "& sTempParameterNm(jCount) &"=" & sData
+							Fn_FSO_XMLOperations=True
+						Else
+							Reporter.ReportEvent micFail, "Validate "& sTempParameterNm(jCount) &" attribute value", "Fail to validate "& sTempParameterNm(jCount) &" attribute value as "& sTempParameterNm(jCount) &"=" & sData
+							ExitComponent	
+						End If	
+						'--------------------------------------------------------------------------------------------------------------------------------							
+				       End  If
+				       '--------------------------------------------------------------------------------------------------------------------------------	
+				Next
+				'--------------------------------------------------------------------------------------------------------------------------------	
+			Next
+			Fn_FSO_XMLOperations = True
+		'--------------------------------------------------------------------------------------------------------------------------------
+		'Set Node Value in xml
+		Case "setnodevalue"
+			
+				'If parameters are more than one
+				sTempParamNm=split(sParameterNm,"~")
+				sTempParaVal=split(sParameterVal,"~")
+				'--------------------------------------------------------------------------------------------------------------------------------
+				Set sNodelist=objXML.GetElementsByTagName("Item")
+				 '--------------------------------------------------------------------------------------------------------------------------------	
+				For jCount = 0 To ubound(sTempParamNm)			
+					 '--------------------------------------------------------------------------------------------------------------------------------	
+					For Each sItem In sNodelist
+					    sKey = sItem.getElementsByTagName("Key")(0).Text
+					    If sKey= sTempParamNm(jCount) Then
+							sItem.getElementsByTagName("Val")(0).Text = sTempParaVal(jCount)
+							  Reporter.ReportEvent micPass, "Set matching Key. Value", "Successfully Set matching Key Value: " & sTempParaVal(jCount)
+							Exit For
+						End If
+					Next	
+					 '--------------------------------------------------------------------------------------------------------------------------------	
+				Next
+				objXML.Save sFileName
+				Fn_FSO_XMLOperations = True
+			'--------------------------------------------------------------------------------------------------------------------------------
+			'Get Node Value from xml
+			Case "getnodevalue"
+			
+				'If parameters are more than one
+				sTempParamNm=split(sParameterNm,"~")
+				'--------------------------------------------------------------------------------------------------------------------------------
+				Set sNodelist=objXML.GetElementsByTagName("Item")
+				Wait 5
+				 '--------------------------------------------------------------------------------------------------------------------------------	
+				For jCount = 0 To ubound(sTempParamNm)			
+					 '--------------------------------------------------------------------------------------------------------------------------------	
+					For Each sItem In sNodelist
+					    sKey = sItem.getElementsByTagName("Key")(0).Text
+					     '--------------------------------------------------------------------------------------------------------------------------------	
+					    If sKey= sTempParamNm(jCount) Then
+							'--------------------------------------------------------------------------------------------------------------------------------	
+							If trim(sItem.getElementsByTagName("Key")(0).Text)="" Then
+								Reporter.ReportEvent micFail, "Fail to Find matching Key Value", "Fail To  Find matching Key Value as Key Value is : " & sItem.getElementsByTagName("Val")(0).Text
+								Fn_FSO_XMLOperations = False
+							Else	
+								sTempParaVal=sTempParaVal &"~" & sItem.getElementsByTagName("Val")(0).Text 
+								 Reporter.ReportEvent micPass, "Found matching Key Value", "Successfully Found matching Key Value: " & sItem.getElementsByTagName("Val")(0).Text
+								Exit For
+							 End If
+							'--------------------------------------------------------------------------------------------------------------------------------	
+						End If
+						 '--------------------------------------------------------------------------------------------------------------------------------	
+					Next	
+					 '--------------------------------------------------------------------------------------------------------------------------------	
+				Next
+				 '--------------------------------------------------------------------------------------------------------------------------------	
+				If Left(sTempParaVal, 1) = "~" Then
+   				 	sTempParaVal = Mid(sTempParaVal, 2)
+   				End  If 
+				Fn_FSO_XMLOperations = sTempParaVal
+	'--------------------------------------------------------------------------------------------------------------------------------		
+	 End Select  
+	 '--------------------------------------------------------------------------------------------------------------------------------
+	'Report any unexpected runtime error
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If Err.Number <> 0 Then
+		Reporter.ReportEvent micFail, "Fn_FSO_XMLOperations", "Fail To perform operation [ " & Cstr(sAction) & " ] due to error number [ " & Cstr(Err.Number) & " ] with error description [ " & Cstr(Err.Description) & " ]"
+		Fn_FSO_XMLOperations = False
+	End If	
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Release objects
+	'--------------------------------------------------------------------------------------------------------------------------------	
+	Set objParameterNode = Nothing
+	Set objXML=Nothing
+End  Function	
+'--------------------------------------------------------------------------------------------------------------------------------

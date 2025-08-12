@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Favorites objectID="0">
+  <Elements isCollection="True">
+    <Favorite objectID="1">
+      <Name>Last Session</Name>
+      <Collection objectID="2">
+        <Elements isCollection="True">
+          <RunLocation objectID="3" type="HP.MirrorTesting.BL.Data.Favorites.Favorite+RunLocation, HP.Sprinter.BL.Data">
+            <RunID objectID="4">
+              <ID>-10</ID>
+              <TestInstanceID>34685</TestInstanceID>
+            </RunID>
+            <TestName>Reports AND Exports</TestName>
+            <TestSourceType>QcTest</TestSourceType>
+            <Path>Root\CVS PLM Release 12.2, - "TC Data Model Optimization"\2nd Internal Test -  "TC Data Model Optimization"\Other</Path>
+            <TestSetID type="System.Int32, mscorlib">7663</TestSetID>
+            <TestInstanceID type="System.Int32, mscorlib">34685</TestInstanceID>
+          </RunLocation>
+          <RunLocation objectID="5" type="HP.MirrorTesting.BL.Data.Favorites.Favorite+RunLocation, HP.Sprinter.BL.Data">
+            <RunID objectID="6">
+              <ID>-11</ID>
+              <TestInstanceID>34686</TestInstanceID>
+            </RunID>
+            <TestName>SIR process</TestName>
+            <TestSourceType>QcTest</TestSourceType>
+            <Path>Root\CVS PLM Release 12.2, - "TC Data Model Optimization"\2nd Internal Test -  "TC Data Model Optimization"\Other</Path>
+            <TestSetID type="System.Int32, mscorlib">7663</TestSetID>
+            <TestInstanceID type="System.Int32, mscorlib">34686</TestInstanceID>
+          </RunLocation>
+        </Elements>
+      </Collection>
+      <QcConnectionSettings objectID="7">
+        <Credentials objectID="8" type="HP.MirrorTesting.BL.Data.TestDefinitionData.RunDefinition.Host.CredentialsDefinition, HP.Sprinter.BL.Data">
+          <EncryptedPassword></EncryptedPassword>
+          <Username>kb_bejjanki</Username>
+          <FullUsername isNull="True" />
+          <UserDomain isNull="True" />
+        </Credentials>
+        <Domain>DEFAULT_KNORR_BREMSE</Domain>
+        <Project>KB_Functional_Testing_Design</Project>
+        <ServerAddress>https://almknorrbremse1501.saas.microfocus.com/qcbin/</ServerAddress>
+        <AttemptingToConnect>False</AttemptingToConnect>
+        <EnableSSO>False</EnableSSO>
+        <ServerHistory objectID="9">
+          <Elements isCollection="True">
+            <String>https://almknorrbremse1501.saas.microfocus.com/qcbin</String>
+          </Elements>
+        </ServerHistory>
+      </QcConnectionSettings>
+      <TestSourceType>QcTest</TestSourceType>
+      <IsRunSpecific>True</IsRunSpecific>
+    </Favorite>
+  </Elements>
+</Favorites>

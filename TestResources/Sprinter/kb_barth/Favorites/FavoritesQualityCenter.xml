@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Favorites objectID="0">
+  <Elements isCollection="True">
+    <Favorite objectID="1">
+      <Name>Last Session</Name>
+      <Collection objectID="2">
+        <Elements isCollection="True">
+          <RunLocation objectID="3" type="HP.MirrorTesting.BL.Data.Favorites.Favorite+RunLocation, HP.Sprinter.BL.Data">
+            <RunID objectID="4">
+              <ID>-10</ID>
+              <TestInstanceID>17829</TestInstanceID>
+            </RunID>
+            <TestName>Query</TestName>
+            <TestSourceType>QcTest</TestSourceType>
+            <Path>Root\STEPS-4 Part-BoM Mgm to TCUA\STEPS-4 Full Function Test CW 14 - 15 - 30.03. - 10.04.2020\Part Management- EN</Path>
+            <TestSetID type="System.Int32, mscorlib">3874</TestSetID>
+            <TestInstanceID type="System.Int32, mscorlib">17829</TestInstanceID>
+          </RunLocation>
+        </Elements>
+      </Collection>
+      <QcConnectionSettings objectID="5">
+        <Credentials objectID="6" type="HP.MirrorTesting.BL.Data.TestDefinitionData.RunDefinition.Host.CredentialsDefinition, HP.Sprinter.BL.Data">
+          <EncryptedPassword></EncryptedPassword>
+          <Username>kb_barth</Username>
+          <FullUsername isNull="True" />
+          <UserDomain isNull="True" />
+        </Credentials>
+        <Domain>DEFAULT_KNORR_BREMSE</Domain>
+        <Project>KB_Functional_Testing_Design</Project>
+        <ServerAddress>https://almknorrbremse126.saas.microfocus.com/qcbin/</ServerAddress>
+        <AttemptingToConnect>False</AttemptingToConnect>
+        <EnableSSO>False</EnableSSO>
+        <ServerHistory objectID="7">
+          <Elements isCollection="True">
+            <String>https://almknorrbremse126.saas.microfocus.com/qcbin</String>
+          </Elements>
+        </ServerHistory>
+      </QcConnectionSettings>
+      <TestSourceType>QcTest</TestSourceType>
+      <IsRunSpecific>True</IsRunSpecific>
+    </Favorite>
+  </Elements>
+</Favorites>

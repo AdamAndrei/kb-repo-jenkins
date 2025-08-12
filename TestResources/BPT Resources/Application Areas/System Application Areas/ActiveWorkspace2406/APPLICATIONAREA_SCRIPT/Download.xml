@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Owners>
+  <OwnerId>2372</OwnerId>
+  <OwnerType>RESOURCES</OwnerType>
+  <Name><![CDATA[ActiveWorkspace2406]]></Name>
+  <FSRoot><![CDATA[resources\2372]]></FSRoot>
+  <FSPath><![CDATA[resources\2372\APPLICATIONAREA_SCRIPT]]></FSPath>
+  <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\ActiveWorkspace2406]]></QCPath>
+  <FileName>APPLICATIONAREA_SCRIPT</FileName>
+  <SubType>Application Area</SubType>
+  <Owner>
+    <OwnerId>9737</OwnerId>
+    <OwnerType>USER_ASSETS</OwnerType>
+    <Name><![CDATA[Action1]]></Name>
+    <FSRoot><![CDATA[resources\2372]]></FSRoot>
+    <FSPath><![CDATA[resources\2372\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\ActiveWorkspace2406]]></QCPath>
+    <Relation>
+      <RelatedId>9736</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\2372]]></FSRoot>
+      <FSPath><![CDATA[resources\2372\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\ActiveWorkspace2406]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>72</Order>
+    </Relation>
+  </Owner>
+  <Owner>
+    <OwnerId>2372</OwnerId>
+    <OwnerType>RESOURCES</OwnerType>
+    <Name><![CDATA[ActiveWorkspace2406]]></Name>
+    <FSRoot><![CDATA[resources\2372]]></FSRoot>
+    <FSPath><![CDATA[resources\2372\APPLICATIONAREA_SCRIPT]]></FSPath>
+    <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\ActiveWorkspace2406]]></QCPath>
+    <FileName>APPLICATIONAREA_SCRIPT</FileName>
+    <SubType>Application Area</SubType>
+    <Relation>
+      <RelatedId>2499</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_AWC_Global_Variable.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2499]]></FSRoot>
+      <FSPath><![CDATA[resources\2499]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_AWC_Global_Variable.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>73</Order>
+      <FileName>AWC_Global_Variable.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>9737</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Action1]]></Name>
+      <FSRoot><![CDATA[resources\2372]]></FSRoot>
+      <FSPath><![CDATA[resources\2372\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\ActiveWorkspace2406]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2519</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_AWC_Attachment_Operations.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2519]]></FSRoot>
+      <FSPath><![CDATA[resources\2519]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_AWC_Attachment_Operations.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>84</Order>
+      <FileName>Fn_AWC_Attachment_Operations.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2493</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_AWC_Object_Creation_Revise_Operation.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2493]]></FSRoot>
+      <FSPath><![CDATA[resources\2493]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_AWC_Object_Creation_Revise_Operation.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>74</Order>
+      <FileName>AWC_CommonBusinessFunctions.qfl</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2492</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[ActiveWorkspace2406_OR]]></Name>
+      <FSRoot><![CDATA[resources\2492]]></FSRoot>
+      <FSPath><![CDATA[resources\2492]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Object Repositories\ActiveWorkspace2406_OR]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>85</Order>
+      <FileName>AWC_OR_ChromiumEdge.tsr</FileName>
+      <SubType>Shared object repository</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2514</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_AWC_Common_Business_Operations.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2514]]></FSRoot>
+      <FSPath><![CDATA[resources\2514]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_AWC_Common_Business_Operations.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>81</Order>
+      <FileName>Fn_AWC_Common_Business_Operations.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2513</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_AWC_Search_Operations.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2513]]></FSRoot>
+      <FSPath><![CDATA[resources\2513]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_AWC_Search_Operations.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>80</Order>
+      <FileName>Fn_AWC_Search_Operations.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2516</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_AWC_Object_Edit_Operations.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2516]]></FSRoot>
+      <FSPath><![CDATA[resources\2516]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_AWC_Object_Edit_Operations.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>75</Order>
+      <FileName>Fn_AWC_Object_Edit_Operations.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2518</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_AWC_Workflow_Operations.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2518]]></FSRoot>
+      <FSPath><![CDATA[resources\2518]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_AWC_Workflow_Operations.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>83</Order>
+      <FileName>Fn_AWC_Workflow_Operations.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2517</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_AWC_Object_Navigation_Operations.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2517]]></FSRoot>
+      <FSPath><![CDATA[resources\2517]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_AWC_Object_Navigation_Operations.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>82</Order>
+      <FileName>Fn_AWC_Object_Navigation_Operations.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>9735</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[Main Test Flow]]></Name>
+      <FSRoot><![CDATA[resources\2372]]></FSRoot>
+      <FSPath><![CDATA[resources\2372\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\ActiveWorkspace2406]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>9736</RelatedId>
+      <RelatedType>USER_ASSETS</RelatedType>
+      <Name><![CDATA[TEST_Data]]></Name>
+      <FSRoot><![CDATA[resources\2372]]></FSRoot>
+      <FSPath><![CDATA[resources\2372\APPLICATIONAREA_SCRIPT]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Application Areas\System Application Areas\ActiveWorkspace2406]]></QCPath>
+    </Relation>
+    <Relation>
+      <RelatedId>2506</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_Resources.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2506]]></FSRoot>
+      <FSPath><![CDATA[resources\2506]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_Resources.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>78</Order>
+      <FileName>kb_resources.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2505</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_Common_Util.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2505]]></FSRoot>
+      <FSPath><![CDATA[resources\2505]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_Common_Util.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>77</Order>
+      <FileName>Common_Util.vbs</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2508</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_Web_UI.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2508]]></FSRoot>
+      <FSPath><![CDATA[resources\2508]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_Web_UI.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>79</Order>
+      <FileName>Web.txt</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+    <Relation>
+      <RelatedId>2507</RelatedId>
+      <RelatedType>RESOURCES</RelatedType>
+      <Name><![CDATA[Fn_Common_FSO.vbs]]></Name>
+      <FSRoot><![CDATA[resources\2507]]></FSRoot>
+      <FSPath><![CDATA[resources\2507]]></FSPath>
+      <QCPath><![CDATA[Resources\BPT Resources\Libraries\Fn_Common_FSO.vbs]]></QCPath>
+      <Condition>NONE</Condition>
+      <Order>76</Order>
+      <FileName>Common_FSO.qfl</FileName>
+      <SubType>Function library</SubType>
+    </Relation>
+  </Owner>
+</Owners>
