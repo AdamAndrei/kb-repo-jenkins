@@ -1,0 +1,1 @@
+﻿var __testDataSource={items:[{dataFilePath:'Default.xlsx',dataFileFormat:'excel',dataFileFolder:'C:\\MBT-REPOS\\kb-repo-jenkins\\ComponentsById\\4422\\Res24',namePairs:[]}]};

@@ -25,6 +25,12 @@ Dim iCount,iCounter
 Dim sVersion,sGroup,sRole,sTempValue,Process,targetUrl,sPassword,sUserName,sHeaderText,sTemp,sTempUserNm
 Dim myProcess1,myProcess
 
+Dim repos
+'Set repos = ObjectRepositories
+' Add a shared object repository by its full path
+'RepositoriesCollection.Add "..\..\..\Resources\BPT Resources\Object Repositories\AWC_OR_ChromiumEdge.tsr"
+
+
 Reporter.ReportEvent micPass, "Test dir", Environment("TestDir")
 
 Dim repoCount, i
