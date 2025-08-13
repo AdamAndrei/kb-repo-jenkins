@@ -295,5 +295,31 @@ If  lCase(Parameter("str_Instance"))="project"or lCase(Parameter("str_Instance")
 		ExitComponent
 	End  If	
 End If
+
+Call Fn_AWC_ReadyStatusSync(2)	
+     
+'''--------------------------------------------------------------------------------------------------------------------------------
+'''Verify the header
+'''--------------------------------------------------------------------------------------------------------------------------------
+''''''For Production Execution
+''''If Parameter("str_Location") = "CVS PLM (PRE-PROD)" Then
+''''	Parameter("str_Location") = "CVS PLM (PRODUCTION)"
+''''End If
+''
+''''For INT1 Execution
+''''If Parameter("str_Location") = "CVS PLM (PRE-PROD)" Then
+''''	Parameter("str_Location") = "CVS PLM (INT1)"
+''''End If
+''
+'''objWshShell.SendKeys "{ENTER}"
+'''Browser("Browser").Refresh
+'''Call Fn_AWC_ReadyStatusSync(13)
+
+Wait 2
+objWshShell.SendKeys "{TAB}"
+Wait 2
+objWshShell.SendKeys "{TAB}"
+
+
 Set objWshShell=Nothing
 Set obj_AWCTeamcenterHome = Nothing
