@@ -17,6 +17,26 @@
 
 '******************************************************************************************************************************
 Option Explicit
+
+Dim testPath, resourcesParentFolder
+Dim resourceName, repoFullPath
+resourceName = "AWC_OR_ChromiumEdge.tsr"
+testPath =Environment("TestDir")
+
+resourcesParentFolder = FindParentFolderWithResources(testPath)
+If resourcesParentFolder = "" Then
+	Reporter.ReportEvent micFail, "Error searching Test Resource: " & filename, "Couldn't find the folder containing TestResources."
+End If
+resourcesParentFolder = resourcesParentFolder & "\TestResources"
+repoFullPath = FindResourceFullPath(resourcesParentFolder, resourceName)
+
+Dim repos
+Set repos = RepositoriesCollection
+repos.removeAll
+
+repos.Add repoFullPath
+
+
 '-------------------------------------------------------------------------------------------------------------------------------
 'Variable Declaration
 '-------------------------------------------------------------------------------------------------------------------------------
@@ -24,11 +44,6 @@ Dim objEdgeBrowser,objBrowsers,objApp,obj_AWCTeamcenterHome,Processes,objBrowser
 Dim iCount,iCounter
 Dim sVersion,sGroup,sRole,sTempValue,Process,targetUrl,sPassword,sUserName,sHeaderText,sTemp,sTempUserNm
 Dim myProcess1,myProcess
-
-Dim repos
-'Set repos = ObjectRepositories
-' Add a shared object repository by its full path
-'RepositoriesCollection.Add "..\..\..\Resources\BPT Resources\Object Repositories\AWC_OR_ChromiumEdge.tsr"
 
 
 Reporter.ReportEvent micPass, "Test dir", Environment("TestDir")
