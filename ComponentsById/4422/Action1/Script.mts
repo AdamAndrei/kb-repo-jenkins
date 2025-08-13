@@ -319,6 +319,36 @@ Wait 2
 objWshShell.SendKeys "{TAB}"
 Wait 2
 objWshShell.SendKeys "{TAB}"
+''
+If WaitUntilExist(obj_AWCTeamcenterHome, 2, 8)Then
+'	Browser("Browser").Refresh
+'	Call Fn_AWC_ReadyStatusSync(1)	
+'	Parameter("str_Location") =Browser("Browser").GetROProperty("title")
+'	sTemp =Split(Parameter("str_Location"),"-")
+	Reporter.ReportEvent micPass, "Passed the WaitUntilExist", "Let us see"
+	For iCounter = 0 To 10
+		If WaitUntilExist(obj_AWCTeamcenterHome.WebElement("wele_HomePageHeader"), 5,5) Then
+			sHeaderText=obj_AWCTeamcenterHome.WebElement("wele_HomePageHeader").GetROProperty("outertext")
+			Exit For
+		Else
+			Browser("Browser").Refresh
+			Call Fn_AWC_ReadyStatusSync(1)	
+		End  If
+	Next
+	
+'	If Instr(trim(sHeaderText),trim(sTemp(0)))>0 Then
+	If Instr(trim(sHeaderText),trim(Parameter("str_Location") ))>0 Then
+		Reporter.ReportEvent micPass, "Verify the Header on Home page", "Successfully verified the Header [ "& trim(Parameter("str_Location") ) & " ] on the Home Page"
+		Reporter.ReportEvent micPass, "SignIn to the Active  Workspace", "Successfully SignIn to the Active  Workspace "
+	Else
+		Reporter.ReportEvent micFail, "Verify the Header on Home page", "Fail to verify the Header [ "& trim(Parameter("str_Location") ) & " ] on the Home Page"
+		Reporter.ReportEvent micFail, "SignIn to the Active  Workspace", "Fail to SignIn to the Active  Workspace"
+		ExitComponent
+	End If
+Else
+	Reporter.ReportEvent micFail, "SignIn to the Active  Workspace", "Fail to SignIn to the Active  Workspace"
+	ExitComponent
+End  If
 
 
 Set objWshShell=Nothing
