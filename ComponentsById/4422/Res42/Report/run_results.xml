@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<Results version="1.0">
+<ReportNode type="testrun">
+<ReportNode type="Step">
+<Data>
+    <Name>Add-in(s) not activated</Name>
+    <Description>The following add-in(s) were associated with your test, but are not currently loaded: 
+PDFPackage.</Description>
+    <StartTime>2025-08-13 12:52:46</StartTime>
+    <Result>Warning</Result>
+    <Extension>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<ReportNode type="Action">
+<ReportNode type="User">
+<Data>
+    <Name>Found file</Name>
+    <Description>C:\MBT-REPOS\kb-repo-jenkins\TestResources\BPT Resources\Object Repositories\ActiveWorkspace2406_OR\AWC_OR_ChromiumEdge.tsr</Description>
+    <StartTime>2025-08-13 12:52:50</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>b13104cafff24294939e1f7c5c5179c8</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <IsPlainTextStepInfo>True</IsPlainTextStepInfo>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="User">
+<Data>
+    <Name>Test dir</Name>
+    <Description>C:\MBT-REPOS\kb-repo-jenkins\ComponentsById\4422</Description>
+    <StartTime>2025-08-13 12:52:50</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>b13104cafff24294939e1f7c5c5179c8</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <IsPlainTextStepInfo>True</IsPlainTextStepInfo>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="User">
+<Data>
+    <Name>FOUND OBJECT REPOSITORY:</Name>
+    <Description>Repository 1: C:\MBT-REPOS\kb-repo-jenkins\TestResources\BPT Resources\Object Repositories\ActiveWorkspace2406_OR\AWC_OR_ChromiumEdge.tsr</Description>
+    <StartTime>2025-08-13 12:52:50</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>b13104cafff24294939e1f7c5c5179c8</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <IsPlainTextStepInfo>True</IsPlainTextStepInfo>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="User">
+<Data>
+    <Name>Found file</Name>
+    <Description>C:\MBT-REPOS\kb-repo-jenkins\TestResources\BPT Resources\XML Data\ActiveWorkspace_OR.xml\ActiveWorkspace_OR.xml</Description>
+    <StartTime>2025-08-13 12:52:53</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>b13104cafff24294939e1f7c5c5179c8</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <IsPlainTextStepInfo>True</IsPlainTextStepInfo>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>[ MBT39200 PRE - Revise a Test Request - Core Software Delivery Platform ].Exist</Name>
+    <Description>"Object exists"</Description>
+    <StartTime>2025-08-13 12:53:26</StartTime>
+    <Result>Done</Result>
+    <Extension>
+      <TestObject>
+        <Repository>C:\MBT-REPOS\kb-repo-jenkins\TestResources\BPT Resources\Object Repositories\ActiveWorkspace2406_OR\AWC_OR_ChromiumEdge.tsr</Repository>
+        <Path>
+          <Object>
+            <Type>Browser</Type>
+            <Name><![CDATA[[ MBT39200 PRE - Revise a Test Request - Core Software Delivery Platform ]]]></Name>
+          </Object>
+        </Path>
+        <Operation>Exist</Operation>
+        <OperationData><![CDATA["Object exists"]]></OperationData>
+      </TestObject>
+      <IconKey>0dbad349595c477285753d3f218357b1</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<ReportNode type="User">
+<Data>
+    <Name>Close the all instances of Edge Chromium Browser</Name>
+    <Description>Fail to Close the all instances of Edge Chromium Browser</Description>
+    <StartTime>2025-08-13 12:53:26</StartTime>
+    <Result>Failed</Result>
+    <Extension>
+      <IconKey>b13104cafff24294939e1f7c5c5179c8</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <IsPlainTextStepInfo>True</IsPlainTextStepInfo>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>Stop action replay</Name>
+    <Description>Run stopped by user.</Description>
+    <StartTime>2025-08-13 12:53:26</StartTime>
+    <Result>Information</Result>
+    <Extension>
+      <IconKey>33f24c7695ea4ea6804cf85d59e0eca4</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<Data>
+    <Name>0. Start Active Workspace 2406</Name>
+    <Description />
+    <StartTime>2025-08-13 12:52:47</StartTime>
+    <Duration>39</Duration>
+    <Result>Failed</Result>
+    <InputParameters>
+      <Parameter name="str_Instance" value="PRE" type="System.String" />
+      <Parameter name="str_UserName" value="#T_RD10" type="System.String" />
+      <Parameter name="str_password" value="" type="System.String" />
+      <Parameter name="str_Location" value="INTEGRATION" type="System.String" />
+    </InputParameters>
+    <OutputParameters>
+      <Parameter name="str_UserName_Out" value="" type="" />
+    </OutputParameters>
+    <Extension>
+      <IconKey>11e4495e4af1419eb6d3403b0d0064c4</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<Data>
+    <Name>4422</Name>
+    <ToolName>OpenText Functional Testing</ToolName>
+    <ToolVersion>25.2</ToolVersion>
+    <ToolVersionStringLiteral>25.2</ToolVersionStringLiteral>
+    <Description />
+    <StartTime>2025-08-13 12:52:45</StartTime>
+    <Duration>41</Duration>
+    <Result>Failed</Result>
+    <InputParameters>
+      <Parameter name="str_Instance" value="INT2-NONSSO" type="System.String" />
+      <Parameter name="str_UserName" value="#T_RD10" type="System.String" />
+      <Parameter name="str_password" value="" type="System.String" />
+      <Parameter name="str_Location" value="INTEGRATION" type="System.String" />
+    </InputParameters>
+    <OutputParameters>
+      <Parameter name="str_UserName_Out" value="" type="" />
+    </OutputParameters>
+    <Extension>
+      <IconKey>b61e0b3081a844fba4ea4ab114a2cb79</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <Environment>
+      <Timezone>+03:00:00</Timezone>
+      <Locale>English (United States)</Locale>
+      <User>OPENTEXT\aadam2</User>
+      <CpuInfo>Intel(R) Core(TM) Ultra 7 165H</CpuInfo>
+      <NumberOfCores>22</NumberOfCores>
+      <TotalMemory>64981</TotalMemory>
+      <HostName>\OTX-2VMBG54</HostName>
+      <OSInfo>Windows 11 24H2 (x64)</OSInfo>
+    </Environment>
+    <TestedApplications />
+    <Links>
+      <Link type="DataTable" reference="Default.xlsx" displayname="Default Data Table" />
+    </Links>
+  </Data>
+</ReportNode>
+<GeneralInfo>
+    <ResultName>Res42</ResultName>
+    <RunStartTime>2025-08-13 12:52:45</RunStartTime>
+    <Timezone>+03:00:00</Timezone>
+    <OrchestrationToolName>OpenText Functional Testing</OrchestrationToolName>
+    <OrchestrationToolVersion>25.2</OrchestrationToolVersion>
+    <OrchestrationToolVersionStringLiteral>25.2</OrchestrationToolVersionStringLiteral>
+  </GeneralInfo>
+</Results>

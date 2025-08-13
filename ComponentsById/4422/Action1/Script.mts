@@ -18,6 +18,17 @@
 '******************************************************************************************************************************
 Option Explicit
 
+
+Dim paramNameList, ii, paramName
+
+paramNameList = Array("str_Instance", "str_UserName", "str_password", "str_Location")
+
+For ii = 0 To UBound(paramNameList)
+	paramName = paramNameList(ii)
+	Reporter.ReportEvent micPass, "Found paramater", "Parameter: " & paramName & " = " & Parameter(paramName)
+Next
+
+
 Dim testPath, resourcesParentFolder
 Dim resourceName, repoFullPath
 resourceName = "AWC_OR_ChromiumEdge.tsr"
@@ -222,6 +233,67 @@ objWshShell.SendKeys "{TAB}"
 'AIUtil.Context.SetBrowserScope(BrowserWindow)
 'AIUtil.FindTextBlock("https:/,").Hover
 
-
+'Non SSO is not valid any more 11 - oct -2023
+If  lCase(Parameter("str_Instance"))="project"or lCase(Parameter("str_Instance"))="int2-nonsso" or lCase(Parameter("str_Instance"))="int2"  or  lCase(Parameter("str_Instance"))="cloud"  or  lCase(Parameter("str_Instance"))="int2406" Then
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Enter User Name
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If Parameter("str_UserName")<>"" Then
+		sUserName=Parameter("str_UserName")
+	'	sUserName=GetResource("ActiveWorkspace_UserDetails.xml").GetValue(Parameter("str_UserName"))
+		If sUserName="" Then
+			Reporter.ReportEvent micFail, "Enter the Correct UserName", "Fail to Sign In to the Active Workspace as [ UserName is wrong ]"
+			ExitComponent
+		Else
+		
+			If WaitUntilExist(obj_AWCTeamcenterHome.WebEdit("wedit_UserName"), 2, 5)=False Then
+			     objWshShell.SendKeys "{ENTER}"
+			      Browser("Browser").Sync
+			End  IF
+			'Enter Username
+			If Fn_Web_UI_WebEdit_Operations("Start Active Workspace","Set",obj_AWCTeamcenterHome, "wedit_UserName", sUserName ) Then
+				Reporter.ReportEvent micPass, "Enter the [ Username ] in username edit field", "Successfully entered the [ "& sUserName &" ] in username edit field"
+			Else
+				Reporter.ReportEvent micFail, "Enter the [ Username ] in username edit field", "Fail to enter the [ Username ] in username edit field"
+				ExitComponent
+			End  If
+			 Browser("Browser").Sync
+		End  IF	
+	Else
+		Reporter.ReportEvent micFail, "Fail to Sign In to the Active Workspace", "Fail to Sign In to the Active Workspace as [ Username is Empty ]"
+		ExitComponent
+	End If
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Enter Password
+	'--------------------------------------------------------------------------------------------------------------------------------
+	If Parameter("str_UserName")<>"" Then
+		sPassword=SearchAndLoadResourceByName("ActiveWorkspace2406_UserDetails.xml").GetValue(Parameter("str_UserName"))
+		If sPassword="" Then
+			Reporter.ReportEvent micFail, "Enter the Correct Password", "Fail to Sign In to the Active Workspace as [ Password is wrong ]"
+			ExitComponent
+		Else
+			'Enter Password
+			If Fn_Web_UI_WebEdit_Operations("Start Active Workspace","SetSecure",obj_AWCTeamcenterHome, "wedit_Password", sPassword ) Then
+				Reporter.ReportEvent micPass, "Enter the [ Password ] in password edit field", "Successfully entered the [ " & sPassword & " ] in password edit field"
+			Else
+				Reporter.ReportEvent micFail, "Enter the [ Password ] in password edit field", "Fail to enter the [ Password ] in password edit field"
+				ExitComponent
+			End  If
+			 Browser("Browser").Sync
+		End  IF	
+	Else
+		Reporter.ReportEvent micFail, "Fail to Sign In to the Active Workspace", "Fail to Sign In to the Active Workspace as [ Password is Empty ]"
+		ExitComponent
+	End If
+	'--------------------------------------------------------------------------------------------------------------------------------
+	'Click on Login  button
+	'--------------------------------------------------------------------------------------------------------------------------------	
+	IF Fn_WEB_UI_WebButton_Operations("Start Active Workspace", "click", obj_AWCTeamcenterHome, "wbtn_Login","","","") Then
+		Reporter.ReportEvent micPass, "Click on Log In button", "Successfully Clicked on Log In button"
+	Else
+		Reporter.ReportEvent micFail, "Click on Log In button", "Fail to Click on Log In button"
+		ExitComponent
+	End  If	
+End If
 Set objWshShell=Nothing
 Set obj_AWCTeamcenterHome = Nothing

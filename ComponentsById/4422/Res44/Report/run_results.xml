@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<Results version="1.0">
+<ReportNode type="testrun">
+<ReportNode type="Step">
+<Data>
+    <Name>Add-in(s) not activated</Name>
+    <Description>The following add-in(s) were associated with your test, but are not currently loaded: 
+PDFPackage.</Description>
+    <StartTime>2025-08-13 13:06:54</StartTime>
+    <Result>Warning</Result>
+    <Extension>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<ReportNode type="Action">
+<ReportNode type="Step">
+<Data>
+    <Name>Variable is undefined: 'Test'</Name>
+    <ErrorText>Variable is undefined: 'Test'</ErrorText>
+    <Description>&lt;BR/&gt;Line (24): &amp;quot;For Each paramName In Test.Parameters&amp;quot;.</Description>
+    <StartTime>2025-08-13 13:06:55</StartTime>
+    <Result>Failed</Result>
+    <Extension>
+      <StackTrace>
+        <StackFrame>
+          <ModuleName><![CDATA[0. Start Active Workspace 2406]]></ModuleName>
+          <FileName><![CDATA[0. Start Active Workspace 2406]]></FileName>
+          <Language><![CDATA[VBScript - script block]]></Language>
+          <FunctionName><![CDATA[VBScript global code]]></FunctionName>
+          <Scripts><![CDATA[For Each paramName In Test.Parameters]]></Scripts>
+          <LineNo><![CDATA[24]]></LineNo>
+        </StackFrame>
+      </StackTrace>
+      <IconKey>a52ffa413c2a4e389e243bd7644a04e5</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <MergeIsErrorIcon>True</MergeIsErrorIcon>
+    </Extension>
+    <Snapshot reference="Resources\Snapshots\10d11084-923a-4108-8270-ce81a876e3fb.jpeg" />
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>Variable is undefined: 'Test'</Name>
+    <ErrorText>Variable is undefined: 'Test'</ErrorText>
+    <Description>&lt;BR/&gt;Line (25): &amp;quot;Set param = Test.Parameters.Item(paramName)&amp;quot;.</Description>
+    <StartTime>2025-08-13 13:06:55</StartTime>
+    <Result>Failed</Result>
+    <Extension>
+      <StackTrace>
+        <StackFrame>
+          <ModuleName><![CDATA[0. Start Active Workspace 2406]]></ModuleName>
+          <FileName><![CDATA[0. Start Active Workspace 2406]]></FileName>
+          <Language><![CDATA[VBScript - script block]]></Language>
+          <FunctionName><![CDATA[VBScript global code]]></FunctionName>
+          <Scripts><![CDATA[Set param = Test.Parameters.Item(paramName)]]></Scripts>
+          <LineNo><![CDATA[25]]></LineNo>
+        </StackFrame>
+      </StackTrace>
+      <IconKey>a52ffa413c2a4e389e243bd7644a04e5</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <MergeIsErrorIcon>True</MergeIsErrorIcon>
+    </Extension>
+    <Snapshot reference="Resources\Snapshots\dc4b5624-9d6c-417d-9ca5-42acface5c71.jpeg" />
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>Object required: ''</Name>
+    <ErrorText>Object required: ''</ErrorText>
+    <Description>&lt;BR/&gt;Line (26): &amp;quot;Reporter.ReportEvent micPass, &amp;quot;Found parameter&amp;quot;, &amp;quot;Parameter: &amp;quot; &amp;amp; paramName &amp;amp; &amp;quot; = &amp;quot; &amp;amp; param.Value&amp;quot;.</Description>
+    <StartTime>2025-08-13 13:06:55</StartTime>
+    <Result>Failed</Result>
+    <Extension>
+      <StackTrace>
+        <StackFrame>
+          <ModuleName><![CDATA[0. Start Active Workspace 2406]]></ModuleName>
+          <FileName><![CDATA[0. Start Active Workspace 2406]]></FileName>
+          <Language><![CDATA[VBScript - script block]]></Language>
+          <FunctionName><![CDATA[VBScript global code]]></FunctionName>
+          <Scripts><![CDATA[Reporter.ReportEvent micPass, "Found parameter", "Parameter: " & paramName & " = " & param.Value]]></Scripts>
+          <LineNo><![CDATA[26]]></LineNo>
+        </StackFrame>
+      </StackTrace>
+      <IconKey>a52ffa413c2a4e389e243bd7644a04e5</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <MergeIsErrorIcon>True</MergeIsErrorIcon>
+    </Extension>
+    <Snapshot reference="Resources\Snapshots\1ba4825e-0fde-45ba-8e58-a72fd46988f2.jpeg" />
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>Object not a collection</Name>
+    <ErrorText>Object not a collection</ErrorText>
+    <Description>&lt;BR/&gt;Line (27): &amp;quot;Next&amp;quot;.</Description>
+    <StartTime>2025-08-13 13:06:56</StartTime>
+    <Result>Failed</Result>
+    <Extension>
+      <StackTrace>
+        <StackFrame>
+          <ModuleName><![CDATA[0. Start Active Workspace 2406]]></ModuleName>
+          <FileName><![CDATA[0. Start Active Workspace 2406]]></FileName>
+          <Language><![CDATA[VBScript - script block]]></Language>
+          <FunctionName><![CDATA[VBScript global code]]></FunctionName>
+          <Scripts><![CDATA[Next]]></Scripts>
+          <LineNo><![CDATA[27]]></LineNo>
+        </StackFrame>
+      </StackTrace>
+      <IconKey>a52ffa413c2a4e389e243bd7644a04e5</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <MergeIsErrorIcon>True</MergeIsErrorIcon>
+    </Extension>
+    <Snapshot reference="Resources\Snapshots\4f49dcd0-b5d0-4a17-aade-a53f40146656.jpeg" />
+    <DeviceInfo />
+  </Data>
+</ReportNode>
+<ReportNode type="User">
+<Data>
+    <Name>Found file</Name>
+    <Description>C:\MBT-REPOS\kb-repo-jenkins\TestResources\BPT Resources\Object Repositories\ActiveWorkspace2406_OR\AWC_OR_ChromiumEdge.tsr</Description>
+    <StartTime>2025-08-13 13:06:56</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>08deb7ae0ecb4e34bf24aad2853659d4</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <IsPlainTextStepInfo>True</IsPlainTextStepInfo>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="User">
+<Data>
+    <Name>Test dir</Name>
+    <Description>C:\MBT-REPOS\kb-repo-jenkins\ComponentsById\4422</Description>
+    <StartTime>2025-08-13 13:06:56</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>08deb7ae0ecb4e34bf24aad2853659d4</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <IsPlainTextStepInfo>True</IsPlainTextStepInfo>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="User">
+<Data>
+    <Name>FOUND OBJECT REPOSITORY:</Name>
+    <Description>Repository 1: C:\MBT-REPOS\kb-repo-jenkins\TestResources\BPT Resources\Object Repositories\ActiveWorkspace2406_OR\AWC_OR_ChromiumEdge.tsr</Description>
+    <StartTime>2025-08-13 13:06:56</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>08deb7ae0ecb4e34bf24aad2853659d4</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <IsPlainTextStepInfo>True</IsPlainTextStepInfo>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>Stop Run</Name>
+    <Description>Run stopped by user.</Description>
+    <StartTime>2025-08-13 13:06:58</StartTime>
+    <Result>Information</Result>
+    <Extension>
+      <IconKey>d257a74a6abf488eb49454f73e400263</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<Data>
+    <Name>0. Start Active Workspace 2406</Name>
+    <Description />
+    <StartTime>2025-08-13 13:06:55</StartTime>
+    <Duration>3</Duration>
+    <Result>Failed</Result>
+    <InputParameters>
+      <Parameter name="str_Instance" value="INT2-NONSSO" type="System.String" />
+      <Parameter name="str_UserName" value="#T_RD10" type="System.String" />
+      <Parameter name="str_password" value="" type="System.String" />
+      <Parameter name="str_Location" value="INTEGRATION" type="System.String" />
+    </InputParameters>
+    <OutputParameters>
+      <Parameter name="str_UserName_Out" value="" type="" />
+    </OutputParameters>
+    <Extension>
+      <IconKey>f9dd9e15248a4933bc6511dcb234862d</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>Stop Run</Name>
+    <Description>Run stopped by user.</Description>
+    <StartTime>2025-08-13 13:06:58</StartTime>
+    <Result>Information</Result>
+    <Extension>
+      <IconKey>bc7bdf5475f944139bb6eb4ed52ff622</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<Data>
+    <Name>4422</Name>
+    <ToolName>OpenText Functional Testing</ToolName>
+    <ToolVersion>25.2</ToolVersion>
+    <ToolVersionStringLiteral>25.2</ToolVersionStringLiteral>
+    <Description />
+    <StartTime>2025-08-13 13:06:53</StartTime>
+    <Duration>5</Duration>
+    <Result>Failed</Result>
+    <InputParameters>
+      <Parameter name="str_Instance" value="INT2-NONSSO" type="System.String" />
+      <Parameter name="str_UserName" value="#T_RD10" type="System.String" />
+      <Parameter name="str_password" value="" type="System.String" />
+      <Parameter name="str_Location" value="INTEGRATION" type="System.String" />
+    </InputParameters>
+    <OutputParameters>
+      <Parameter name="str_UserName_Out" value="" type="" />
+    </OutputParameters>
+    <Extension>
+      <IconKey>d49b0b7b7a434d55bc33aeb341e9e1ae</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <Environment>
+      <Timezone>+03:00:00</Timezone>
+      <Locale>English (United States)</Locale>
+      <User>OPENTEXT\aadam2</User>
+      <CpuInfo>Intel(R) Core(TM) Ultra 7 165H</CpuInfo>
+      <NumberOfCores>22</NumberOfCores>
+      <TotalMemory>64981</TotalMemory>
+      <HostName>\OTX-2VMBG54</HostName>
+      <OSInfo>Windows 11 24H2 (x64)</OSInfo>
+    </Environment>
+    <TestedApplications />
+    <Links>
+      <Link type="DataTable" reference="Default.xlsx" displayname="Default Data Table" />
+    </Links>
+  </Data>
+</ReportNode>
+<GeneralInfo>
+    <ResultName>Res44</ResultName>
+    <RunStartTime>2025-08-13 13:06:53</RunStartTime>
+    <Timezone>+03:00:00</Timezone>
+    <OrchestrationToolName>OpenText Functional Testing</OrchestrationToolName>
+    <OrchestrationToolVersion>25.2</OrchestrationToolVersion>
+    <OrchestrationToolVersionStringLiteral>25.2</OrchestrationToolVersionStringLiteral>
+  </GeneralInfo>
+</Results>
